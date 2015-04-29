@@ -1,0 +1,6 @@
+.vim/bundle/*
+!.vim/bundle/vundle
+.DS_Store
+*/.DS_Store
+*.bak
+*.bk
