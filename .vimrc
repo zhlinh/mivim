@@ -411,5 +411,92 @@ nnoremap t <C-^>
 " <leader>k 替换 Esc  --这个可以先试用下，估计会有误操作
 inoremap <leader>k <Esc>
 
+"==========================================
+" Bundle:Plgin management and setting
+"==========================================
+"package dependent:  ctags
+"awesome javascript autocomplete dependent: nodejs
+"python dependent:  pep8, pyflake
 
+filetype off " required! turn off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+
+
+"################### Plugins Management ###################"
+
+Bundle 'gmarik/vundle'
+" vim plugin bundle control, command model
+" --若找不到插件(包括主题插件),则可用命令模式执行 :BundleInstall
+" :BundleInstall     install
+" :BundleInstall!    update
+" :BundleClean       remove plugin not in list
+
+
+
+"################### Themes ###################"
+
+" --先执行 :BundleInstall ，主题保存在~/.vim/bundle/
+" --主题一 
+"theme solarized
+Bundle 'altercation/vim-colors-solarized'
+let g:solarized_termcolors=16
+let g:solarized_termtrans=1
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+
+" --主题二
+"theme molokai
+Bundle 'tomasr/molokai'
+"let g:molokai_original = 1
+
+
+
+"==========================================
+" Color&Theme
+"==========================================
+
+filetype plugin indent on
+
+syntax enable
+syntax on
+
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set guifont=Monaco:h14
+    set guioptions-=T
+    set guioptions+=e
+    set guioptions-=r
+    set guioptions-=L
+    set guitablabel=%M\ %t
+    set showtabline=1
+    set linespace=2
+    set noimd
+    set t_Co=256
+endif
+
+" --设置背景为light和dark，对应solarized的两种配色，对于molokai没区别
+set background=light
+"set background=dark
+" --设置为256色
+set t_Co=256
+
+colorscheme solarized
+"colorscheme molokai
+"colorscheme desert
+
+hi! link SignColumn   LineNr
+hi! link ShowMarksHLl DiffAdd
+hi! link ShowMarksHLu DiffChange
+
+" for error highlight
+highlight clear SpellBad
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+highlight clear SpellCap
+highlight SpellCap term=underline cterm=underline
+highlight clear SpellRare
+highlight SpellRare term=underline cterm=underline
+highlight clear SpellLocal
+highlight SpellLocal term=underline cterm=underline
 
