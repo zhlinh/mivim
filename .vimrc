@@ -24,7 +24,7 @@
 "  
 "                                2015.4.25 
 "
-"              ??? "Be the change you want to see the world" ???
+"               <<< "Be the change you want to see the world">>>
 "
 " Author:  zhlinh
 " Version: 0.4.25
@@ -73,7 +73,7 @@ endif
 "==========================================
 
 "history: number of command-lines remembered
-" ÉèÖÃÕâ¾äºó£¬ÔÚ×´Ì¬À¸ÒÑ¾­ÏÔÊ¾ÕıÔÚÊäÈëµÄÃüÁîÁË£¬Í¬ºóÃæÉèÖÃµÄset showcmd
+" è®¾ç½®è¿™å¥åï¼Œåœ¨çŠ¶æ€æ å·²ç»æ˜¾ç¤ºæ­£åœ¨è¾“å…¥çš„å‘½ä»¤äº†ï¼ŒåŒåé¢è®¾ç½®çš„set showcmd
 set history=200
 
 "detect filetype
@@ -90,75 +90,113 @@ set autoread          " auto reload file after being modified
 set shortmess=atI       " do not show initial page
 set title                " change the terminal's title
 
+"Set the window's size.
+set lines=32
+set columns=98
+
 " cancel backup,or it will create a *.wap file
 set nobackup
 set noswapfile
 
 " highlight current column and line
-"set cursorcolumn      "¸ßÁÁÁĞÃ²ËÆĞ§¹û²»¼Ñ°¡
+"set cursorcolumn      "é«˜äº®åˆ—è²Œä¼¼æ•ˆæœä¸ä½³å•Š
 set cursorline     
 
 " alway show the content on the screen after exist VIM
 " in case if i did some stupid deleting, and i can find them back
-"set t_ti= t_te=              "¹Ø±Õvimºó½«ÄÚÈİ»ØÏÔµ½shellÖĞ
+"set t_ti= t_te=              "å…³é—­vimåå°†å†…å®¹å›æ˜¾åˆ°shellä¸­
 
 " disable mouse
 set mouse-=a
-"set selection=exclusive    "¹â±êµÄÎ»ÖÃ²»ÊôÓÚÑ¡ÖĞµÄ·¶Î§
-" ĞŞ¸´ctrl+m¶à¹â±ê²Ù×÷Ñ¡ÔñµÄbug,µ«ÊÇ¸Ä±äÁËctrl+v½øĞĞ×Ö·ûÑ¡ÖĞ½«°üº¬¹â±êÏÂµÄ×Ö·û
-set selection=inclusive		"¹â±êµÄÎ»ÖÃÊôÓÚÑ¡ÖĞµÄ·¶Î§
+"set selection=exclusive    "å…‰æ ‡çš„ä½ç½®ä¸å±äºé€‰ä¸­çš„èŒƒå›´
+" ä¿®å¤ctrl+må¤šå…‰æ ‡æ“ä½œé€‰æ‹©çš„bug,ä½†æ˜¯æ”¹å˜äº†ctrl+vè¿›è¡Œå­—ç¬¦é€‰ä¸­å°†åŒ…å«å…‰æ ‡ä¸‹çš„å­—ç¬¦
+set selection=inclusive		"å…‰æ ‡çš„ä½ç½®å±äºé€‰ä¸­çš„èŒƒå›´
 set selectmode=mouse,key
 
-" No annoying sound on errors  --È¥µôÃüÁî´íÎóµÄÌáÊ¾Òô
+" No annoying sound on errors  --å»æ‰å‘½ä»¤é”™è¯¯çš„æç¤ºéŸ³
 set novisualbell           " don't beep
 set noerrorbells         " don't beep
 set t_vb=                "close visual bell
 set tm=500
 
-set nostartofline   "ĞĞÌø×ªÊ±±£³ÖÔÚÍ¬Ò»ÁĞ
+set nostartofline   "è¡Œè·³è½¬æ—¶ä¿æŒåœ¨åŒä¸€åˆ—
 
 "==========================================
 " Show:User Interface settings
 "==========================================
 
+" éšè—èœå•æ ã€å·¥å…·æ ã€æ»šåŠ¨æ¡ï¼Œå¯ç”¨ Ctrl + F11 åˆ‡æ¢æ˜¾ç¤º
+if g:isGUI
+    set guioptions-=m       " No menu bar
+    set guioptions-=T       " No Toolbar
+    set guioptions-=r		" No right hand scrollbars
+    set guioptions-=L       " No left hand scrollbars
+"    set guioptions-=e       " å…³é—­GUIæ ‡ç­¾é¡µæ”¯æŒ     
+    set guitablabel=%M\ %t
+    set showtabline=1		" æŒ‡å®šä½•æ—¶æ˜¾ç¤ºæ ‡ç­¾é¡µè¡Œ,0ä¸ºæ°¸è¿œä¸ä¼š,1ä¸ºè‡³å°‘æœ‰ä¸¤ä¸ªæ ‡ç­¾,2ä¸ºæ°¸è¿œä¼š
+    set linespace=2			
+	" --æ’å…¥æ¨¡å¼è¾“å…¥ä¸­æ–‡å®Œæ¯•å›åˆ°æ™®é€šæ¨¡å¼æ—¶ç¦ç”¨è¾“å…¥æ³•ï¼Œç¼ºç‚¹æ˜¯æœç´¢ä¸äº†ä¸­æ–‡ã€Œå› ä¸ºä¹Ÿæ˜¯åœ¨nomalä¸‹ã€ï¼Œæ…ç”¨
+	" ç»æµ‹è¯•ï¼Œè¿˜æ˜¯æœ‰æœä¸­æ–‡éœ€æ±‚çš„ï¼Œæ•…å¼ƒç½®äº†
+    "set imd         "å±è”½è¾“å…¥æ³•
+	"au InsertEnter * set noimd
+	"au InsertLeave * set imd
+	"au FocusGained * set imd     "è·å–ç„¦ç‚¹æ—¶å±è”½è¾“å…¥æ³•
+    set t_Co=256
+    nmap <silent> <c-F11> :if &guioptions =~# 'm' <Bar>
+        \set guioptions-=m <Bar>
+        \set guioptions-=T <Bar>
+        \set guioptions-=r <Bar>
+        \set guioptions-=L <Bar>
+    \else <Bar>
+        \set guioptions+=m <Bar>
+        \set guioptions+=T <Bar>
+        \set guioptions+=r <Bar>
+        \set guioptions+=L <Bar>
+    \endif<CR>
+	
+	"ä¸è¦åŠ ä¸‹é¢ä¸¤å¥ï¼Œä¼šæŠŠwindowsä¹ æƒ¯çš„é¢„è®¾mappingéƒ½åŠ ä¸Šï¼Œå°±ç”¨ä¸äº†c-a,c-xä¹‹ç±»çš„è‡ªå¢è‡ªå‡æ“ä½œäº†
+	"source $VIMRUNTIME/mswin.vim
+    "behave mswin
+endif
+
 " show line number
 set number
-" disable wrap --²»×Ô¶¯»»ĞĞ
+" disable wrap --ä¸è‡ªåŠ¨æ¢è¡Œ
 set nowrap
 
 " show matched brackets
 set showmatch
-" How many tenths of a second to blink when matching brackets £¨Æ¥ÅäÀ¨ºÅ¸ßÁÁµÄÊ±¼ä£ºµ¥Î»0.1Ãë£©
+" How many tenths of a second to blink when matching brackets ï¼ˆåŒ¹é…æ‹¬å·é«˜äº®çš„æ—¶é—´ï¼šå•ä½0.1ç§’ï¼‰
 set matchtime=2
 
 " highlight the searching words
 set hlsearch
-" ingnore case when do searching
+" ingnore case when do searching  --æœç´¢æ—¶å¿½ç•¥å¤§å°å†™
 set ignorecase
-" instant search £¨¼´Ê±²éÕÒ£¬µ±ÊäÈëµ½/bÊ±»á²éÕÒb¿ªÍ·µÄµ¥´Ê£©
+" instant search ï¼ˆå³æ—¶æŸ¥æ‰¾ï¼Œå½“è¾“å…¥åˆ°/bæ—¶ä¼šæŸ¥æ‰¾bå¼€å¤´çš„å•è¯ï¼‰
 set incsearch
-" ÓĞÒ»¸ö»òÒÔÉÏ´óĞ´×ÖÄ¸Ê±ÈÔ´óĞ¡Ğ´Ãô¸Ğ
+" æœ‰ä¸€ä¸ªæˆ–ä»¥ä¸Šå¤§å†™å­—æ¯æ—¶ä»å¤§å°å†™æ•æ„Ÿ
 set smartcase   
 
-" code folding  --ÕÛµşºÍÕÛµş·½Ê½
+" code folding  --æŠ˜å å’ŒæŠ˜å æ–¹å¼
 set foldenable
 " folding methods
-" manual		            --ÊÖ¹¤ÕÛµş
-" indent    use indentation --²ÉÈ¡Ëõ½øµÄ·½Ê½ÕÛµş
-" expr      use expressions  --Ê¹ÓÃ±í´ïÊ½¶¨ÒåÕÛµş
-" syntax    use syntax based on language   --Ê¹ÓÃÓï·¨¶¨ÒåÕÛµş
-" diff      fold the content which not modified   --¶ÔÃ»ÓĞ¸ü¸ÄµÄÎÄ±¾½øĞĞÕÛµş
-" marker    use marker to indent, the default are {{{ and }}}   --Ê¹ÓÃ±ê¼Ç½øĞĞÕÛµş, Ä¬ÈÏ±ê¼ÇÊÇ {{{ ºÍ }}}
+" manual		            --æ‰‹å·¥æŠ˜å 
+" indent    use indentation --é‡‡å–ç¼©è¿›çš„æ–¹å¼æŠ˜å 
+" expr      use expressions  --ä½¿ç”¨è¡¨è¾¾å¼å®šä¹‰æŠ˜å 
+" syntax    use syntax based on language   --ä½¿ç”¨è¯­æ³•å®šä¹‰æŠ˜å 
+" diff      fold the content which not modified   --å¯¹æ²¡æœ‰æ›´æ”¹çš„æ–‡æœ¬è¿›è¡ŒæŠ˜å 
+" marker    use marker to indent, the default are {{{ and }}}   --ä½¿ç”¨æ ‡è®°è¿›è¡ŒæŠ˜å , é»˜è®¤æ ‡è®°æ˜¯ {{{ å’Œ }}}
 set foldmethod=indent
 set foldlevel=99
 
-" Do smart autoindenting when starting a new line.  --»»ĞĞÊ±×Ô¶¯¶ÔÆë
-"set cindent     "CÓïÑÔ×Ô¶¯Ëõ½ø
+" Do smart autoindenting when starting a new line.  --æ¢è¡Œæ—¶è‡ªåŠ¨å¯¹é½
+"set cindent     "Cè¯­è¨€è‡ªåŠ¨ç¼©è¿›
 set smartindent
 set autoindent    " always set autoindenting on
 " never add copyindent, case error   " copy the previous indentation on autoindenting
 
-" Number of spaces that a <Tab> in the file counts for.  --Tab´ú±íµÄ³¤¶È
+" Number of spaces that a <Tab> in the file counts for.  --Tabä»£è¡¨çš„é•¿åº¦
 set tabstop=4
 " number of spaces to use for autoindenting
 set shiftwidth=4
@@ -167,26 +205,26 @@ set softtabstop=4
 " When on, a <Tab> in front of a line inserts blanks according to
 " 'shiftwidth'.  'tabstop' or 'softtabstop' is used in other places.  A
 " <BS> will delete a 'shiftwidth' worth of space at the start of the line.
-set smarttab				"ÔÚĞĞºÍ¶ÎµÄ¿ªÊ¼Ê¹ÓÃÖÆ±í·û
+set smarttab				"åœ¨è¡Œå’Œæ®µçš„å¼€å§‹ä½¿ç”¨åˆ¶è¡¨ç¬¦
 
 "when type <Tab>, it auto generate to <spale>
 set expandtab
 
-" use multiple of shiftwidth when indenting with '<' and '>'  --Ê¹ÓÃ'>' '<'À´¸Ä±äËõ½ø
+" use multiple of shiftwidth when indenting with '<' and '>'  --ä½¿ç”¨'>' '<'æ¥æ”¹å˜ç¼©è¿›
 set shiftround 
 
-" A buffer becomes hidden when it is abandoned --¶à»º´æµÄ´æÔÚ·½Ê½
+" A buffer becomes hidden when it is abandoned --å¤šç¼“å­˜çš„å­˜åœ¨æ–¹å¼
 set hidden
 set wildmode=longest:full,full
 set ttyfast  
 
 
-set relativenumber                          " show relative line number  --ÏÔÊ¾Ïà¶ÔĞĞºÅ£¬Õâ¸ö²»´í
-autocmd InsertEnter * :set norelativenumber " no relativenumber in insert mode   --ÊäÈëÄ£Ê½ÏÂ²»ÏÔÊ¾Ïà¶ÔĞĞºÅ
+set relativenumber                          " show relative line number  --æ˜¾ç¤ºç›¸å¯¹è¡Œå·ï¼Œè¿™ä¸ªä¸é”™
+autocmd InsertEnter * :set norelativenumber " no relativenumber in insert mode   --è¾“å…¥æ¨¡å¼ä¸‹ä¸æ˜¾ç¤ºç›¸å¯¹è¡Œå·
 autocmd InsertLeave * :set relativenumber   " show relativenumber when leave insert mode
 
 
-"create undo file     --´´½¨undoµÄÎÄ¼ş£¬¿ÉÒÔundo¸ü¶àµÄ²½Öè
+"create undo file     --åˆ›å»ºundoçš„æ–‡ä»¶ï¼Œå¯ä»¥undoæ›´å¤šçš„æ­¥éª¤
 if has('persistent_undo')
   set undofile                " So is persistent undo ...
   set undolevels=1000         " Maximum number of changes that can be undone
@@ -194,14 +232,14 @@ if has('persistent_undo')
   set undodir=~/.undodir/
 endif
 
-set ruler       " show the current line number and column number  --ÏÂ·½ÏÔÊ¾µ±Ç°µÄĞĞÁĞ
-set showcmd     " show the current typing command    --ÏÔÊ¾ÊäÈëµÄÃüÁî
-set showmode    " Show current mode     --ÏÔÊ¾µ±Ç°Ëù´¦µÄÄ£Ê½
-set scrolloff=7 " Set 7 lines to the cursor - when moving vertically  --ÉÏÏÂÒÆ¶¯Ê±±£³Ö¶¥¶Ë»òÎ²²¿ÖÁÉÙ7ĞĞ¿É¼û
+set ruler       " show the current line number and column number  --ä¸‹æ–¹æ˜¾ç¤ºå½“å‰çš„è¡Œåˆ—
+set showcmd     " show the current typing command    --æ˜¾ç¤ºè¾“å…¥çš„å‘½ä»¤
+set showmode    " Show current mode     --æ˜¾ç¤ºå½“å‰æ‰€å¤„çš„æ¨¡å¼
+set scrolloff=7 " Set 7 lines to the cursor - when moving vertically  --ä¸Šä¸‹ç§»åŠ¨æ—¶ä¿æŒé¡¶ç«¯æˆ–å°¾éƒ¨è‡³å°‘7è¡Œå¯è§
 
 
 if has('statusline')
-    set laststatus=2						 " ÃüÁîĞĞµÄ¸ß¶È
+    set laststatus=2						 " å‘½ä»¤è¡Œçš„é«˜åº¦
     set statusline=%<%f\                     " Filename
     set statusline+=%w%h%m%r                 " Options
 "   set statusline+=%{fugitive#statusline()} " Git Hotness
@@ -214,50 +252,50 @@ endif
 " File encode:encode for varied filetype
 "==========================================
 
-" ×¢£ºÊ¹ÓÃutf-8¸ñÊ½ºó£¬Èí¼şÓë³ÌĞòÔ´Âë¡¢ÎÄ¼şÂ·¾¶²»ÄÜÓĞÖĞÎÄ£¬·ñÔò±¨´í
-set encoding=utf-8                           "ÉèÖÃgvimÄÚ²¿±àÂë£¬Ä¬ÈÏ²»¸ü¸Ä
-"termmencoding ºÜ¶à¶¼ÉèÖÃÎªutf-8£¬µ«ÔÚwindowsÏÂvim»áÂÒÂë£¬gvim²»»á
+" æ³¨ï¼šä½¿ç”¨utf-8æ ¼å¼åï¼Œè½¯ä»¶ä¸ç¨‹åºæºç ã€æ–‡ä»¶è·¯å¾„ä¸èƒ½æœ‰ä¸­æ–‡ï¼Œå¦åˆ™æŠ¥é”™
+set encoding=utf-8                           "è®¾ç½®gvimå†…éƒ¨ç¼–ç ï¼Œé»˜è®¤ä¸æ›´æ”¹
+"termmencoding å¾ˆå¤šéƒ½è®¾ç½®ä¸ºutf-8ï¼Œä½†åœ¨windowsä¸‹vimä¼šä¹±ç ï¼Œgvimä¸ä¼š
 if(g:iswindows && !(g:isGUI))
-	set termencoding=cp936			         "ÖÕ¶ËµÄ±àÂë¸ñÊ½;
+	set termencoding=cp936			         "ç»ˆç«¯çš„ç¼–ç æ ¼å¼;
 else
 	set termencoding=utf-8
 endif
 	
-set fileencoding=utf-8                        "ÉèÖÃµ±Ç°ÎÄ¼ş±àÂë£¬¿ÉÒÔ¸ü¸Ä£¬Èç£ºgbk£¨Í¬cp936£©
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1     "ÉèÖÃÖ§³Ö´ò¿ªµÄÎÄ¼şµÄ±àÂë
+set fileencoding=utf-8                        "è®¾ç½®å½“å‰æ–‡ä»¶ç¼–ç ï¼Œå¯ä»¥æ›´æ”¹ï¼Œå¦‚ï¼šgbkï¼ˆåŒcp936ï¼‰
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1     "è®¾ç½®æ”¯æŒæ‰“å¼€çš„æ–‡ä»¶çš„ç¼–ç 
 
-" ÎÄ¼ş¸ñÊ½£¬Ä¬ÈÏ ffs=dos,unix
-set fileformat=unix                            "ÉèÖÃĞÂ£¨µ±Ç°£©ÎÄ¼şµÄ<EOL>¸ñÊ½£¬¿ÉÒÔ¸ü¸Ä£¬Èç£ºdos£¨windowsÏµÍ³³£ÓÃ£©
-set fileformats=unix,dos,mac                   "¸ø³öÎÄ¼şµÄ<EOL>¸ñÊ½ÀàĞÍ,ÉèÖÃUnixÎªÄ¬ÈÏµÄÎÄ¼şÀàĞÍ
+" æ–‡ä»¶æ ¼å¼ï¼Œé»˜è®¤ ffs=dos,unix
+set fileformat=unix                            "è®¾ç½®æ–°ï¼ˆå½“å‰ï¼‰æ–‡ä»¶çš„<EOL>æ ¼å¼ï¼Œå¯ä»¥æ›´æ”¹ï¼Œå¦‚ï¼šdosï¼ˆwindowsç³»ç»Ÿå¸¸ç”¨ï¼‰
+set fileformats=unix,dos,mac                   "ç»™å‡ºæ–‡ä»¶çš„<EOL>æ ¼å¼ç±»å‹,è®¾ç½®Unixä¸ºé»˜è®¤çš„æ–‡ä»¶ç±»å‹
 
-if (g:iswindows)
-    "½â¾ö²Ëµ¥ÂÒÂë
+if (g:iswindows && g:isGUI)
+    "è§£å†³èœå•ä¹±ç 
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
-    "½â¾öconsleÊä³öÂÒÂë
+    "è§£å†³consleè¾“å‡ºä¹±ç 
     language messages zh_CN.utf-8
 endif
 
-"½â¾öÓ¢ÎÄWindowsÏÂµÄVim²»ÖªµÀÈçºÎÏÔÊ¾Ë«±¶×Ö·û¿í¶ÈµÄ×ÖÌå
-set gfn=Monaco:h10:cANSI
-set guifontwide=NSimsun\:h12
+"è§£å†³è‹±æ–‡Windowsä¸‹çš„Vimä¸çŸ¥é“å¦‚ä½•æ˜¾ç¤ºåŒå€å­—ç¬¦å®½åº¦çš„å­—ä½“
+set gfn=Consolas:h11\cANSI
+"set guifontwide=Simsun\:h11:cANSI
 
-" --Õë¶ÔÖĞÎÄµÄÒ»Ğ©ÉèÖÃ
-set formatoptions+=m         " ÈçÓöUnicodeÖµ´óÓÚ255£¨´óÓÚÒ»¸ö×Ö½Ú£©µÄÎÄ±¾,ÖĞÎÄÖ®Àà£¬²»±ØµÈµ½¿Õ¸ñÔÙÕÛĞĞ
+" --é’ˆå¯¹ä¸­æ–‡çš„ä¸€äº›è®¾ç½®
+set formatoptions+=m         " å¦‚é‡Unicodeå€¼å¤§äº255ï¼ˆå¤§äºä¸€ä¸ªå­—èŠ‚ï¼‰çš„æ–‡æœ¬,ä¸­æ–‡ä¹‹ç±»ï¼Œä¸å¿…ç­‰åˆ°ç©ºæ ¼å†æŠ˜è¡Œ
 set formatoptions+=B         " When joining lines, don't insert a space between two multi-byte characters.
-set completeopt=longest,menu " behaviour of insert mode completion  --×Ô¶¯Íê³É
-set wildmenu                 " auto complete command  --ÔöÇ¿Ä£Ê½ÖĞÃüÁîĞĞ×Ô¶¯Íê³É
-set wildignore=**.o,*~,.swp,*.bak,*.pyc,*.class   " Ignore compiled files  --ºöÂÔ±àÒëµÄÖĞ¼äÎÄ¼ş;
+set completeopt=longest,menu " behaviour of insert mode completion  --è‡ªåŠ¨å®Œæˆ
+set wildmenu                 " auto complete command  --å¢å¼ºæ¨¡å¼ä¸­å‘½ä»¤è¡Œè‡ªåŠ¨å®Œæˆ
+set wildignore=**.o,*~,.swp,*.bak,*.pyc,*.class   " Ignore compiled files  --å¿½ç•¥ç¼–è¯‘çš„ä¸­é—´æ–‡ä»¶;
 
 
-" --¼ÇÒäÉÏ´Î½áÊøµÄÎ»ÖÃ£¬ºÍÊ¹ÓÃÕıÔò±í´ïÊ½
+" --è®°å¿†ä¸Šæ¬¡ç»“æŸçš„ä½ç½®ï¼Œå’Œä½¿ç”¨æ­£åˆ™è¡¨è¾¾å¼
                     " if this not work ,make sure .viminfo is writable for you
 if has("autocmd")   " remember the last cursor postion when reopen a file
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 set viminfo^=% " Remember info about open buffers on close
-set magic      " For regular expressions turn magic on  --Ê¹ÓÃÕıÔò±í´ïÊ½ \v¸úÕıÔò±í´ïÊ½
-
+" æœç´¢æ—¶ä¼šè‡ªåŠ¨è·Ÿ/\v
+set magic      " For regular expressions turn magic on  --ä½¿ç”¨æ­£åˆ™è¡¨è¾¾å¼ \vè·Ÿæ­£åˆ™è¡¨è¾¾å¼
 
 
 set backspace=eol,start,indent               " Configure backspace so it acts as it should act
@@ -266,7 +304,7 @@ set backspace=eol,start,indent               " Configure backspace so it acts as
 "( < > are the cursor keys used in normal and visual mode, 
 "and [ ] are the cursor keys in insert mode
 set whichwrap+=<,>,h,l,[,]
-" --vimrcÎÄ¼ş±ä»¯Ê±£¬×Ô¶¯ÖØÔØ
+" --vimrcæ–‡ä»¶å˜åŒ–æ—¶ï¼Œè‡ªåŠ¨é‡è½½
 autocmd! bufwritepost .vimrc source $MYVIMRC  " auto load vimrc file after modify;;
 
 
@@ -277,7 +315,7 @@ inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
-" --ÉèÖÃ²»Í¬ÓïÑÔµÄËõ½ø
+" --è®¾ç½®ä¸åŒè¯­è¨€çš„ç¼©è¿›
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType javascript,json,css,scss,html set tabstop=2 shiftwidth=2 expandtab ai
 
@@ -286,8 +324,10 @@ autocmd FileType javascript,json,css,scss,html set tabstop=2 shiftwidth=2 expand
 "Key Mappings:Customized keys
 "==========================================
 
-" ÃüÁîµÄÇ°×º£¬Èç¿ÉÒÔÓ°Éä¶à¸ö°´¼ü£º¿ÉÒÔÊÇ ",d"  ",c"
-let mapleader = ','       "ÏÂÃæ³öÏÖµÄ<leader>±íÊ¾µÄ¾ÍÊÇ¡®,¡¯
+
+" --åˆ‡è®°ï¼šä¸è¦åœ¨map è®¾ç½®åæ³¨é‡Šï¼Œå¦åˆ™ä¼šå°†æ³¨é‡Šå†…å®¹ä½œä¸ºmapçš„ä¸€éƒ¨åˆ†
+" å‘½ä»¤çš„å‰ç¼€ï¼Œå¦‚å¯ä»¥å½±å°„å¤šä¸ªæŒ‰é”®ï¼šå¯ä»¥æ˜¯ ",d"  ",c"
+let mapleader = ','       "ä¸‹é¢å‡ºç°çš„<leader>è¡¨ç¤ºçš„å°±æ˜¯â€˜,â€™
 let g:mapleader = ','
 
 command! W w !sudo tee % > /dev/null "sudo write with W
@@ -302,33 +342,46 @@ vnoremap p "_dP
 " use <C-V> to paste yanked content
 inoremap <C-V> <C-R>"
 
-" Quickly edit/reload the vimrc file
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
+" Quickly edit/reload the vimrc config file
+nmap <silent> <leader>ec :e $MYVIMRC<CR>
+nmap <silent> <leader>sc :so $MYVIMRC<CR>
 
 "Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
 
-"  ÃüÁîĞĞÄ£Ê½ÔöÇ¿£¬ctrl - aµ½ĞĞÊ×£¬ -e µ½ĞĞÎ²
+"  å‘½ä»¤è¡Œæ¨¡å¼å¢å¼ºï¼Œctrl - aåˆ°è¡Œé¦–ï¼Œ -e åˆ°è¡Œå°¾
 " better command line editing
 cnoremap <C-j> <t_kd>
 cnoremap <C-k> <t_ku>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
-"Smart way to move between windows  --ÓĞÓÃ
+"Smart way to move between windows  --æœ‰ç”¨
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" Go to home and end using capitalized directions  --ÓĞÓÃ
+"æ–°å»ºtab
+imap <C-T> <Esc>:tabnew<CR>
+nmap <C-T> :tabnew<CR>
+"åˆ‡æ¢tab
+imap <M-Left> <Esc>:tabp<CR>
+imap <M-Right> <Esc>:tabn<CR>
+nmap <M-Left> :tabp<CR>
+nmap <M-Right> :tabn<CR>
+"å…³é—­tabï¼Œæ…ç”¨ï¼Œå› ä¸ºå¯èƒ½ä¼šå¿˜äº†ä¿å­˜ç›´æ¥å…³é—­ã€‚ã€‚ã€‚
+"imap <C-W> <Esc>:tabclose<CR>
+"nmap <C-W> :tabclose<CR>
+
+" Go to home and end using capitalized directions  --æœ‰ç”¨
 noremap H 0
 noremap L $
-map Y y$
+" --åŸæœ¬Yçš„åŠŸèƒ½åŒyyï¼Œy$å†pçš„æ—¶å€™æ˜¯åœ¨æœ¬è¡Œ
+map Y y$ 
 
-" Remap VIM 0 to first non-blank character
+" Remap VIM 0 to first non-blank character  --æœ¬æ¥0æ˜¯åˆ°ä¸€è¡Œçš„å¼€å¤´
 map 0 ^
 
 " Speed up scrolling of the viewport slightly
@@ -338,18 +391,18 @@ nnoremap <C-y> 2<C-y>
 "no Highlight
 noremap <silent><leader>/ :nohls<CR>
 
-" F1 - F6 ÉèÖÃ
-" F1 ·ÏÆúÕâ¸ö¼ü,·ÀÖ¹µ÷³öÏµÍ³°ïÖú
-" F2 ĞĞºÅ¿ª¹Ø£¬ÓÃÓÚÊó±ê¸´ÖÆ´úÂëÓÃ
-" F3 ÏÔÊ¾¿É´òÓ¡×Ö·û¿ª¹Ø
-" F4 »»ĞĞ¿ª¹Ø
-" F5 Õ³ÌùÄ£Ê½paste_mode¿ª¹Ø,ÓÃÓÚÓĞ¸ñÊ½µÄ´úÂëÕ³Ìù
-" F6 Óï·¨¿ª¹Ø£¬¹Ø±ÕÓï·¨¿ÉÒÔ¼Ó¿ì´óÎÄ¼şµÄÕ¹Ê¾
+" F1 - F6 è®¾ç½®
+" F1 åºŸå¼ƒè¿™ä¸ªé”®,é˜²æ­¢è°ƒå‡ºç³»ç»Ÿå¸®åŠ©
+" F2 è¡Œå·å¼€å…³ï¼Œç”¨äºé¼ æ ‡å¤åˆ¶ä»£ç ç”¨
+" F3 æ˜¾ç¤ºå¯æ‰“å°å­—ç¬¦å¼€å…³
+" F4 æ¢è¡Œå¼€å…³
+" F5 ç²˜è´´æ¨¡å¼paste_modeå¼€å…³,ç”¨äºæœ‰æ ¼å¼çš„ä»£ç ç²˜è´´
+" F6 è¯­æ³•å¼€å…³ï¼Œå…³é—­è¯­æ³•å¯ä»¥åŠ å¿«å¤§æ–‡ä»¶çš„å±•ç¤º
 
 " I can type :help on my own, thanks.
 noremap <F1> <Esc>"
 
-""Îª·½±ã¸´ÖÆ£¬ÓÃ<F2>¿ªÆô/¹Ø±ÕĞĞºÅÏÔÊ¾:
+""ä¸ºæ–¹ä¾¿å¤åˆ¶ï¼Œç”¨<F2>å¼€å¯/å…³é—­è¡Œå·æ˜¾ç¤º:
 function! HideNumber()
   if(&relativenumber == &number)
     set relativenumber! number!
@@ -363,14 +416,16 @@ endfunc
 nnoremap <F2> :call HideNumber()<CR>
 nnoremap <F3> :set list! list?<CR>
 nnoremap <F4> :set wrap! wrap?<CR>
-" --°´F5½øÈëÕ³ÌùÄ£Ê½£¬¼´²»»áÔÙ´Î×Ô¶¯Ëõ½ø£¬±£³ÖÔ´ÎÄ¼ş¸ñÊ½;
-set pastetoggle=<F5>                          " when in insert mode, toggle between 'paste' and 'nopaste'
-au InsertLeave * set nopaste                  " disbale paste mode when leaving insert mode 
+" --æŒ‰F5è¿›å…¥ç²˜è´´æ¨¡å¼ï¼Œå³ä¸ä¼šå†æ¬¡è‡ªåŠ¨ç¼©è¿›ï¼Œä¿æŒæºæ–‡ä»¶æ ¼å¼;
+ " when in insert mode, toggle between 'paste' and 'nopaste'
+set pastetoggle=<F5>    
+" disbale paste mode when leaving insert mode                      
+au InsertLeave * set nopaste                  
 
 
-"½«·ÖºÅÓ°Éäµ½Ã°ºÅ£¬½øÒ»²½Ìá¸ß½øÈëÃüÁîÄ£Ê½µÄËÙ¶ÈºÍ½µµÍ´íÎóÂÊ
+"å°†åˆ†å·å½±å°„åˆ°å†’å·ï¼Œè¿›ä¸€æ­¥æé«˜è¿›å…¥å‘½ä»¤æ¨¡å¼çš„é€Ÿåº¦å’Œé™ä½é”™è¯¯ç‡
 nnoremap ; :
-nnoremap ' :b
+"nnoremap ' :b
 
 nnoremap <leader>v V`}
 
@@ -378,7 +433,7 @@ nnoremap <leader>v V`}
 nnoremap / /\v
 vnoremap / /\v
 
-" ÈÃËÑË÷½á¹û³öÏÖÔÚÆÁÄ»ÖĞĞÄ
+" è®©æœç´¢ç»“æœå‡ºç°åœ¨å±å¹•ä¸­å¿ƒ
 "Keep search pattern at the center of the screen."
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
@@ -393,22 +448,22 @@ noremap M :bp<CR>
 " remap U to <C-r> for easier redo
 nnoremap U <C-r>
 
-" select all --È«Ñ¡
+" select all --å…¨é€‰
 map <Leader>sa ggVG"
 
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>fe :e %%
-map <leader>fs :sp %%
-map <leader>fv :vsp %%
+map <leader>ee :e %%
+map <leader>es :sp %%
+map <leader>ev :vsp %%
 
 nnoremap dp :diffput<CR>
 nnoremap dg :diffget<CR>
 nnoremap dg :diffget<CR>
 
-" toggle between two buffers
+" toggle between two buffers   --å¯ä»¥ç”¨fæ¥æ›¿ä»£tçš„åŠŸèƒ½ï¼Œç›¸å·®ä¸€ä¸ªå­—ç¬¦
 nnoremap t <C-^>
 
-" <leader>k Ìæ»» Esc  --Õâ¸ö¿ÉÒÔÏÈÊÔÓÃÏÂ£¬¹À¼Æ»áÓĞÎó²Ù×÷
+" <leader>k æ›¿æ¢ Esc  --è¿™ä¸ªå¯ä»¥å…ˆè¯•ç”¨ä¸‹ï¼Œä¼°è®¡ä¼šæœ‰è¯¯æ“ä½œ
 inoremap <leader>k <Esc>
 
 "==========================================
@@ -428,7 +483,7 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 " vim plugin bundle control, command model
-" --ÈôÕÒ²»µ½²å¼ş(°üÀ¨Ö÷Ìâ²å¼ş),Ôò¿ÉÓÃÃüÁîÄ£Ê½Ö´ĞĞ :BundleInstall
+" --è‹¥æ‰¾ä¸åˆ°æ’ä»¶(åŒ…æ‹¬ä¸»é¢˜æ’ä»¶),åˆ™å¯ç”¨å‘½ä»¤æ¨¡å¼æ‰§è¡Œ :BundleInstall
 " :BundleInstall     install
 " :BundleInstall!    update
 " :BundleClean       remove plugin not in list
@@ -437,8 +492,8 @@ Bundle 'gmarik/vundle'
 
 "################### Themes ###################"
 
-" --ÏÈÖ´ĞĞ :BundleInstall £¬Ö÷Ìâ±£´æÔÚ~/.vim/bundle/
-" --Ö÷ÌâÒ» 
+" --å…ˆæ‰§è¡Œ :BundleInstall ï¼Œä¸»é¢˜ä¿å­˜åœ¨~/.vim/bundle/
+" --ä¸»é¢˜ä¸€ 
 "theme solarized
 Bundle 'altercation/vim-colors-solarized'
 let g:solarized_termcolors=16
@@ -446,7 +501,7 @@ let g:solarized_termtrans=1
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 
-" --Ö÷Ìâ¶ş
+" --ä¸»é¢˜äºŒ
 "theme molokai
 Bundle 'tomasr/molokai'
 "let g:molokai_original = 1
@@ -462,26 +517,15 @@ filetype plugin indent on
 syntax enable
 syntax on
 
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guifont=Monaco:h14
-    set guioptions-=T
-    set guioptions+=e
-    set guioptions-=r
-    set guioptions-=L
-    set guitablabel=%M\ %t
-    set showtabline=1
-    set linespace=2
-    set noimd
-    set t_Co=256
-endif
 
-" --ÉèÖÃ±³¾°ÎªlightºÍdark£¬¶ÔÓ¦solarizedµÄÁ½ÖÖÅäÉ«£¬¶ÔÓÚmolokaiÃ»Çø±ğ
-set background=light
+" --è®¾ç½®èƒŒæ™¯ä¸ºlightå’Œdarkï¼Œå¯¹åº”solarizedçš„ä¸¤ç§é…è‰²ï¼Œå¯¹äºmolokaiæ²¡åŒºåˆ«
+set background=dark
 "set background=dark
-" --ÉèÖÃÎª256É«
+" --è®¾ç½®ä¸º256è‰²
 set t_Co=256
 
+"I have fixed solorized.vim to cacel italic.
+"if you want it back, serch for italic and make the 431 line to "else let s:i=",italic".
 colorscheme solarized
 "colorscheme molokai
 "colorscheme desert
