@@ -24,7 +24,6 @@ mivim
     F5 set paste/nopaste,粘贴模式paste_mode开关,用于有格式的代码粘贴
     F6 syntax on/off,语法开关，关闭语法可以加快大文件的展示
 
-    F9 tagbar
     F10 运行当前文件(quickrun)
 
     4. 分屏移动
@@ -32,8 +31,8 @@ mivim
     ctrl + j/k/h/l   进行上下左右窗口跳转,不需要ctrl+w+jkhl
 
     5. 搜索
-    <space> 空格，进入搜索状态
-    /       同上
+    <space> 空格，进入搜索状态/
+    /       =/\v  引入正则
     ,/      去除匹配高亮
 
     优化搜索保证结果在屏幕中间
@@ -61,16 +60,24 @@ mivim
     ,0     切最后一个tab
 
     ,tt 最近使用两个tab之间切换
-    (可修改配置位 ctrl+o,  但是ctrl+o/i为系统光标相关快捷键, 故不采用)
 
     7. buffer操作(不建议, 建议使用ctrlspace插件来操作)
     [b    前一个buffer
     ]b    后一个buffer
-    <-    前一个buffer
-    ->    后一个buffer
+    <Left>    前一个buffer
+    <Right>    后一个buffer
 
 
-    8. 按键修改
+    8. 打开文件操作
+    ,em  打开(my)vimrc配置文件
+    ,sm  重载入(my)vimrc配置文件
+    ,ee  =e 当前目录/
+    ,es  =split  当前目录/
+    ,ev  =vsplit  当前目录/
+
+
+
+    9. 按键修改
     Y         =y$   复制到行尾
     U         =Ctrl-r
     ,sa       select all,全选

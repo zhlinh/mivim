@@ -335,7 +335,7 @@ set wildignore=*.o,*~,*.swp,*.bak,*.pyc,*.class,.svn
 if has("autocmd")   " remember the last cursor postion when reopen a file
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-set viminfo^=% " Remember info about open buffers on close
+set viminfo^=%   " %号表示记录缓存区列表，只有不带参数启动vim时才有效 
 
 "离开插入模式后自动关闭预览窗口
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -363,6 +363,7 @@ map <Up> <Nop>
 map <Down> <Nop>
 
 "se swap之后，同物理行上线直接跳
+"nore的意思是扩展后的结果不会再映射成别的内容,形成多次映射
 nnoremap k gk
 nnoremap gk k
 nnoremap j gj
@@ -430,8 +431,8 @@ vnoremap p "_dP
 inoremap <C-V> <C-R>"
 
 " Quickly edit/reload the vimrc config file
-nmap <silent> <leader>ec :e $MYVIMRC<CR>
-nmap <silent> <leader>sc :so $MYVIMRC<CR>
+nmap <silent> <leader>em :e $MYVIMRC<CR>
+nmap <silent> <leader>sm :so $MYVIMRC<CR>
 
 " 在当前窗口打开一个文本
 map <leader>ee :e %%
@@ -488,7 +489,7 @@ nnoremap <leader>v V`}
 " 搜索相关
 
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
+noremap <space> /
 "Use sane regexes !not used!
 nnoremap / /\v
 vnoremap / /\v
@@ -517,7 +518,7 @@ nnoremap dg :diffget<CR>
 nnoremap dg :diffget<CR>
 
 " toggle between two buffers   --可以用f来替代t原先的功能，相差一个字符
-nnoremap t <C-^>
+"nnoremap t <C-^>
 
 " tab 操作,有些不符合人体工程学。
 map <leader>th :tabfirst<cr>
