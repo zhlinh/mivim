@@ -10,7 +10,8 @@ IF EXIST "%HOME%\_vimrc" (
 	call del "%HOME%\_vimrc"
 )
 IF EXIST "%HOME%\.vim" (
-	call rd /Q "%HOME%\.vim")	
+	call rd /Q "%HOME%\.vim"
+)	
 	
 call mklink "%HOME%\_vimrc" "%APP_PATH%\.vimrc"
 call mklink /J "%HOME%\.vim" "%APP_PATH%\.vim" 	
