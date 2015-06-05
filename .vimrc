@@ -680,7 +680,7 @@ Bundle 'gmarik/vundle'
 " --主题一 
 "theme solarized
 Bundle 'altercation/vim-colors-solarized'
-let g:solarized_termcolors=16
+"let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
@@ -703,8 +703,8 @@ syntax on
 
 
 " --设置背景为light和dark，对应solarized的两种配色，对于molokai没区别
+"set background=light
 set background=dark
-"set background=dark
 " --设置为256色
 set t_Co=256
 
