@@ -27,10 +27,11 @@
 "               <<< "Be the change you want to see the world">>>
 "
 " Author:  zhlinh
-" Version: 0.4.25
+" Version: 0.6.5
 " Email: zhlinhng@gmail.com"
-" Last_modify: 2015-4-25
+" Last_modify: 2015-6-5
 " Sections:
+"     ->Initial Plugins
 "     ->System Identification
 "     ->General Settings
 "     ->Show:User Interface settings
@@ -38,9 +39,30 @@
 "     ->Others
 "     ->Hot Key:Customized keys
 "     ->FileType Settings
-"     ->Bundle:Plgin management and setting
 "     ->Color&Theme
 "==========================================
+
+
+"==========================================
+" Initial Plugin 加载插件
+"==========================================
+
+" 修改leader键,因插件中会用到，所以把这句放前面
+let mapleader = ','
+let g:mapleader = ','
+
+" 开启语法高亮
+syntax enable
+syntax on
+
+" install Vundle bundles,插件配置和具体设置在vimrc.bundles中
+if filereadable(expand("~/.vimrc.bundles"))
+      source ~/.vimrc.bundles
+endif
+
+" ensure ftdetect et al work by including this after the Vundle stuff
+filetype plugin on
+filetype plugin indent on
 
 
 " ========================================
@@ -82,13 +104,8 @@ filetype on
 " 针对不同的文件类型采用不同的缩进格式
 filetype indent on    
 
-"allow plugins
-filetype plugin on
-" 启用自动补全
-filetype plugin indent on 
-
 "Do not compatible with VI
-set nocompatible
+"set nocompatible
 set autoread          " auto reload file after being modified
 set shortmess=atI       " do not show initial page
 set title                " change the terminal's title
@@ -308,7 +325,8 @@ if (g:iswindows && g:isGUI)
 endif
 
 "解决英文Windows下的Vim不知道如何显示双倍字符宽度的字体
-set gfn=Consolas:h11\cANSI
+"set guifont=Consolas:h11\cANSI
+set guifont=DejaVu_Sans_Mono:h14
 "set guifontwide=Simsun\:h11:cANSI
 
 " --针对中文的一些设置
@@ -412,10 +430,6 @@ function! NumberToggle()
   endif
 endfunc
 nnoremap <C-n> :call NumberToggle()<cr>
-
-" 命令的前缀，如可以影射多个按键：可以是 ",d"  ",c"
-let mapleader = ','       "下面出现的<leader>表示的就是‘,’
-let g:mapleader = ','
 
 "sudo & write with W
 command! W w !sudo tee % > /dev/null   
@@ -606,40 +620,41 @@ function! AutoSetFileHead()
 endfunc
 
 "C，C++, shell, python, javascript, ruby...等按F10运行
-map <F10> :call CompileRun()<CR>
-func! CompileRun()
-    exec "w"
-    if &filetype == 'c'
-        exec "!g++ % -o %<"
-        exec "!time ./%<"
-        exec "!rm ./%<"
-    elseif &filetype == 'cpp'
-        exec "!g++ % -o %<"
-        exec "!time ./%<"
-        exec "!rm ./%<"
-    elseif &filetype == 'java'
-        exec "!javac %"
-        exec "!time java %<"
-        exec "!rm ./%<.class"
-    elseif &filetype == 'sh'
-        exec "!time bash %"
-    elseif &filetype == 'python'
-        exec "!time python %"
-    elseif &filetype == 'html'
-        exec "!chrome % &"
-    elseif &filetype == 'go'
-        exec "!go build %<"
-        exec "!time go run %"
-    elseif &filetype == 'mkd' "MarkDown 解决方案为VIM + Chrome浏览器的MarkDown Preview Plus插件，保存后实时预览
-        exec "!chrome % &"
-    elseif &filetype == 'javascript'
-        exec "!time node %"
-    elseif &filetype == 'coffee'
-        exec "!time coffee %"
-    elseif &filetype == 'ruby'
-        exec "!time ruby %"
-    endif
-endfunc
+"用插件quickRun取代了
+"map <F10> :call CompileRun()<CR>
+"func! CompileRun()
+"    exec "w"
+"    if &filetype == 'c'
+"        exec "!g++ % -o %<"
+"        exec "!time ./%<"
+"        exec "!rm ./%<"
+"    elseif &filetype == 'cpp'
+"        exec "!g++ % -o %<"
+"        exec "!time ./%<"
+"        exec "!rm ./%<"
+"    elseif &filetype == 'java'
+"        exec "!javac %"
+"        exec "!time java %<"
+"        exec "!rm ./%<.class"
+"    elseif &filetype == 'sh'
+"        exec "!time bash %"
+"    elseif &filetype == 'python'
+"        exec "!time python %"
+"    elseif &filetype == 'html'
+"        exec "!chrome % &"
+"    elseif &filetype == 'go'
+"        exec "!go build %<"
+"        exec "!time go run %"
+"    elseif &filetype == 'mkd' "MarkDown 解决方案为VIM + Chrome浏览器的MarkDown Preview Plus插件，保存后实时预览
+"        exec "!chrome % &"
+"    elseif &filetype == 'javascript'
+"        exec "!time node %"
+"    elseif &filetype == 'coffee'
+"        exec "!time coffee %"
+"    elseif &filetype == 'ruby'
+"        exec "!time ruby %"
+"    endif
+"endfunc
 
 " set some keyword to highlight
 if has("autocmd")
@@ -650,57 +665,10 @@ if has("autocmd")
   endif
 endif
 
-"==========================================
-" Bundle:Plgin management and setting
-"==========================================
-"package dependent:  ctags
-"awesome javascript autocomplete dependent: nodejs
-"python dependent:  pep8, pyflake
-
-filetype off " required! turn off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-
-
-"################### Plugins Management ###################"
-
-Bundle 'gmarik/vundle'
-" vim plugin bundle control, command model
-" --若找不到插件(包括主题插件),则可用命令模式执行 :BundleInstall
-" :BundleInstall     install
-" :BundleInstall!    update
-" :BundleClean       remove plugin not in list
-
-
-
-"################### Themes ###################"
-
-" --先执行 :BundleInstall ，主题保存在~/.vim/bundle/
-" --主题一 
-"theme solarized
-Bundle 'altercation/vim-colors-solarized'
-"let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
-
-" --主题二
-"theme molokai
-Bundle 'tomasr/molokai'
-"let g:molokai_original = 1
-
-
 
 "==========================================
 " Color&Theme
 "==========================================
-
-filetype plugin indent on
-
-syntax enable
-syntax on
-
 
 " --设置背景为light和dark，对应solarized的两种配色，对于molokai没区别
 "set background=light

@@ -1,0 +1,1 @@
+Copy these *.ttf to directory to %windir%\Fonts\ (likely c:\Windows\Fonts),and then you can use it in _vimrc(or .vimrc) with the setting "set guifontset guifont=DejaVu_Sans_Mono:h14"(Just an example). 
