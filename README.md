@@ -1,6 +1,7 @@
 mivim
 ====================
 # 自定义快捷键
+-----------------------
     注意, 以下 `,` 代表<leader>
     1. 可以自己修改vimrc中配置，决定是否开启鼠标
 
@@ -97,9 +98,9 @@ mivim
 
     <enter>   normal模式下回车选中当前项
 
-
- # 插件部分
-
+---------------------
+# 插件部分
+---------------------
 > 基础
 
 1. ####插件管理 [gmarik/vundle](https://github.com/gmarik/vundle)
@@ -262,7 +263,7 @@ mivim
     以下是我改的一些快捷键，我觉得能用到的
 
         ,w      跳转
-      "下面这个是大杀器啊，只要盯着你想跳转的词就好 
+      "下面这个是大杀器啊，只要盯着你想跳转的词就好
       "记忆方式 [s]earch
         s或,,f      查找'e',快速跳转定位到某个字符位置
         ,.      重复上一次easymotion命令
@@ -355,7 +356,7 @@ mivim
 1. ####搜索 [kien/ctrlp.vim](https://github.com/kien/ctrlp.vim)
 
     文件搜索,ack/Command-T需要依赖于外部包,不喜欢有太多依赖的,除非十分强大, 具体 [文档](http://kien.github.io/ctrlp.vim/)
-    
+
      "记忆方式;文件的用<leader>，,[s]earch    ,[f]ind
         [sd] ,s  打开ctrlp搜索
         [sd] ,f  相当于mru功能，show recently opened files
@@ -393,7 +394,7 @@ mivim
     git插件, 编辑文件时进行一些diff操作,例如diff
 
     不是很习惯,所以用的次数太少
-    
+
     @@表示目前出现can not create diffs的问题，待解决
         [sd]
         ,ge   = git diff edit[gd被ycm占用了]
@@ -407,7 +408,6 @@ mivim
         [sd]
         ,gs   = show diff status [gd被ycm占用了]
 
-    ![gitgutter](https://raw.githubusercontent.com/airblade/vim-gitgutter/master/screenshot.png)
 
 3. ####文件时光机 [sjl/gundo.vim](https://github.com/sjl/gundo.vim)
 
@@ -514,7 +514,7 @@ mivim
     tagbar针对而一些语言的文档https://github.com/majutsushi/tagbar/wiki
 
     注意:之前版本有装taglist,决定用tagbar替代,taglist的配置注解未删除,需要的自行打开
-        
+
         "记忆方式: ,[t]agbar toggle
          [sd] <leader>t 打开Tagbar
 
@@ -535,9 +535,6 @@ mivim
 
     因为有一个特牛的功能,fly check,即,编码时在buffer状态就能动态查错标记,弥补syntastic只能保存和打开时检查语法错误的不足
 
-    演示
-
-    ![pyflakes](https://github.com/wklken/gallery/blob/master/vim/pyflakes.png?raw=true)
 
 2. ####Golang
 
@@ -610,7 +607,7 @@ mivim
 ---------------------------
 ---------------------------
 
-The End!
+The End.
 
 zhlinh
 
