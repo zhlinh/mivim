@@ -1,35 +1,35 @@
-"                                    .                 
-"                    ##############.....   #############  
-"                    ##############....... #############   
-"                      ##########..........###########     
-"                      ##########........###########       
-"                      ##########.......##########        
-"                      ##########.....##########..        
-"                     .##########....##########.....      
-"                   ...##########..##########.........    
-"                 .....##########.#########.............  
-"                   ...################GGG............    
-"                    . ################.............      
-"                      ##############.GGG...GGGGGGGGGG      
-"                      ############...GG...GG..GG  GG     
-"                      ##########....GG...GG..GG  GG      
-"                      ########.....GGG..GGG GGG GGG     
-"                      ######    .........                
-"                                  .....                  
-"                                    .       
+"                                    .
+"                    ##############.....   #############
+"                    ##############....... #############
+"                      ##########..........###########
+"                      ##########........###########
+"                      ##########.......##########
+"                      ##########.....##########..
+"                     .##########....##########.....
+"                   ...##########..##########.........
+"                 .....##########.#########.............
+"                   ...################GGG............
+"                    . ################.............
+"                      ##############.GGG...GGGGGGGGGG
+"                      ############...GG...GG..GG  GG
+"                      ##########....GG...GG..GG  GG
+"                      ########.....GGG..GGG GGG GGG
+"                      ######    .........
+"                                  .....
+"                                    .
 "
 "
-" 
+"
 "                    zhlinh Linux&Windows GVim config file
-"  
-"                                2015.4.25 
+"
+"                                2015.4.25
 "
 "               <<< "Be the change you want to see the world">>>
 "
 " Author:  zhlinh
-" Version: 0.6.5
+" Version: 0.6.8
 " Email: zhlinhng@gmail.com"
-" Last_modify: 2015-6-5
+" Last_modify: 2015-6-8
 " Sections:
 "     ->Initial Plugins
 "     ->System Identification
@@ -102,7 +102,7 @@ set history=200
 filetype on
 "differet indentation for differet filetype
 " 针对不同的文件类型采用不同的缩进格式
-filetype indent on    
+filetype indent on
 
 "Do not compatible with VI
 "set nocompatible
@@ -111,8 +111,8 @@ set shortmess=atI       " do not show initial page
 set title                " change the terminal's title
 
 "Set the window's size.
-set lines=32
-set columns=98
+set lines=35
+set columns=115
 
 " cancel backup,or it will create a *.wap file
 "" 备份,到另一个位置. 防止误删, 目前是取消备份
@@ -134,7 +134,7 @@ endif
 
 " highlight current column and line
 set cursorcolumn      "高亮列貌似效果不佳啊
-set cursorline     
+set cursorline
 
 " alway show the content on the screen after exist VIM
 " in case if i did some stupid deleting, and i can find them back
@@ -163,9 +163,9 @@ set magic      " For regular expressions turn magic on  --使用正则表达式 
 
 " <BS>起作用的地方：行首的空白字符，换行符和插入模式开始处之前的字符
 set backspace=eol,start,indent               " Configure backspace so it acts as it should act
-"This causes the left and right arrow keys, as well as h and l, 
-"to wrap when used at beginning or end of lines. 
-"( < > are the cursor keys used in normal and visual mode, 
+"This causes the left and right arrow keys, as well as h and l,
+"to wrap when used at beginning or end of lines.
+"( < > are the cursor keys used in normal and visual mode,
 "and [ ] are the cursor keys in insert mode
 set whichwrap+=<,>,h,l,[,]
 
@@ -183,10 +183,10 @@ if g:isGUI
     set guioptions-=T       " No Toolbar
     set guioptions-=r		" No right hand scrollbars
     set guioptions-=L       " No left hand scrollbars
-"    set guioptions-=e       " 关闭GUI标签页支持     
+"    set guioptions-=e       " 关闭GUI标签页支持
     set guitablabel=%M\ %t
     set showtabline=1		" 指定何时显示标签页行,0为永远不会,1为至少有两个标签,2为永远会
-    set linespace=2			
+    set linespace=2
 	" --插入模式输入中文完毕回到普通模式时禁用输入法，缺点是搜索不了中文「因为也是在nomal下」，慎用
 	" 经测试，还是有搜中文需求的，故弃置了
     "set imd         "屏蔽输入法
@@ -205,7 +205,7 @@ if g:isGUI
         \set guioptions+=r <Bar>
         \set guioptions+=L <Bar>
     \endif<CR>
-	
+
 	"不要加下面两句，会把windows习惯的预设mapping都加上，就用不了c-a,c-x之类的自增自减操作了
 	"source $VIMRUNTIME/mswin.vim
     "behave mswin
@@ -234,7 +234,7 @@ set ignorecase
 " instant search （即时查找，当输入到/b时会查找b开头的单词）
 set incsearch
 " 有一个或以上大写字母时仍大小写敏感
-set smartcase   
+set smartcase
 
 " 代码折叠
 set foldenable
@@ -246,7 +246,7 @@ set foldenable
 " diff      fold the content which not modified   --对没有更改的文本进行折叠
 " marker    use marker to indent, the default are {{{ and }}}   --使用标记进行折叠, 默认标记是 {{{ 和 }}}
 " 选择一种折叠方法
-set foldmethod=indent           
+set foldmethod=indent
 set foldlevel=99
 
 " 缩进设置--------------
@@ -260,7 +260,7 @@ set autoindent    " 打开自动缩进
 " Tab相关设置
 set tabstop=4          " 设置Tab键的宽度 [等同的空格个数]
 set shiftwidth=4       " 每一次缩进对应的空格数
-set softtabstop=4      " 按一次空格键可以一次删除4个空格   
+set softtabstop=4      " 按一次空格键可以一次删除4个空格
 " When on, a <Tab> in front of a line inserts blanks according to
 " 'shiftwidth'.  'tabstop' or 'softtabstop' is used in other places.  A
 " <BS> will delete a 'shiftwidth' worth of space at the start of the line.
@@ -268,12 +268,12 @@ set smarttab				"在行和段的开始使用制表符
 "when type <Tab>, it auto generate to <spale>
 set expandtab       "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
 " 取shiftwidth的整数倍，当使用'>' '<'来改变缩进时
-set shiftround 
+set shiftround
 
 " A buffer becomes hidden when it is abandoned --多缓存的存在方式
 set hidden
 set wildmode=longest:full,full
-set ttyfast  
+set ttyfast
 
 
 set relativenumber                          " 显示相对行号，这个不错
@@ -281,7 +281,7 @@ au FocusLost * :set norelativenumber number
 au FocusGained * :set relativenumber
 " 插入模式下用绝对行号, 普通模式下用相对
 autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber   
+autocmd InsertLeave * :set relativenumber
 
 if has('statusline')
     set laststatus=2						 " 命令行的高度
@@ -308,7 +308,7 @@ if(g:iswindows && !(g:isGUI))
 else
 	set termencoding=utf-8
 endif
-	
+
 set fileencoding=utf-8            "设置当前文件编码，可以更改，如：gbk（同cp936）
 set helplang=cn
 
@@ -320,13 +320,14 @@ if (g:iswindows && g:isGUI)
     "解决gvim菜单乱码
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
+    set langmenu=zh_CN.utf-8
     "解决consle输出乱码
     language messages zh_CN.utf-8
 endif
 
 "解决英文Windows下的Vim不知道如何显示双倍字符宽度的字体
 "set guifont=Consolas:h11\cANSI
-set guifont=DejaVu_Sans_Mono:h14
+set guifont=DejaVu_Sans_Mono:h11
 "set guifontwide=Simsun\:h11:cANSI
 
 " --针对中文的一些设置
@@ -353,7 +354,7 @@ set wildignore=*.o,*~,*.swp,*.bak,*.pyc,*.class,.svn
 if has("autocmd")   " remember the last cursor postion when reopen a file
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-set viminfo^=%   " %号表示记录缓存区列表，只有不带参数启动vim时才有效 
+set viminfo^=%   " %号表示记录缓存区列表，只有不带参数启动vim时才有效
 
 "离开插入模式后自动关闭预览窗口
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -387,6 +388,16 @@ nnoremap gk k
 nnoremap j gj
 nnoremap gj j
 
+
+" Ctrl + K 插入模式下光标向上移动
+imap <c-k> <Up>
+" Ctrl + J 插入模式下光标向下移动
+imap <c-j> <Down>
+" Ctrl + H 插入模式下光标向左移动
+imap <c-h> <Left>
+" Ctrl + L 插入模式下光标向右移动
+imap <c-l> <Right>
+
 " F1 - F6 设置
 " F1 废弃这个键,防止调出系统帮助
 " F2 行号开关，用于鼠标复制代码用
@@ -395,8 +406,16 @@ nnoremap gj j
 " F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
 " F6 语法开关，关闭语法可以加快大文件的展示
 
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber number
+  else
+    set relativenumber
+  endif
+endfunc
 " I can type :help on my own, thanks.  Protect your fat fingers from the evils of <F1>
-noremap <F1> <Esc>"
+noremap <F1> :call NumberToggle()<cr>
 
 ""为方便复制，用<F2>开启/关闭行号显示:
 function! HideNumber()
@@ -422,17 +441,8 @@ au InsertLeave * set nopaste
 
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
 
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber number
-  else
-    set relativenumber
-  endif
-endfunc
-nnoremap <C-n> :call NumberToggle()<cr>
-
 "sudo & write with W
-command! W w !sudo tee % > /dev/null   
+command! W w !sudo tee % > /dev/null
 
 "goto older/newer position in change list
 nnoremap <silent> ( g;
@@ -447,6 +457,7 @@ inoremap <C-V> <C-R>"
 " Quickly edit/reload the vimrc config file
 nmap <silent> <leader>em :e $MYVIMRC<CR>
 nmap <silent> <leader>sm :so $MYVIMRC<CR>
+nmap <silent> <leader>eb :e ~/.vimrc.bundles<CR>
 
 " 在当前窗口打开一个文本
 map <leader>ee :e %%
@@ -462,8 +473,8 @@ map <leader>ev :vsp %%
 cnoremap <C-j> <t_kd>
 " <c-a>移动到上一条历史命令
 cnoremap <C-k> <t_ku>
-" <c-a>到行首，<c-e>到行尾
-cnoremap <C-a> <Home>
+" <c-a>到行首，<c-e>到行尾.默认为<c-b>到行首
+cnoremap <C-i> <Home>
 cnoremap <C-e> <End>
 " 命令行模式下自动填写
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -492,7 +503,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " --原本Y的功能同yy，y$再p的时候是在本行
-map Y y$ 
+map Y y$
 
 " select all --全选
 map <Leader>sa ggVG"
@@ -566,7 +577,9 @@ noremap <leader>0 :tablast<cr>
 " <leader>k 替换 Esc  --这个可以先试用下，估计会有误操作
 inoremap <leader>k <Esc>
 
-" 粘贴系统存储器的内容
+" 复制粘贴系统存储器的内容
+nnoremap <leader>y "+y
+nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 
@@ -680,7 +693,9 @@ set t_Co=256
 "if you want it back, serch for italic and make the 431 line to "else let s:i=",italic".
 colorscheme solarized
 "colorscheme molokai
-"colorscheme desert
+" colorscheme Tomorrow-Night
+" colorscheme Tomorrow-Night-Bright
+" colorscheme desert
 
 " 设置标记一列的背景颜色和数字行号的背景颜色一致
 hi! link SignColumn   LineNr
