@@ -540,22 +540,17 @@ noremap <left> :bp<CR>
 noremap <right> :bn<CR>
 nnoremap dp :diffput<CR>
 nnoremap dg :diffget<CR>
-nnoremap dg :diffget<CR>
 
 " toggle between two buffers   --可以用f来替代t原先的功能，相差一个字符
 "nnoremap t <C-^>
 
-" tab 操作,有些不符合人体工程学。
-map <leader>th :tabfirst<cr>
-map <leader>tl :tablast<cr>
-
-map <leader>tj :tabnext<cr>
-map <leader>tk :tabprev<cr>
-map <leader>tn :tabnext<cr>
-map <leader>tp :tabprev<cr>
+" tab 操作
+map <leader>h :tabnext<cr>
+map <leader>l :tabprev<cr>
 
 map <leader>te :tabedit<cr>
 map <leader>td :tabclose<cr>
+"将当前标签移动到最后一个
 map <leader>tm :tabm<cr>
 
 " 新建tab  Ctrl+t
@@ -573,6 +568,17 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
+
+" Toggles between the active and last active tab "
+" The first tab is always 1 "
+let g:last_active_tab = 1
+" nnoremap <leader>gt :execute 'tabnext ' . g:last_active_tab<cr>
+" nnoremap <silent> <c-o> :execute 'tabnext ' . g:last_active_tab<cr>
+" vnoremap <silent> <c-o> :execute 'tabnext ' . g:last_active_tab<cr>
+nnoremap <silent> <leader>tt :execute 'tabnext ' . g:last_active_tab<cr>
+vnoremap <silent> <leader>tt :execute 'tabnext ' . g:last_active_tab<cr>
+autocmd TabLeave * let g:last_active_tab = tabpagenr()
+
 
 " <leader>k 替换 Esc  --这个可以先试用下，估计会有误操作
 inoremap <leader>k <Esc>

@@ -45,15 +45,11 @@ mivim
     6. tab操作(重点推)
     ctrl+t 新建一个tab
 
-    (hjkl)
-    ,th    切第1个tab
-    ,tl    切最后一个tab
-    ,tj    下一个tab
-    ,tk    前一个tab
+    (hl)
+    ,l    下一个tab
+    ,h    前一个tab
 
-    ,tn    下一个tab(next)
-    ,tp    前一个tab(previous)
-
+    (关闭打开操作)
     ,td    关闭tab
     ,te    tabedit
     ,tm    tabm
@@ -266,12 +262,11 @@ mivim
       "下面这个是大杀器啊，只要盯着你想跳转的词就好
       "记忆方式 [s]earch
         s或,,f      查找'e',快速跳转定位到某个字符位置
-        ,.      重复上一次easymotion命令
 
+        ,.      重复上一次easymotion命令
+    本行的就用f+字母，而,h和,l作为标签页的移动使用
         ,j      快速决定移动到下面哪行(比用行号/j移动快)
         ,k      快速移动到上面哪行
-        ,l      本行, 向后快速移动
-        ,h      本行, 向前快速移动
 
 
 2. ####符号匹配跳转[vim-scripts/matchit.zip](https://github.com/vim-scripts/matchit.zip)
@@ -395,7 +390,6 @@ mivim
 
     不是很习惯,所以用的次数太少
 
-    @@表示目前出现can not create diffs的问题，待解决
         [sd]
         ,ge   = git diff edit[gd被ycm占用了]
 

@@ -219,10 +219,10 @@ nmap <Leader>w <Plug>(easymotion-w)
 " 然后s-【你所盯着的字母】-选择字母[下面这个重要]
 nmap s <Plug>(easymotion-s)
 "let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-map <Leader>h <Plug>(easymotion-linebackward)
+"删去了<Leader>h和和<Leader>l，因为这两个留给了tab的移动
+"当然本行的移动用自带的f+字母即可
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
-map <Leader>l <Plug>(easymotion-lineforward)
 " 重复上一次操作, 类似repeat插件, 很强大
 map <Leader>. <Plug>(easymotion-repeat)
 
@@ -342,7 +342,7 @@ nnoremap <leader>ge :Gdiff<CR>
 " not ready to open
 " <leader>gb maps to :Gblame<CR>
 " <leader>gs maps to :Gstatus<CR>
-" <leader>gd maps to :Gdiff<CR>  和现有冲突
+" <leader>gd maps to :Gdiff<CR>  和现有的快捷键冲突
 " <leader>gl maps to :Glog<CR>
 " <leader>gc maps to :Gcommit<CR>
 " <leader>gp maps to :Git push<CR>
