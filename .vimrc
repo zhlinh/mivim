@@ -47,6 +47,9 @@
 " Initial Plugin 加载插件
 "==========================================
 
+"Do not compatible with VI
+set nocompatible
+
 " 修改leader键,因插件中会用到，所以把这句放前面
 let mapleader = ','
 let g:mapleader = ','
@@ -104,8 +107,6 @@ filetype on
 " 针对不同的文件类型采用不同的缩进格式
 filetype indent on
 
-"Do not compatible with VI
-"set nocompatible
 set autoread          " auto reload file after being modified
 set shortmess=atI       " do not show initial page
 set title                " change the terminal's title
@@ -388,24 +389,27 @@ nnoremap gk k
 nnoremap j gj
 nnoremap gj j
 
-
-" Ctrl + K 插入模式下光标向上移动
-imap <c-k> <Up>
-" Ctrl + J 插入模式下光标向下移动
-imap <c-j> <Down>
+"因c-j和c-k用于插件的补全操作了，在输入模式下会冲突，故在此去掉了
+"imap <c-k> <Up>
+"imap <c-j> <Down>
 " Ctrl + H 插入模式下光标向左移动
 imap <c-h> <Left>
 " Ctrl + L 插入模式下光标向右移动
 imap <c-l> <Right>
 
-" F1 - F6 设置
+" F1 - F10 设置(没有用全哈)
 " F1 废弃这个键,防止调出系统帮助
 " F2 行号开关，用于鼠标复制代码用
 " F3 显示可打印字符开关
 " F4 换行开关
-" F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
-" F6 语法开关，关闭语法可以加快大文件的展示
 
+" 看键盘的设置就知道为什么会选择F5和F9作为快捷键了
+" F5 LaTeX插件的insert/wrap in environment
+" F9 LaTeX插件的do a completion (ref, cite, lename)
+
+" F6 语法开关，关闭语法可以加快大文件的展示
+" F7 粘贴模式paste_mode开关,用于有格式的代码粘贴
+" F10 QuickRun插件的快捷键(或者可以使用c-r)
 
 function! NumberToggle()
   if(&relativenumber == 1)
@@ -432,14 +436,12 @@ nnoremap <F2> :call HideNumber()<CR>
 nnoremap <F3> :set list! list?<CR>
 nnoremap <F4> :set wrap! wrap?<CR>
               "set paste
-set pastetoggle=<F5>            "    when in insert mode, press <F5> to go to
+nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+set pastetoggle=<F7>            "    when in insert mode, press <F5> to go to
                                 "    paste mode, where you can paste mass data
                                 "    that won't be autoindented
-
 " disbale paste mode when leaving insert mode
 au InsertLeave * set nopaste
-
-nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
 
 "sudo & write with W
 command! W w !sudo tee % > /dev/null
@@ -575,8 +577,8 @@ let g:last_active_tab = 1
 " nnoremap <leader>gt :execute 'tabnext ' . g:last_active_tab<cr>
 " nnoremap <silent> <c-o> :execute 'tabnext ' . g:last_active_tab<cr>
 " vnoremap <silent> <c-o> :execute 'tabnext ' . g:last_active_tab<cr>
-nnoremap <silent> <leader>tt :execute 'tabnext ' . g:last_active_tab<cr>
-vnoremap <silent> <leader>tt :execute 'tabnext ' . g:last_active_tab<cr>
+nnoremap <silent> <leader>tl :execute 'tabnext ' . g:last_active_tab<cr>
+vnoremap <silent> <leader>tl :execute 'tabnext ' . g:last_active_tab<cr>
 autocmd TabLeave * let g:last_active_tab = tabpagenr()
 
 

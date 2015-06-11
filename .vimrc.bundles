@@ -9,7 +9,8 @@
 " python dependence:   pep8, pyflake
 
 " 非兼容vi模式。去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
-set nocompatible
+"在vimrc的一开始就已经设置了，此处就省去了
+"set nocompatible
 " configure Vundle
 filetype off " required! turn off
 set rtp+=~/.vim/bundle/vundle/
@@ -23,6 +24,8 @@ call vundle#rc()
 "     :BundleInstall     install 安装配置的插件
 "     :BundleInstall!    update  更新
 "     :BundleClean       remove plugin not in list 删除本地无用插件
+"     :BundleSearch      search 查找插件
+"     :BundleList        list   列出所有使用的插件
 Bundle 'gmarik/vundle'
 
 
@@ -215,16 +218,16 @@ let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String']
 Bundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
 " 这个真的是神器啊，只要盯着自己想跳转的地方，
-nmap <Leader>w <Plug>(easymotion-w)
+nmap <leader>w <Plug>(easymotion-w)
 " 然后s-【你所盯着的字母】-选择字母[下面这个重要]
 nmap s <Plug>(easymotion-s)
 "let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-"删去了<Leader>h和和<Leader>l，因为这两个留给了tab的移动
+"删去了<leader>h和和<leader>l，因为这两个留给了tab的移动
 "当然本行的移动用自带的f+字母即可
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
 " 重复上一次操作, 类似repeat插件, 很强大
-map <Leader>. <Plug>(easymotion-repeat)
+map <leader>. <Plug>(easymotion-repeat)
 
 
 "符号跳转,使用%
@@ -271,10 +274,16 @@ let g:multi_cursor_quit_key='<Esc>'
 
 " 文件搜索
 " change to https://github.com/ctrlpvim/ctrlp.vim
+    " ,ff 进入find file模式
+    " Ctrl-d:Toggle between full-path and filename only search.
+    " Ctrl-r:Toggle between the string mode and full regexp mode.
+    " Ctrl-t:Open the selected file in a new tab.
+    " Ctrl-v:Open the selected file in a vertical split.
+    " Ctrl-x:Open the selected file in a horizontal split.
 Bundle 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = '<leader>s'
+let g:ctrlp_map = '<leader>ff'
 let g:ctrlp_cmd = 'CtrlP'
-map <leader>f :CtrlPMRU<CR>
+map <leader>fh :CtrlPMRU<CR>
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
     \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
@@ -296,31 +305,44 @@ let g:ctrlp_follow_symlinks=1
 
 " ctrlp插件1 - 不用ctag进行函数快速跳转
 Bundle 'tacahiroy/ctrlp-funky'
-nnoremap <Leader>fu :CtrlPFunky<Cr>
+nnoremap <leader>fj :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nnoremap <leader>fk :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 let g:ctrlp_funky_syntax_highlight = 1
 
 let g:ctrlp_extensions = ['funky']
 
+
 " 类似sublimetext的搜索
 " 光标移动到单词, 按\ 进入全局搜索
-" 也可以在命令行输入 :CtrlSF [pattern]，全局搜索[pattern],目前映射为<leader>\
+" 也可以在命令行输入 :CtrlSF [path],设置搜索路径,目前映射为<leader>\
 Bundle "dyng/ctrlsf.vim"
 " In CtrlSF window:
 " 回车/o, 打开
 " t - 在tab中打开(建议)
 " T - Lkie t but focus CtrlSF window instead of opened new tab.
 " q - Quit CtrlSF window.
+" 需要ag或ack依赖，grep的升级版!设置ctrlsf 使用ag
+let g:ctrlsf_ackprg = 'ag'
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+    " Use Ag over Grep
+    set grepprg=ag\ --nogroup\ --nocolor
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -U ""'
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+endif
 " 实话说，运行速度比较慢，慎用,感觉意义不大，还是用IDE实现快些
-nmap <leader>\  <Plug>CtrlSFPrompt
 nmap \ <Plug>CtrlSFCwordPath<CR>
-" let g:ctrlsf_position = 'below'
-" let g:ctrlsf_winsize = '30%'
+" 进入ctrlsf的命令行模式
+nmap <leader>\ <Plug>CtrlSFPrompt
+let g:ctrlsf_position = 'bottom'
+let g:ctrlsf_winsize = '30%'
 let g:ctrlsf_auto_close = 0
 let g:ctrlsf_confirm_save = 0
 " Note: cannot use <CR> or <C-m> for open
-" Use : <sapce> or <tab>
+" Use : o or t
 let g:ctrlsf_mapping = {
     \ "open"  : "o",
     \ "openb" : "O",
@@ -328,8 +350,8 @@ let g:ctrlsf_mapping = {
     \ "tabb"  : "T",
     \ "prevw" : "p",
     \ "quit"  : "q",
-    \ "next"  : "<C-J>",
-    \ "prev"  : "<C-K>",
+    \ "next"  : "<C-N>",
+    \ "prev"  : "<C-P>",
     \ "pquit" : "q",
     \ }
 
@@ -509,6 +531,7 @@ let g:tagbar_type_go = {
 
 " ################### 语言相关 ###################
 
+"快速编译运行的插件
 Bundle 'thinca/vim-quickrun'
 let g:quickrun_config = {
 \   "_" : {
@@ -519,6 +542,40 @@ let g:quickrun_config = {
 let g:quickrun_no_default_key_mappings = 1
 nmap <Leader>r <Plug>(quickrun)
 map <F10> :QuickRun<CR>
+
+" ###### Latex #########
+"Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
+"上面那个太久了，应该只是一个mirror
+"故改用下面这个，也是官网上的github网址
+"官网地址http://vim-latex.sourceforge.net/
+Bundle 'vim-latex/vim-latex'
+  "用到的快捷键:
+    " <leader>ll：compile
+    " <leader>lv：view pdf
+    " <leader>ls: 正向搜索
+    " SumatraPDF中 双击: 反向搜索
+    " Ctrl-J： 跳到下一个++位置（place holder）
+    " F5：insert/wrap in environment
+    " F9：do a completion (ref, cite, lename)
+    " za：fold/unfold
+    " <leader>rf：refresh folding
+" 下面是官方的一些推荐配置
+" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+" can be called correctly.
+set shellslash
+" Set your grep program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+" vim默认把空的tex文件设为plaintex而不是tex，导致latex-suite不被加载
+let g:tex_flavor='latex'
+" TIP: if you write your \label's as \label{fig:something}, then if you
+" type in \ref{fig: and press <C-n> you will automatically cycle through
+" all the figure labels. Very useful!
+set iskeyword+=:
+autocmd BufEnter *.tex set sw=2
+" 反向搜索相关
+let g:Tex_DefaultTargetFormat='pdf'
+let g:Tex_CompileRule_pdf = 'xelatex --synctex=-1 -src-specials -interaction=nonstopmode $*'
+let g:Tex_ViewRule_pdf = 'sumatrapdf -reuse-instance -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
 
 " ###### Python #########
 

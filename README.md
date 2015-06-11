@@ -22,8 +22,12 @@ mivim
     F2 set nu/nonu,行号开关，用于鼠标复制代码用
     F3 set list/nolist,显示可打印字符开关
     F4 set wrap/nowrap,换行开关
-    F5 set paste/nopaste,粘贴模式paste_mode开关,用于有格式的代码粘贴
+
+    F5 LaTeX插件的insert/wrap in environment
+    F9 LaTeX插件的do a completion (ref, cite, lename)
+
     F6 syntax on/off,语法开关，关闭语法可以加快大文件的展示
+    F7 set paste/nopaste,粘贴模式paste_mode开关,用于有格式的代码粘贴
 
     F10或<leader>r 运行当前文件(用了插件quickrun)
 
@@ -32,8 +36,8 @@ mivim
     Normal模式下:
     ctrl + j/k/h/l   进行上下左右窗口跳转,不需要ctrl+w+jkhl
 
-    Insert模式下:
-    ctrl + j/k/h/l  相当于Normal模式下的j/k/h/l
+    Insert模式下[注意没有c-j和c-k，用于插件的补全操作了，会冲突]:
+    ctrl + h/l  相当于Normal模式下的h/l
 
     5. 搜索
     <space> 空格，进入搜索状态/
@@ -60,7 +64,7 @@ mivim
     ,9     切第9个tab
     ,0     切最后一个tab
 
-    ,tt 最近使用两个tab之间切换
+    ,tl   (tab last use)最近使用两个tab之间切换
 
     7. buffer操作(不建议, 建议使用ctrlspace插件来操作)
     [b    前一个buffer
@@ -261,10 +265,11 @@ mivim
         ,w      跳转
       "下面这个是大杀器啊，只要盯着你想跳转的词就好
       "记忆方式 [s]earch
-        s或,,f      查找'e',快速跳转定位到某个字符位置
 
+        s或,,f      查找'e',快速跳转定位到某个字符位置
         ,.      重复上一次easymotion命令
     本行的就用f+字母，而,h和,l作为标签页的移动使用
+       
         ,j      快速决定移动到下面哪行(比用行号/j移动快)
         ,k      快速移动到上面哪行
 
@@ -352,9 +357,12 @@ mivim
 
     文件搜索,ack/Command-T需要依赖于外部包,不喜欢有太多依赖的,除非十分强大, 具体 [文档](http://kien.github.io/ctrlp.vim/)
 
-     "记忆方式;文件的用<leader>，,[s]earch    ,[f]ind
-        [sd] ,s  打开ctrlp搜索
-        [sd] ,f  相当于mru功能，show recently opened files
+     "记忆方式;文件的用<leader>,find file和find history file
+
+        "[F]ind [F]ile
+        [sd] ,ff  打开ctrlp搜索
+        "[F]ind [H]istory file
+        [sd] ,fh  相当于mru功能，show recently opened files
 
         ctrl + j/k 进行上下移动
         ctrl + x/v 分屏打开该文件 [重要**]
@@ -364,9 +372,10 @@ mivim
 
     解决问题:使用tagbar当函数比较多的时候,移动耗时较长,使用快速搜索快很多
 
-    "记忆方式:可看做ctrlp的插件，然后 [f]ind [u]p
-        ,fu   进入当前文件函数搜索
-        ,fU   搜索光标下单词对应函数
+    "记忆方式:可看做ctrlp的插件，然后[F]unky [J]ump,[F]unky [K]up
+
+        ,fj   进入当前文件函数搜索
+        ,fk   搜索光标下单词对应函数
 
 2. ####全局搜索插件(类sumlimetext) [dyng/ctrlsf.vim](https://github.com/dyng/ctrlsf.vim)
 
@@ -375,7 +384,7 @@ mivim
     实话说不是很推荐，相当相当慢，慎用
 
         \       搜索光标下的词
-        ,\      搜索指定的词
+        ,\      进入ctrlsf搜索的命令行模式
         进入左侧后的操作:
                     o - 打开[注意回车不能打开]
                     O - 在buffer中打开
@@ -406,7 +415,8 @@ mivim
 3. ####文件时光机 [sjl/gundo.vim](https://github.com/sjl/gundo.vim)
 
     编辑文件时光机
-       "不常用，所以用两个<leader>
+
+        "不常用，所以用两个<leader>
         [sd] ,,h  查看文件编辑历史
 
     附:同类插件 [mbbill/undotree](https://github.com/mbbill/undotree)
@@ -515,7 +525,23 @@ mivim
 
 > 语言相关- 需要自定义编辑确认是否保留(默认打开)
 
-1. ####Python
+1. ####LaTeX
+
+   vim下的latex编辑插件[vim-latex/vim-latex](https://github.com/vim-latex/vim-latex)
+
+    "Latex-suit的常用快捷键:记忆方式:<leader>[L]ateX
+        <leader>ll：compile
+        <leader>lv：view pdf
+        <leader>ls: 正向搜索
+        SumatraPDF中 双击: 反向搜索
+        Ctrl-J： 跳到下一个++位置（place holder）
+        F5：insert/wrap in environment
+        F9：do a completion (ref, cite, lename)
+        za：fold/unfold
+        <leader>rf：refresh folding
+
+
+2. ####Python
 
     Vim as a Python IDE, but much more than that!
 
@@ -530,7 +556,7 @@ mivim
     因为有一个特牛的功能,fly check,即,编码时在buffer状态就能动态查错标记,弥补syntastic只能保存和打开时检查语法错误的不足
 
 
-2. ####Golang
+3. ####Golang
 
     Go语言自动补全[Blackrush/vim-gocode](https://github.com/Blackrush/vim-gocode)
 
@@ -541,13 +567,13 @@ mivim
     另一个插件[觉得太过庞大没有使用,golang开发者可以配置试用下] [fatih/vim-go](https://github.com/fatih/vim-go) [介绍](http://blog.gopheracademy.com/vimgo-development-environment)
 
 
-3. ####Markdown
+4. ####Markdown
 
     [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)
 
     markdown语法,编辑md文件
 
-4. ####HTML/JS/JQUERY/CSS
+5. ####HTML/JS/JQUERY/CSS
 
     [jelera/vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax) js语法高亮
     [pangloss/vim-javascript](https://github.com/pangloss/vim-javascript) 缩进等
@@ -572,13 +598,13 @@ mivim
     [vim-css-color](https://github.com/ap/vim-css-color) 未配置
     css颜色展示
 
-5. ####Jinja2
+6. ####Jinja2
 
     [Glench/Vim-Jinja2-Syntax](https://github.com/Glench/Vim-Jinja2-Syntax)
 
     jinja2 语法高亮
 
-6. ####Ruby
+7. ####Ruby
 
     可以参考tpope的插件列表,很多跟ruby相关
 
@@ -588,13 +614,13 @@ mivim
     这个有坑, 暂未搞定
     [tpope/vim-endwise](https://github.com/tpope/vim-endwise) 未配置,自动加end
 
-7. ####PHP
+8. ####PHP
 
     [spf13/PIV](https://github.com/spf13/PIV) 未配置
 
     [arnaud-lb/vim-php-namespace](https://github.com/arnaud-lb/vim-php-namespace) 未配置
 
-8. ####非语言语法高亮
+9. ####非语言语法高亮
 
     [evanmiller/nginx-vim-syntax](https://github.com/evanmiller/nginx-vim-syntax) 未配置
 
