@@ -204,8 +204,9 @@ map <leader><space> :FixWhitespace<cr>
 
 " 快速赋值语句对齐
 Bundle 'junegunn/vim-easy-align'
-vmap <Leader>a <Plug>(EasyAlign)
-nmap <Leader>a <Plug>(EasyAlign)
+"<leader>a后还可以用<enter>来转换右对齐还是两端对齐，默认为左对齐
+vmap <leader>a <Plug>(EasyAlign)
+nmap <leader>a <Plug>(EasyAlign)
 if !exists('g:easy_align_delimiters')
   let g:easy_align_delimiters = {}
 endif
@@ -567,15 +568,22 @@ set shellslash
 set grepprg=grep\ -nH\ $*
 " vim默认把空的tex文件设为plaintex而不是tex，导致latex-suite不被加载
 let g:tex_flavor='latex'
+
 " TIP: if you write your \label's as \label{fig:something}, then if you
 " type in \ref{fig: and press <C-n> you will automatically cycle through
 " all the figure labels. Very useful!
 set iskeyword+=:
 autocmd BufEnter *.tex set sw=2
+
 " 反向搜索相关
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_CompileRule_pdf = 'xelatex --synctex=-1 -src-specials -interaction=nonstopmode $*'
 let g:Tex_ViewRule_pdf = 'sumatrapdf -reuse-instance -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
+" tex文件自动检查拼写
+autocmd BufNewFile,BufRead *.tex set spell
+" 关闭编辑tex文件时换行时自动对齐的功能
+let g:tex_indent_items=0
+
 
 " ###### Python #########
 

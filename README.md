@@ -240,14 +240,19 @@ mivim
 4. ####赋值语句代码对齐 [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)
 
     将代码,或者json等, 根据表达式符号进行对齐,具体见例子 [examples](https://github.com/junegunn/vim-easy-align/blob/master/EXAMPLES.md)
+    <leader>a后还可以用<enter>来转换右对齐还是两端对齐，默认为左对齐
 
-        [sd]  可以选中多行,不选中默认操作当前行
-            ,a= 对齐等号表达 [有用]
-            ,a: 对齐冒号表达式(json/map等)
-            ,a<space>  首个空格对齐
-            ,a2<space> 第二个空格对齐
-            ,a*<space> 所有空格依次对齐
+        [sd]一般会先用vip[visual in paragraph]先选中一段,不选中默认操作当前行
+            ,a=        对齐等号表达 [有用]
+            ,a:        对齐冒号表达式(json/map等)
+            ,a<space>  首个空格左对齐
+            ,a2<space> 第二个空格左对齐
 
+            ,a*|              左对齐所有|号,表格中会用到
+            ,a**|             依次左右对齐所出现的|号
+            ,a<enter>*|       右对齐所有|号
+            ,a<enter>**|      依次右左对齐所出现的|号
+            ,<enter><enter>*| 居中对齐所有|号
 
     同类插件 [tabular](https://github.com/godlygeek/tabular)
 
@@ -269,7 +274,7 @@ mivim
         s或,,f      查找'e',快速跳转定位到某个字符位置
         ,.      重复上一次easymotion命令
     本行的就用f+字母，而,h和,l作为标签页的移动使用
-       
+
         ,j      快速决定移动到下面哪行(比用行号/j移动快)
         ,k      快速移动到上面哪行
 
@@ -527,9 +532,10 @@ mivim
 
 1. ####LaTeX
 
-   vim下的latex编辑插件[vim-latex/vim-latex](https://github.com/vim-latex/vim-latex)
+   vim下的LaTeX编辑插件[vim-latex/vim-latex](https://github.com/vim-latex/vim-latex)
 
-    "Latex-suit的常用快捷键:记忆方式:<leader>[L]ateX
+    "LaTeX-suit的常用快捷键:记忆方式:<leader>[L]aTeX
+
         <leader>ll：compile
         <leader>lv：view pdf
         <leader>ls: 正向搜索
