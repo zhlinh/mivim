@@ -508,7 +508,7 @@ vnoremap > >gv
 map Y y$
 
 " select all --全选
-map <Leader>sa ggVG"
+map <Leader>sa ggVG
 
 " 从本行选中到空行或代码块结束位置
 nnoremap <leader>v V`}
@@ -547,8 +547,8 @@ nnoremap dg :diffget<CR>
 "nnoremap t <C-^>
 
 " tab 操作
-map <leader>h :tabnext<cr>
-map <leader>l :tabprev<cr>
+map <leader>l :tabnext<cr>
+map <leader>h :tabprev<cr>
 
 map <leader>te :tabedit<cr>
 map <leader>td :tabclose<cr>

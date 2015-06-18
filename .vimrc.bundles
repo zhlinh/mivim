@@ -142,14 +142,17 @@ let g:ycm_filetype_blacklist = {
 " 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
 Bundle 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
+" 下面这个给出各种语言的一些代码段，如果需要则添加到~/.vim/UltiSnips
 Bundle 'honza/vim-snippets'
 
 let g:UltiSnipsExpandTrigger       = "<tab>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" 定义代码片段会使用vim运行环境下的UltiSnips文件夹
+" 可设置多个，但必须在vim运行环境下，通常为~/，这个我没用到
 let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
+" 定义存放代码片段的文件夹。
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
-" 定义存放代码片段的文件夹 .vim/UltiSnips下，使用自定义和默认的，将会的到全局，有冲突的会提示
 " 进入对应filetype的snippets进行编辑
 map <leader>us :UltiSnipsEdit<CR>
 
