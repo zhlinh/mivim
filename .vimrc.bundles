@@ -8,7 +8,7 @@
 " package dependence:  ctags, ag(he_silver_searcher)
 " python dependence:   pep8, pyflake
 
-" 非兼容vi模式。去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
+" 非兼容vi模式。去掉有关vi一致性模式，避免以前版本的一些bug和局限
 "在vimrc的一开始就已经设置了，此处就省去了
 "set nocompatible
 " configure Vundle
@@ -109,7 +109,7 @@ let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
 let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
-let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
+"let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
 let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_tags_files = 1
 
@@ -145,12 +145,12 @@ Bundle 'SirVer/ultisnips'
 " 下面这个给出各种语言的一些代码段，如果需要则添加到~/.vim/UltiSnips
 Bundle 'honza/vim-snippets'
 
-let g:UltiSnipsExpandTrigger       = "<tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " 定义代码片段会使用vim运行环境下的UltiSnips文件夹
 " 可设置多个，但必须在vim运行环境下，通常为~/，这个我没用到
-let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
+"let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
 " 定义存放代码片段的文件夹。
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 " 进入对应filetype的snippets进行编辑
@@ -545,7 +545,6 @@ let g:quickrun_config = {
 
 let g:quickrun_no_default_key_mappings = 1
 nmap <Leader>r <Plug>(quickrun)
-map <F10> :QuickRun<CR>
 
 " ###### Latex #########
 "Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
@@ -635,13 +634,27 @@ let g:html_indent_style1 = "inc"
 
 " for javascript 自动补全,配合YCM,需要安装nodejs&npm  see
 " https://github.com/marijnh/tern_for_vim
-" Bundle 'marijnh/tern_for_vim'
+Bundle 'marijnh/tern_for_vim'
 
 " for jquery
 Bundle 'nono/jquery.vim'
 
 " ###### emmet HTML complete #########
-" Bundle "mattn/emmet-vim"
+Bundle "mattn/emmet-vim"
+let g:user_emmet_settings = {
+      \ 'php' : {
+      \ 'extends' : 'html',
+      \ 'filters' : 'c',
+      \ },
+      \ 'xml' : {
+      \ 'extends' : 'html',
+      \ },
+      \ 'haml' : {
+      \ 'extends' : 'html',
+      \ },
+      \}
+let g:user_emmet_expandabbr_key = '<c-e>'
+
 
 " ###### vim.less : less 自动更新##########
 " Bundle 'groenewege/vim-less'

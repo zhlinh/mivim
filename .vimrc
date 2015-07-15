@@ -310,6 +310,8 @@ else
 	set termencoding=utf-8
 endif
 
+"去掉bom
+set nobomb
 set fileencoding=utf-8            "设置当前文件编码，可以更改，如：gbk（同cp936）
 set helplang=cn
 
@@ -397,7 +399,7 @@ imap <c-h> <Left>
 " Ctrl + L 插入模式下光标向右移动
 imap <c-l> <Right>
 
-" F1 - F10 设置(没有用全哈)
+" F1 - F12 设置(没有用全哈)
 " F1 废弃这个键,防止调出系统帮助
 " F2 行号开关，用于鼠标复制代码用
 " F3 显示可打印字符开关
@@ -409,7 +411,9 @@ imap <c-l> <Right>
 
 " F6 语法开关，关闭语法可以加快大文件的展示
 " F7 粘贴模式paste_mode开关,用于有格式的代码粘贴
-" F10 QuickRun插件的快捷键(或者可以使用c-r)
+" F10 编译运行当前文件
+" F8 用chrome浏览器打开正在编辑的html文件
+" F12 用ie刘浏览器打开正在编辑的html文件
 
 function! NumberToggle()
   if(&relativenumber == 1)
@@ -437,14 +441,88 @@ nnoremap <F3> :set list! list?<CR>
 nnoremap <F4> :set wrap! wrap?<CR>
               "set paste
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
-set pastetoggle=<F7>            "    when in insert mode, press <F5> to go to
-                                "    paste mode, where you can paste mass data
-                                "    that won't be autoindented
+"    when in insert mode, press <F7> to go to
+"    paste mode, where you can paste mass data
+"    that won't be autoindented
+set pastetoggle=<F7>
+
+"C，C++, shell, python, javascript, ruby...等按F10运行
+" TODO 还需要进一步完善
+map <F10> :call CompileRun()<CR>
+func! CompileRun()
+    "去掉bom, 写了autocmd，保存前就会自动做这些
+    exec ":set nobomb"
+    exec ":set fileencoding=utf-8"
+    exec ":w"
+    let infile = expand("%:p")
+    let outfile = expand("%:r")
+    " 解决空格问题
+    let infile = '"'.infile.'"'
+    let outfile = '"'.outfile.'"'
+    " 转义的\还需要再转义一次
+    "let outfile = substitute(infile, "\\(\\.c\\)\\|\\(\\.java\\)\\|\\(\\.go\\)", "", "gei")
+    "echo outfile
+    if &filetype == 'c'
+        exec "!g++ " infile "-o" outfile
+        exec "!" outfile
+    elseif &filetype == 'cpp'
+        exec "!g++ " infile "-o" outfile
+        exec "!" outfile
+    elseif &filetype == 'java'
+        let dir = expand("%:h")
+        let dir = '"'.dir.'"'
+        let outfile = expand("%:t:r")
+        exec "!javac -encoding UTF-8 " infile
+        " java 需要在当前路径或指定路径中寻找class来执行
+        exec "!java -classpath" dir outfile
+    elseif &filetype == 'sh'
+        exec "!bash " infile
+    elseif &filetype == 'python'
+        exec "!python " infile
+    elseif &filetype == 'html'
+        call ViewInBrowser("chrome")
+    elseif &filetype == 'go'
+        exec "!go build " infile
+        exec "!go run " outfile
+    elseif &filetype == 'markdown' 
+        "需要Chrome浏览器的MarkDown Preview Plus插件
+        call ViewInBrowser("chrome")
+    elseif &filetype == 'javascript'
+        exec "!node " infile
+    elseif &filetype == 'ruby'
+        exec "!ruby " infile
+    endif
+endfunc
+
+" 在浏览器预览 for Windows
+function! ViewInBrowser(name)
+    let file = expand("%:p")
+    "解决空格问题，加双引号
+    let file = '"'.file.'"'
+    exec ":update " . file
+    "echo file
+    let l:browsers = {
+                \"chrome":" chrome ",
+                \"ie":" iexplore "
+                \}
+    let htdocs='D:/Program Files/Apache24/htdocs/'
+    "echo htdocs
+    let strpos = stridx(file,htdocs)
+    "echo strpos
+    if strpos == -1
+        exec ":silent !start" l:browsers[a:name] file
+    else
+        let file=substitute(file, htdocs, "http://127.0.0.1:8080/", "g")
+        let file=substitute(file, '\\', '/', "g")
+        exec ":silent !start" l:browsers[a:name] file
+    endif
+endfunction
+nmap <F8> :call ViewInBrowser("chrome")<cr>
+nmap <F12> :call ViewInBrowser("ie")<cr>
+
 " disbale paste mode when leaving insert mode
 au InsertLeave * set nopaste
 
-"sudo & write with W
-command! W w !sudo tee % > /dev/null
 
 "goto older/newer position in change list
 nnoremap <silent> ( g;
@@ -476,7 +554,7 @@ cnoremap <C-j> <t_kd>
 " <c-a>移动到上一条历史命令
 cnoremap <C-k> <t_ku>
 " <c-a>到行首，<c-e>到行尾.默认为<c-b>到行首
-cnoremap <C-i> <Home>
+cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 " 命令行模式下自动填写
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -516,7 +594,7 @@ nnoremap <leader>v V`}
 " 搜索相关
 
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-noremap <space> /
+nnoremap <space> /
 "Use sane regexes !not used!
 nnoremap / /\v
 vnoremap / /\v
@@ -547,13 +625,16 @@ nnoremap dg :diffget<CR>
 "nnoremap t <C-^>
 
 " tab 操作
-map <leader>l :tabnext<cr>
-map <leader>h :tabprev<cr>
+nnoremap <leader>l gt
+nnoremap <leader>h gT
 
 map <leader>te :tabedit<cr>
 map <leader>td :tabclose<cr>
 "将当前标签移动到最后一个
 map <leader>tm :tabm<cr>
+map <leader>th :-tabm<cr>
+map <leader>tl :+tabm<cr>
+
 
 " 新建tab  Ctrl+t
 nnoremap <C-t>     :tabnew<CR>
@@ -577,8 +658,9 @@ let g:last_active_tab = 1
 " nnoremap <leader>gt :execute 'tabnext ' . g:last_active_tab<cr>
 " nnoremap <silent> <c-o> :execute 'tabnext ' . g:last_active_tab<cr>
 " vnoremap <silent> <c-o> :execute 'tabnext ' . g:last_active_tab<cr>
-nnoremap <silent> <leader>tl :execute 'tabnext ' . g:last_active_tab<cr>
-vnoremap <silent> <leader>tl :execute 'tabnext ' . g:last_active_tab<cr>
+nnoremap <silent> <leader>tu :execute 'tabnext ' . g:last_active_tab<cr>
+vnoremap <silent> <leader>tu :execute 'tabnext ' . g:last_active_tab<cr>
+" 记住上次离开Tab的位置
 autocmd TabLeave * let g:last_active_tab = tabpagenr()
 
 
@@ -605,34 +687,35 @@ nnoremap ` '
 " FileType Settings  文件类型设置
 "==========================================
 
-" Python 文件的一般设置，比如不要 tab 等
+" 文件类型的一般设置，比如不要 tab 等
+autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
 autocmd FileType javascript,json,css,scss,html set tabstop=2 shiftwidth=2 expandtab ai
-autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown.mkd
 
 " 保存文件时删除多余空格
 fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
+    let save_cursor = getcurpos()
     %s/\s\+$//e
-    call cursor(l, c)
+    "把光标放回原位
+    call setpos('.', save_cursor)
 endfun
+
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 
 " 定义函数AutoSetFileHead，自动插入文件头
-autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
+autocmd BufNewFile *.sh,*.py call AutoSetFileHead()
 function! AutoSetFileHead()
     "如果文件类型为.sh文件
     if &filetype == 'sh'
-        call setline(1, "\#!/bin/bash")
+        exec ":call setline(1, '\#!/bin/bash')"
     endif
 
     "如果文件类型为python
     if &filetype == 'python'
-        call setline(1, "\#!/usr/bin/env python")
-        call append(1, "\# encoding: utf-8")
+        exec ":call setline(1, '\#!/usr/bin/env python')"
+        exec ":call append(1, '\# encoding: utf-8')"
     endif
 
     normal G
@@ -640,50 +723,14 @@ function! AutoSetFileHead()
     normal o
 endfunc
 
-"C，C++, shell, python, javascript, ruby...等按F10运行
-"用插件quickRun取代了
-"map <F10> :call CompileRun()<CR>
-"func! CompileRun()
-"    exec "w"
-"    if &filetype == 'c'
-"        exec "!g++ % -o %<"
-"        exec "!time ./%<"
-"        exec "!rm ./%<"
-"    elseif &filetype == 'cpp'
-"        exec "!g++ % -o %<"
-"        exec "!time ./%<"
-"        exec "!rm ./%<"
-"    elseif &filetype == 'java'
-"        exec "!javac %"
-"        exec "!time java %<"
-"        exec "!rm ./%<.class"
-"    elseif &filetype == 'sh'
-"        exec "!time bash %"
-"    elseif &filetype == 'python'
-"        exec "!time python %"
-"    elseif &filetype == 'html'
-"        exec "!chrome % &"
-"    elseif &filetype == 'go'
-"        exec "!go build %<"
-"        exec "!time go run %"
-"    elseif &filetype == 'mkd' "MarkDown 解决方案为VIM + Chrome浏览器的MarkDown Preview Plus插件，保存后实时预览
-"        exec "!chrome % &"
-"    elseif &filetype == 'javascript'
-"        exec "!time node %"
-"    elseif &filetype == 'coffee'
-"        exec "!time coffee %"
-"    elseif &filetype == 'ruby'
-"        exec "!time ruby %"
-"    endif
-"endfunc
 
 " set some keyword to highlight
 if has("autocmd")
-  " Highlight TODO, FIXME, NOTE, etc.
-  if v:version > 701
-    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|DONE\|XXX\|BUG\|HACK\)')
-    autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)')
-  endif
+    " Highlight TODO, FIXME, NOTE, etc.
+    if v:version > 701
+        autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|DONE\|XXX\|BUG\|HACK\)')
+        autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)')
+    endif
 endif
 
 

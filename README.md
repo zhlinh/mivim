@@ -29,7 +29,11 @@ mivim
     F6 syntax on/off,语法开关，关闭语法可以加快大文件的展示
     F7 set paste/nopaste,粘贴模式paste_mode开关,用于有格式的代码粘贴
 
-    F10或<leader>r 运行当前文件(用了插件quickrun)
+    F10 运行当前文件,for windows，path里需要对应的支持
+    <leader>r 运行当前文件，for linux(用了插件quickrun)
+
+    F8 用chrome运行html文件,需要将chrome放进path
+    F12 用ie运行html文件,需要将ie放进path
 
     4. 分屏移动
 
@@ -38,6 +42,7 @@ mivim
 
     Insert模式下[注意没有c-j和c-k，用于插件的补全操作了，会冲突]:
     ctrl + h/l  相当于Normal模式下的h/l
+    ctrl + j 调出snippet[UltiSnips插件,当然vim-latex插件也用到]
 
     5. 搜索
     <space> 空格，进入搜索状态/
@@ -56,7 +61,9 @@ mivim
     (关闭打开操作)
     ,td    关闭tab
     ,te    tabedit
-    ,tm    tabm
+    ,tm    将当前标签移动到最后
+    ,th    将当前标签左移
+    ,tl    将当前标签右移
 
     ,1     切第1个tab
     ,2     切第2个tab
@@ -64,9 +71,9 @@ mivim
     ,9     切第9个tab
     ,0     切最后一个tab
 
-    ,tl   (tab last use)最近使用两个tab之间切换
+    ,tu   (Tab Used)最近使用两个tab之间切换
 
-    7. buffer操作(不建议, 建议使用ctrlspace插件来操作)
+    7. buffer操作(不建议, 建议使用ctrlspace插件来操作,l切换tabList or buffList)
     [b    前一个buffer
     ]b    后一个buffer
     <Left>    前一个buffer
@@ -83,11 +90,13 @@ mivim
 
 
     9. 按键修改
-    Y         =y$   复制到行尾
-    U         =Ctrl-r
-    ,sa       select all,全选
-    ,v        选中段落
-    kj        代替<Esc>，不用到角落去按esc了
+    Y        =y$    复制到行尾
+    U        =Ctrl-r
+    ,sa      select all,全选
+    ,v       选中段落
+    kj       代替<Esc>，不用到角落去按esc了
+    c-a      命令行模式下到行首[默认是c-b]
+    c-e      命令行模式下到行尾[没变，默认就是c-e]
 
     ,y      ="+y  复制指定内容到系统剪切板
     ,Y      ="+yy 复制本行内容到系统剪切板
@@ -228,7 +237,7 @@ mivim
 
 4. ####快速运行 [vim-quickrun](https://github.com/thinca/vim-quickrun)
 
-        F10或<leader>r  快速运行当前文件
+        <leader>r  快速运行当前文件
 
 
 3. ####去行尾空格 [bronson/vim-trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)
@@ -530,9 +539,9 @@ mivim
 
 > 语言相关- 需要自定义编辑确认是否保留(默认打开)
 
-1. ####LaTeX
+1. ####LaTeX [vim-latex/vim-latex](https://github.com/vim-latex/vim-latex)
 
-   vim下的LaTeX编辑插件[vim-latex/vim-latex](https://github.com/vim-latex/vim-latex)
+   vim下的LaTeX编辑插件,还算可以。但C-J会与切换窗口冲突，未解决，只能用<C-W>J来切换窗口
 
     "LaTeX-suit的常用快捷键:记忆方式:<leader>[L]aTeX
 
@@ -598,7 +607,9 @@ mivim
 
     [groenewege/vim-less](https://github.com/groenewege/vim-less) less,未配置
 
-    [emmet](https://github.com/mattn/emmet-vim) zencoding,未配置
+    [emmet](https://github.com/mattn/emmet-vim) zencoding[emmet]，触发键改为了<c-e>
+
+        let g:user_emmet_expandabbr_key = '<c-e>'
 
     [gorodinskiy/vim-coloresque](https://github.com/gorodinskiy/vim-coloresque) 配置 |
     [vim-css-color](https://github.com/ap/vim-css-color) 未配置
