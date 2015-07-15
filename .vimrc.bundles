@@ -109,7 +109,7 @@ let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
 let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
-"let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
+let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
 let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_tags_files = 1
 
@@ -144,38 +144,18 @@ Bundle 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 " 下面这个给出各种语言的一些代码段，如果需要则添加到~/.vim/UltiSnips
 Bundle 'honza/vim-snippets'
-
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " 定义代码片段会使用vim运行环境下的UltiSnips文件夹
-" 可设置多个，但必须在vim运行环境下，通常为~/，这个我没用到
-"let g:UltiSnipsSnippetDirectories  = ['UltiSnips']
+" 可设置多个，但必须在runtimepath下
+" 改了个名字是为了不与vim-snippets下的UltiSnips冲突
+" 这样就可以复制那边的过来再DIY,又可以方便查看有哪些snips
+let g:UltiSnipsSnippetDirectories  = ['mUltiSnips']
 " 定义存放代码片段的文件夹。
-let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+let g:UltiSnipsSnippetsDir = '~/.vim/mUltiSnips'
 " 进入对应filetype的snippets进行编辑
 map <leader>us :UltiSnipsEdit<CR>
-
-" ctrl+j/k 进行选择
-func! g:JInYCM()
-    if pumvisible()
-        return "\<C-n>"
-    else
-        return "\<c-j>"
-    endif
-endfunction
-
-func! g:KInYCM()
-    if pumvisible()
-        return "\<C-p>"
-    else
-        return "\<c-k>"
-    endif
-endfunction
-inoremap <c-j> <c-r>=g:JInYCM()<cr>
-au BufEnter,BufRead * exec "inoremap <silent> " . g:UltiSnipsJumpBackwordTrigger . " <C-R>=g:KInYCM()<cr>"
-let g:UltiSnipsJumpBackwordTrigger = "<c-k>"
-
 
 " 自动补全单引号，双引号等
 Bundle 'Raimondi/delimitMate'
@@ -437,6 +417,8 @@ au Syntax * RainbowParenthesesLoadBraces
 "目录导航
 Bundle 'scrooloose/nerdtree'
 map <leader>n :NERDTreeToggle<CR>
+" 用于切换NERDTree到当前文件目录
+map <leader>nf :NERDTreeTabsFind<CR>
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
 "close vim if the only window left open is a NERDTree
@@ -444,6 +426,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " s/v 分屏打开文件
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
+" Automatically find and select currently opened file in NERDTree.
+let g:nerdtree_tabs_autofind = 1
 
 
 Bundle 'jistr/vim-nerdtree-tabs'

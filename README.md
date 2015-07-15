@@ -42,7 +42,6 @@ mivim
 
     Insert模式下[注意没有c-j和c-k，用于插件的补全操作了，会冲突]:
     ctrl + h/l  相当于Normal模式下的h/l
-    ctrl + j 调出snippet[UltiSnips插件,当然vim-latex插件也用到]
 
     5. 搜索
     <space> 空格，进入搜索状态/
@@ -149,9 +148,6 @@ mivim
 
     快捷键:
 
-        ctrl+j 选择下一个补全
-        ctrl+k 选择上一个补全
-
         ctrl+n 选择下一个补全
         ctrl+p 选择上一个补全
         回车    选中
@@ -166,12 +162,9 @@ mivim
 
     YCM 自动补全会弹提示
 
-        ctrl+j 上一个
-        ctrl+k 下一个
-
-        ctrl+n 上一个
-        ctrl+p 下一个
-        <tab>  使用片段 -> expand to codes
+        ctrl+j 下一个需要补充的位置
+        ctrl+k 上一个需要补充的位置
+        ctrl+j  使用片段 -> expand to codes
         ,us    编辑对应文件类型的代码片段
 
 
@@ -468,6 +461,7 @@ mivim
 
         [sd]
             ,n  打开 关闭树形目录结构
+            ,nf 切换树形目录到当前文件位置
 
             在nerdtree窗口常用操作：(小写当前，大写root)
             x.......收起当前目录树

@@ -67,6 +67,8 @@ endif
 filetype plugin on
 filetype plugin indent on
 
+" 设置~/.vim为RunTimePath,不然windows不认该目录为rpt,具体:help 'runtimepath‘
+set rtp+=~/.vim/
 
 " ========================================
 " System Identification
