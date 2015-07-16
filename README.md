@@ -189,11 +189,12 @@ mivim
     必装，另一个大大提升效率的地方，快速批量加减注释[会自动补一个空格]
 
         [d] shift+v+方向键选中(默认当前行)
-            -> ,cc      加上注释
-            -> ,cu      解开注释
-         "重要记住下面这个就好了c<space>
-            -> ,c<space> 加上/解开注释
-            -> ,cy      先复制再注解, p可以粘贴未注释前的代码
+            -> ,cc      	加上注释
+            -> ,cu      	解开注释
+			-> ,c<space>   	加上/解开注释
+			-> ,cm 			使用/* */,只有在支持多种注释类型的文件中才可使用[下同]
+			-> ,cs  		使用段落的/** \t *文本 \t  */			
+			-> ,a   		选择注释类型
 
 
     附:注释还有其他两种插件可选[tcomment](https://github.com/tomtom/tcomment_vim) 和[tpope/vim-commentary](https://github.com/tpope/vim-commentary)
@@ -578,6 +579,17 @@ mivim
 
 5. ####HTML/JS/JQUERY/CSS
 
+	[emmet](https://github.com/mattn/emmet-vim) 即原来的zencoding，触发键改为了<c-e>
+
+        let g:user_emmet_expandabbr_key = '<C-e>'
+		let g:user_emmet_leader_key='<C-e>'
+		<C-e>i  Update img size
+		<C-e>k  Remove a Tag
+		<C-e>j  Split/Join Tag
+		<C-e>a  Make an anchor from a URL
+		<C-y>A  Make some quoted text from a URL
+		
+
     [jelera/vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax) js语法高亮
     [pangloss/vim-javascript](https://github.com/pangloss/vim-javascript) 缩进等
 
@@ -597,13 +609,9 @@ mivim
 
     [groenewege/vim-less](https://github.com/groenewege/vim-less) less,未配置
 
-    [emmet](https://github.com/mattn/emmet-vim) zencoding[emmet]，触发键改为了<c-e>
-
-        let g:user_emmet_expandabbr_key = '<c-e>'
-
-    [gorodinskiy/vim-coloresque](https://github.com/gorodinskiy/vim-coloresque) 配置 |
-    [vim-css-color](https://github.com/ap/vim-css-color) 未配置
-    css颜色展示
+    [gorodinskiy/vim-coloresque](https://github.com/gorodinskiy/vim-coloresque) 未配置
+    [vim-css-color](https://github.com/ap/vim-css-color)  css颜色展示，未配置
+   
 
 6. ####Jinja2
 

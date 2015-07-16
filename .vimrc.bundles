@@ -177,11 +177,26 @@ Bundle 'alvan/vim-closetag'
 
 " 快速注释
 Bundle 'scrooloose/nerdcommenter'
+" 注释后加一个空格
 let g:NERDSpaceDelims=1
+let g:NERDRemoveExtraSpaces=1
+" 有了注释就不再注释
+" let g:NERDDefaultNesting=0
+" 快捷键(map):
+" ,cc           加上注释
+" ,cu           解开注释
+" ,cm           使用/* */,只有在支持多种注释类型的文件中才可使用
+" ,cs           使用段落的/** \t *文本 \t  */
+" ,c<space>     加上/解开注释
+" ,a   选择注释类型
 
 " 快速加入修改环绕字符
 Bundle 'tpope/vim-surround'
-"快捷键形式如map <leader>ysiw" yss"  cs"'  ds"
+" 快捷键(map):
+" ,ysiw"  在单词上环绕“
+" ,yss"   在一行上环绕”
+" ,cs"'   改变环绕“为‘
+" ,ds"    删除环绕”
 
 " for repeat -> enhance surround.vim, . to repeat command
 Bundle 'tpope/vim-repeat'
@@ -270,9 +285,10 @@ let g:multi_cursor_quit_key='<Esc>'
 
 " ################### 功能相关 ###################
 
-" 文件搜索
+" file, buffer, Mru, Tag, 搜索
+" FIXME windows下出错，好像是正则的问题
 " change to https://github.com/ctrlpvim/ctrlp.vim
-    " ,ff 进入find file模式
+    " c-p 进入find file模式
     " Ctrl-d:Toggle between full-path and filename only search.
     " Ctrl-r:Toggle between the string mode and full regexp mode.
     " Ctrl-t:Open the selected file in a new tab.
@@ -282,39 +298,32 @@ Bundle 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>fh :CtrlPMRU<CR>
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-let g:ctrlp_by_filename = 1
-let g:ctrlp_regexp = 1
-let g:ctrlp_working_path_mode=0
+"let g:ctrlp_working_path_mode=0
 let g:ctrlp_match_window_bottom=1
 let g:ctrlp_max_height=15
 let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 " 如果安装了ag, 使用ag
-if executable('ag')
+"  if executable('ag')
     " " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    if(has("win32") || has("win64") || has("win95") || has("win16"))
+    " if(has("win32") || has("win64") || has("win95") || has("win16"))
         " for windows
-        let g:ctrlp_user_command = 'ag -i --nocolor --nogroup --hidden -g "" %s'
-    else
-        let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    endif
+        " let g:ctrlp_user_command = 'ag -i --nocolor --nogroup --hidden -g "" %s'
+    " else
+        " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    " endif
     " " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0
-endif
+    " let g:ctrlp_use_caching = 0
+" endif
 
 " ctrlp插件1 - 不用ctag进行函数快速跳转
 Bundle 'tacahiroy/ctrlp-funky'
+let g:ctrlp_extensions = ['funky']
 nnoremap <leader>ff :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
 nnoremap <leader>f :execute 'CtrlPFunky \<' . expand('<cword>') . '\>'<Cr>
 let g:ctrlp_funky_syntax_highlight = 1
-
-let g:ctrlp_extensions = ['funky']
 
 
 " 类似sublimetext的搜索
@@ -515,6 +524,7 @@ let g:tagbar_type_go = {
             \ 'v:variables',
             \ 't:types',
             \ 'n:interfaces',
+            \ 'b:bundle',
             \ 'w:fields',
             \ 'e:embedded',
             \ 'm:methods',
@@ -657,7 +667,8 @@ let g:user_emmet_settings = {
             \ 'extends' : 'html',
             \ },
             \}
-let g:user_emmet_expandabbr_key = '<c-e>'
+let g:user_emmet_expandabbr_key = '<C-e>'
+let g:user_emmet_leader_key='<C-e>'
 
 " ###### Always highlight enclosing tags #########
 Bundle "Valloric/MatchTagAlways"
