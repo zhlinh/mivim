@@ -151,8 +151,8 @@ mivim
         ctrl+n 选择下一个补全
         ctrl+p 选择上一个补全
         回车    选中
-        ,jd  跳转到函数定义, 分屏打开一个buffer(非常有用!!!!!!!!!)
-        ,gd  跳到声明位置, 仅 filetypes: c, cpp, objc, objcpp, python 有效(比较少用)
+        ,df  跳转到函数定义[DeFinition]位置, 分屏打开一个buffer(非常有用!!!!!!!!!)
+        ,dc  跳到声明[DeClaration]位置, 仅 filetypes: c, cpp, objc, objcpp, python 有效(比较少用)
 
 
 
@@ -269,16 +269,12 @@ mivim
     默认为2个<leader>+单字母，为了避免快捷键冲突
     以下是我改的一些快捷键，我觉得能用到的
 
-        ,w      跳转
       "下面这个是大杀器啊，只要盯着你想跳转的词就好
       "记忆方式 [s]earch
 
-        s或,,f      查找'e',快速跳转定位到某个字符位置
+        s或,,f[如sa]      查找'a',快速跳转定位到某个字符位置
         ,.      重复上一次easymotion命令
-    本行的就用f+字母，而,h和,l作为标签页的移动使用
-
-        ,j      快速决定移动到下面哪行(比用行号/j移动快)
-        ,k      快速移动到上面哪行
+    
 
 
 2. ####符号匹配跳转[vim-scripts/matchit.zip](https://github.com/vim-scripts/matchit.zip)
@@ -317,7 +313,7 @@ mivim
         [sd]
         ctrl + m 开始选择
         ctrl + p 向上取消
-        ctrl + x 跳过
+        ctrl + n 跳过
         esc   退出
 
 > 文本对象扩展
@@ -364,25 +360,23 @@ mivim
 
     文件搜索,ack/Command-T需要依赖于外部包,不喜欢有太多依赖的,除非十分强大, 具体 [文档](http://kien.github.io/ctrlp.vim/)
 
-     "记忆方式;文件的用<leader>,find file和find history file
-
-        "[F]ind [F]ile
-        [sd] ,ff  打开ctrlp搜索
+	
+        [sd] ctrl + p  打开ctrlp搜索
         "[F]ind [H]istory file
-        [sd] ,fh  相当于mru功能，show recently opened files
+        [sd] ,fh       相当于mru功能，show recently opened files
 
-        ctrl + j/k 进行上下移动
-        ctrl + x/v 分屏打开该文件 [重要**]
-        ctrl + t   在新tab中打开该文件
+        ctrl + j/k     进行上下移动
+        ctrl + x/v     分屏打开该文件 [重要**]
+        ctrl + t       在新tab中打开该文件
 
     当前文件快速函数搜索:[tacahiroy/ctrlp-funky](https://github.com/tacahiroy/ctrlp-funky)
 
     解决问题:使用tagbar当函数比较多的时候,移动耗时较长,使用快速搜索快很多
 
-    "记忆方式:可看做ctrlp的插件，然后[F]unky [J]ump,[F]unky [K]up
+    "记忆方式:可看做ctrlp的插件，然后[F]unky [F]unction,[F]unky
 
-        ,fj   进入当前文件函数搜索
-        ,fk   搜索光标下单词对应函数
+        ,ff   进入当前文件函数搜索
+        ,f    搜索光标下单词对应函数[常用]
 
 2. ####全局搜索插件(类sumlimetext) [dyng/ctrlsf.vim](https://github.com/dyng/ctrlsf.vim)
 
@@ -591,7 +585,9 @@ mivim
 
         cd ~/.vim/bundle/tern_for_vim && npm install
 
-    [maksimr/vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify)  js/html/css 格式化, 未配置
+    [Valloric/MatchTagAlways](https://github.com/Valloric/MatchTagAlways) 高亮显示匹配的标签
+	
+	[maksimr/vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify)  js/html/css 格式化, 未配置
 
     [nono/jquery.vim](https://github.com/nono/jquery.vim) jquery高亮
 

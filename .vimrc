@@ -486,7 +486,7 @@ func! CompileRun()
     elseif &filetype == 'go'
         exec "!go build " infile
         exec "!go run " outfile
-    elseif &filetype == 'markdown' 
+    elseif &filetype == 'markdown'
         "需要Chrome浏览器的MarkDown Preview Plus插件
         call ViewInBrowser("chrome")
     elseif &filetype == 'javascript'

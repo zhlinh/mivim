@@ -117,9 +117,9 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 
 " 跳转到定义处, 分屏打开
 let g:ycm_goto_buffer_command = 'horizontal-split'
-" nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+" nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>df :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>dc :YcmCompleter GoToDeclaration<CR>
 
 " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
 " old version
@@ -139,7 +139,7 @@ let g:ycm_filetype_blacklist = {
       \ 'gitcommit' : 1,
       \}
 
-" 代码片段快速插入 (snippets中,是代码片段资源,需要学习)
+" 代码片段快速插入 (snippets中,是代码片段资源,可自己再补充)
 Bundle 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 " 下面这个给出各种语言的一些代码段，如果需要则添加到~/.vim/UltiSnips
@@ -160,15 +160,18 @@ map <leader>us :UltiSnipsEdit<CR>
 " 自动补全单引号，双引号等
 Bundle 'Raimondi/delimitMate'
 
-"" for python docstring ",优化输入
+" for python docstring ",优化输入
 au FileType python let b:delimitMate_nesting_quotes = ['"']
+" 关闭html文件补全"<"">"，由插件closetag完成
+au FileType html let b:delimitMate_matchpairs = "(:),[:],{:}"
 " 关闭某些类型文件的自动补全
 "au FileType mail let b:delimitMate_autoclose = 0
 
 
 " 自动补全html/xml标签
-Bundle 'docunext/closetag.vim'
-let g:closetag_html_style=1
+" 很实用
+Bundle 'alvan/vim-closetag'
+
 
 " ################### 快速编码 ###################
 
@@ -178,6 +181,8 @@ let g:NERDSpaceDelims=1
 
 " 快速加入修改环绕字符
 Bundle 'tpope/vim-surround'
+"快捷键形式如map <leader>ysiw" yss"  cs"'  ds"
+
 " for repeat -> enhance surround.vim, . to repeat command
 Bundle 'tpope/vim-repeat'
 
@@ -197,28 +202,25 @@ let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String']
 
 " ################### 快速移动 ###################
 
-"更高效的移动 [,, + w/fx]
-"占用了比较多的<Leader>+单字母的快捷键，若冲突，则可改为默认的两个<Leader>
+"默认快捷键都带两个<Leader>
 Bundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
 " 这个真的是神器啊，只要盯着自己想跳转的地方，
-nmap <leader>w <Plug>(easymotion-w)
+"nmap <leader><leader>w <Plug>(easymotion-w)
 " 然后s-【你所盯着的字母】-选择字母[下面这个重要]
 nmap s <Plug>(easymotion-s)
-"let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-"删去了<leader>h和和<leader>l，因为这两个留给了tab的移动
-"当然本行的移动用自带的f+字母即可
-map <leader>j <Plug>(easymotion-j)
-map <leader>k <Plug>(easymotion-k)
 " 重复上一次操作, 类似repeat插件, 很强大
 map <leader>. <Plug>(easymotion-repeat)
+"let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+"当然本行的移动用自带的f+字母即可
+"map <leader><leader>j <Plug>(easymotion-j)
+"map <leader><leader>k <Plug>(easymotion-k)
 
 
 "符号跳转,使用%
 Bundle 'vim-scripts/matchit.zip'
 
 " 显示marks - 方便自己进行标记和跳转
-" 貌似这是本来就有的功能啊
 " m[a-zA-Z] add mark
 " '[a-zA-Z] go to mark
 " m<Space>  del all marks
@@ -244,6 +246,18 @@ Bundle 'terryma/vim-expand-region'
 vmap v <Plug>(expand_region_expand)
 " 减少选中范围
 vmap V <Plug>(expand_region_shrink)
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :1,
+      \ 'i''' :1,
+      \ 'i]'  :1,
+      \ 'ib'  :1,
+      \ 'iB'  :1,
+      \ 'il'  :1,
+      \ 'ip'  :1,
+      \ 'ie'  :1,
+      \ }
 
 " 多光标选中编辑
 Bundle 'terryma/vim-multiple-cursors'
@@ -251,7 +265,7 @@ let g:multi_cursor_use_default_mapping=0
 " Default mapping
 let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_skip_key='<C-n>'
 let g:multi_cursor_quit_key='<Esc>'
 
 " ################### 功能相关 ###################
@@ -265,13 +279,15 @@ let g:multi_cursor_quit_key='<Esc>'
     " Ctrl-v:Open the selected file in a vertical split.
     " Ctrl-x:Open the selected file in a horizontal split.
 Bundle 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = '<leader>ff'
+let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>fh :CtrlPMRU<CR>
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
     \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
     \ }
+let g:ctrlp_by_filename = 1
+let g:ctrlp_regexp = 1
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_match_window_bottom=1
 let g:ctrlp_max_height=15
@@ -279,19 +295,23 @@ let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
 " 如果安装了ag, 使用ag
-" if executable('ag')
-  " " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " " ag is fast enough that CtrlP doesn't need to cache
-  " let g:ctrlp_use_caching = 0
-" endif
-
+if executable('ag')
+    " " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    if(has("win32") || has("win64") || has("win95") || has("win16"))
+        " for windows
+        let g:ctrlp_user_command = 'ag -i --nocolor --nogroup --hidden -g "" %s'
+    else
+        let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    endif
+    " " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+endif
 
 " ctrlp插件1 - 不用ctag进行函数快速跳转
 Bundle 'tacahiroy/ctrlp-funky'
-nnoremap <leader>fj :CtrlPFunky<Cr>
+nnoremap <leader>ff :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
-nnoremap <leader>fk :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nnoremap <leader>f :execute 'CtrlPFunky \<' . expand('<cword>') . '\>'<Cr>
 let g:ctrlp_funky_syntax_highlight = 1
 
 let g:ctrlp_extensions = ['funky']
@@ -328,16 +348,16 @@ let g:ctrlsf_confirm_save = 0
 " Note: cannot use <CR> or <C-m> for open
 " Use : o or t
 let g:ctrlsf_mapping = {
-    \ "open"  : "o",
-    \ "openb" : "O",
-    \ "tab"   : "t",
-    \ "tabb"  : "T",
-    \ "prevw" : "p",
-    \ "quit"  : "q",
-    \ "next"  : "<C-N>",
-    \ "prev"  : "<C-P>",
-    \ "pquit" : "q",
-    \ }
+            \ "open"  : "o",
+            \ "openb" : "O",
+            \ "tab"   : "t",
+            \ "tabb"  : "T",
+            \ "prevw" : "p",
+            \ "quit"  : "q",
+            \ "next"  : "<C-N>",
+            \ "prev"  : "<C-P>",
+            \ "pquit" : "q",
+            \ }
 
 
 " git.  git操作还是习惯命令行,vim里面处理简单diff编辑操作
@@ -387,22 +407,22 @@ Bundle 'kien/rainbow_parentheses.vim'
 " 不加入这行, 防止黑色括号出现, 很难识别
 " \ ['black',       'SeaGreen3'],
 let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
+            \ ['brown',       'RoyalBlue3'],
+            \ ['Darkblue',    'SeaGreen3'],
+            \ ['darkgray',    'DarkOrchid3'],
+            \ ['darkgreen',   'firebrick3'],
+            \ ['darkcyan',    'RoyalBlue3'],
+            \ ['darkred',     'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['brown',       'firebrick3'],
+            \ ['gray',        'RoyalBlue3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['Darkblue',    'firebrick3'],
+            \ ['darkgreen',   'RoyalBlue3'],
+            \ ['darkcyan',    'SeaGreen3'],
+            \ ['darkred',     'DarkOrchid3'],
+            \ ['red',         'firebrick3'],
+            \ ]
 
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
@@ -472,47 +492,47 @@ nmap <silent> <leader>t :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 " for ruby
 let g:tagbar_type_ruby = {
-    \ 'kinds' : [
-        \ 'm:modules',
-        \ 'c:classes',
-        \ 'd:describes',
-        \ 'C:contexts',
-        \ 'f:methods',
-        \ 'F:singleton methods'
-    \ ]
-\ }
+            \ 'kinds' : [
+            \ 'm:modules',
+            \ 'c:classes',
+            \ 'd:describes',
+            \ 'C:contexts',
+            \ 'f:methods',
+            \ 'F:singleton methods'
+            \ ]
+            \ }
 
 " go语言的tagbar配置
 " 1. install gotags 'go get -u github.com/jstemmer/gotags'
 " 2. make sure `gotags` in you shell PATH, you can call check it with `which gotags`
 " for gotags. work with tagbar
 let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
+            \ 'ctagstype' : 'go',
+            \ 'kinds'     : [
+            \ 'p:package',
+            \ 'i:imports:1',
+            \ 'c:constants',
+            \ 'v:variables',
+            \ 't:types',
+            \ 'n:interfaces',
+            \ 'w:fields',
+            \ 'e:embedded',
+            \ 'm:methods',
+            \ 'r:constructor',
+            \ 'f:functions'
+            \ ],
+            \ 'sro' : '.',
+            \ 'kind2scope' : {
+            \ 't' : 'ctype',
+            \ 'n' : 'ntype'
+            \ },
+            \ 'scope2kind' : {
+            \ 'ctype' : 't',
+            \ 'ntype' : 'n'
+            \ },
+            \ 'ctagsbin'  : 'gotags',
+            \ 'ctagsargs' : '-sort -silent'
+            \ }
 
 
 " 去除taglist =>原因: 使用tagbar和ctrlp-funky可以直接快速跳转函数和变量位置,taglist有些多余
@@ -522,10 +542,10 @@ let g:tagbar_type_go = {
 "快速编译运行的插件
 Bundle 'thinca/vim-quickrun'
 let g:quickrun_config = {
-\   "_" : {
-\       "outputter" : "message",
-\   },
-\}
+            \   "_" : {
+            \       "outputter" : "message",
+            \   },
+            \}
 
 let g:quickrun_no_default_key_mappings = 1
 nmap <Leader>r <Plug>(quickrun)
@@ -536,16 +556,16 @@ nmap <Leader>r <Plug>(quickrun)
 "故改用下面这个，也是官网上的github网址
 "官网地址http://vim-latex.sourceforge.net/
 Bundle 'vim-latex/vim-latex'
-  "用到的快捷键:
-    " <leader>ll：compile
-    " <leader>lv：view pdf
-    " <leader>ls: 正向搜索
-    " SumatraPDF中 双击: 反向搜索
-    " Ctrl-J： 跳到下一个++位置（place holder）
-    " F5：insert/wrap in environment
-    " F9：do a completion (ref, cite, lename)
-    " za：fold/unfold
-    " <leader>rf：refresh folding
+"用到的快捷键:
+" <leader>ll：compile
+" <leader>lv：view pdf
+" <leader>ls: 正向搜索
+" SumatraPDF中 双击: 反向搜索
+" Ctrl-J： 跳到下一个++位置（place holder）
+" F5：insert/wrap in environment
+" F9：do a completion (ref, cite, lename)
+" za：fold/unfold
+" <leader>rf：refresh folding
 " 下面是官方的一些推荐配置
 " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
 " can be called correctly.
@@ -626,18 +646,21 @@ Bundle 'nono/jquery.vim'
 " ###### emmet HTML complete #########
 Bundle "mattn/emmet-vim"
 let g:user_emmet_settings = {
-      \ 'php' : {
-      \ 'extends' : 'html',
-      \ 'filters' : 'c',
-      \ },
-      \ 'xml' : {
-      \ 'extends' : 'html',
-      \ },
-      \ 'haml' : {
-      \ 'extends' : 'html',
-      \ },
-      \}
+            \ 'php' : {
+            \ 'extends' : 'html',
+            \ 'filters' : 'c',
+            \ },
+            \ 'xml' : {
+            \ 'extends' : 'html',
+            \ },
+            \ 'haml' : {
+            \ 'extends' : 'html',
+            \ },
+            \}
 let g:user_emmet_expandabbr_key = '<c-e>'
+
+" ###### Always highlight enclosing tags #########
+Bundle "Valloric/MatchTagAlways"
 
 
 " ###### vim.less : less 自动更新##########
