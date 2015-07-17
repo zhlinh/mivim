@@ -1,8 +1,7 @@
 .vim/bundle/*
 !.vim/bundle/vundle
-!.vim/bundle/vim-colors-solarized
-!.vim/bundle/vim-colors-solarized/*
 .DS_Store
 */.DS_Store
 *.bak
 *.bk
+*.ion

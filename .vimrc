@@ -585,11 +585,29 @@ cnoremap <C-e> <End>
 " 命令行模式下自动填写
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
-" 分屏窗口的移动
+" 在分屏中移动光标
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" v分屏
+nmap <leader>w  <c-w>v
+" s分屏
+nmap <leader>ws <c-w>s
+" 只保留当前窗口
+nmap <leader>wo <c-w>o
+" 交换分屏位置
+nmap <leader>wx <c-w>x
+" 垂直分屏最大化
+nmap <leader>wl <c-w>|
+" 水平分屏最大化
+nmap <leader>wk <c-w>_
+" 等分窗口
+nmap <leader>we <c-w>=
+" 分屏同步滚动
+nnoremap <leader>ww  :set scb<CR>
+nnoremap <leader>wm  :set noscb<CR>
 
 " Speed up scrolling of the viewport slightly
 nnoremap <C-e> 2<C-e>
