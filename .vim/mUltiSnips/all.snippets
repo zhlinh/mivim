@@ -78,10 +78,14 @@ endglobal
 # Global snippets
 
 snippet copy "Copyright"
-Author:  zhlinh
-Version: ${1:0.0.1}
-Email: zhlinhng@gmail.com"
-Last_modify: `!v strftime("%Y-%m-%d")`
+*****************************************
+File Name: 		`!v expand("%")`
+Author:  		zhlinh
+Email: 			zhlinhng@gmail.com"
+Version: 		${1:0.0.1}
+Created Time: 	`!v strftime("%Y-%m-%d")`
+Last_modify: 	`!v strftime("%Y-%m-%d")`
+******************************************
 ${0}
 endsnippet
 

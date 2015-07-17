@@ -1,5 +1,12 @@
 mivim
 ====================
+# 依赖
+-----------------------
+	已经尽量少用需要依赖的插件，但有些插件好用到你根没办法拒绝
+	package dependence:  **ctags**, **ag**(he_silver_searcher), **curl**
+	python dependence:   **pep8**, **pyflake**[这些只要装了python就好]
+	
+	
 # 自定义快捷键
 -----------------------
     注意, 以下 `,` 代表<leader>
@@ -33,6 +40,7 @@ mivim
     <leader>r 运行当前文件，for linux(用了插件quickrun)
 
     F8 用chrome运行html文件,需要将chrome放进path
+	F11 切换全屏
     F12 用ie运行html文件,需要将ie放进path
 
     4. 分屏移动
@@ -47,6 +55,8 @@ mivim
     <space> 空格，进入搜索状态/
     /       =/\v  引入正则
     ,/      去除匹配高亮
+	
+	,fi     列出寻找光标下的关键词的所有位置，键入数字即可到达[有点ctrlp-funcy的意思]
 
     优化搜索保证结果在屏幕中间
 
@@ -73,8 +83,8 @@ mivim
     ,tu   (Tab Used)最近使用两个tab之间切换
 
     7. buffer操作(不建议, 建议使用ctrlspace插件来操作,l切换tabList or buffList)
-    [b    前一个buffer
-    ]b    后一个buffer
+    H    前一个buffer
+    L    后一个buffer
     <Left>    前一个buffer
     <Right>    后一个buffer
 
@@ -88,14 +98,29 @@ mivim
     ,ev  =vsplit  当前目录/
 
 
-    9. 按键修改
-    Y        =y$    复制到行尾
-    U        =Ctrl-r
-    ,sa      select all,全选
-    ,v       选中段落
-    kj       代替<Esc>，不用到角落去按esc了
-    c-a      命令行模式下到行首[默认是c-b]
-    c-e      命令行模式下到行尾[没变，默认就是c-e]
+	9. 折叠操作
+	" Code folding options
+    ,f0    foldlevel=0
+    ,f1    foldlevel=1
+    ,f2    foldlevel=2
+    ,f3    foldlevel=3
+    ,f4    foldlevel=4
+    ,f5    foldlevel=5
+    ,f6    foldlevel=6
+    ,f7    foldlevel=7
+    ,f8    foldlevel=8
+    ,f9    foldlevel=9
+	
+    10. 按键修改
+    Y       		=y$    复制到行尾
+    U       		=Ctrl-r
+    ,sa     		select all,全选
+    ,v      		选中段落
+    ,k      		代替<Esc>，不用到角落去按esc了
+    c-a     		命令行模式下到行首[默认是c-b]
+    c-e     		命令行模式下到行尾[没变，默认就是c-e]
+	
+	cd.(或cwd)		命令行模式下切换到当前文件目录
 
     ,y      ="+y  复制指定内容到系统剪切板
     ,Y      ="+yy 复制本行内容到系统剪切板
@@ -174,12 +199,12 @@ mivim
     必装，输入引号,括号时,自动补全
 
     对python的docstring 三引号做了处理(只处理""", '''暂时没配，可以自己加)
+	去除了html的<>补全，这留给插件AutoCloseTag来作，直接补全标签更便捷
 
 
     附:同类插件 [kana/vim-smartinput](https://github.com/kana/vim-smartinput)
 
 
-5. ####html/xml标签配对补全 [docunext/closetag.vim](https://github.com/docunext/closetag.vim)
 
 
 > 快速编码
@@ -215,6 +240,9 @@ mivim
 
         ysiw"       [You Surround in word]
         Hello -> "Hello"
+		
+		ysiW"       [You Surround in Word(split with space),besides ysis"(sentence) ysip"(paragraph)]
+		Hello tpope/vim-surround  ->   Hello "tpope/vim-surround"
 
         yss"        [You Surround Surround]
         Hello world -> "Hello world"
@@ -319,7 +347,7 @@ mivim
 
 > 文本对象扩展
 
-1. 自定义文本对象 [kana/vim-textobj-user.git](https://github.com/kana/vim-textobj-user.git)
+1. ####自定义文本对象 [kana/vim-textobj-user](https://github.com/kana/vim-textobj-user)
 
    后面几个扩展对象的依赖
 
@@ -327,7 +355,7 @@ mivim
 
    PS: 特希望有一个扩展支持 '' "" [] {} ()
 
-2. 行文本对象 [kana/vim-textobj-line](https://github.com/kana/vim-textobj-line)
+2. ####行文本对象 [kana/vim-textobj-line](https://github.com/kana/vim-textobj-line)
 
    增加文本对象: l
 
@@ -335,7 +363,7 @@ mivim
         yal
         cil
 
-3. 缩进文本对象 [kana/vim-textobj-indent.git](https://github.com/kana/vim-textobj-indent.git)
+3. ####缩进文本对象 [kana/vim-textobj-indent](https://github.com/kana/vim-textobj-indent)
 
    增加文本对象: i
 
@@ -345,7 +373,7 @@ mivim
         yai
         cii
 
-4. 文件文本对象 [kana/vim-textobj-entire.git](https://github.com/kana/vim-textobj-entire.git)
+4. ####文件文本对象 [kana/vim-textobj-entire](https://github.com/kana/vim-textobj-entire)
 
    增加文本对象: e
 
@@ -353,6 +381,15 @@ mivim
         yae
         cie
 
+5. ####句子对象 [reedes/vim-textobj-sentence](https://github.com/reedes/vim-textobj-sentence)
+
+6. ####引用对象 [reedes/vim-textobj-quote](https://github.com/reedes/vim-textobj-quote)
+
+
+7. ####语法检查 [reedes/vim-textobj-quote](https://github.com/reedes/vim-textobj-quote)
+
+8. ####单词检查 [reedes/vim-wordy](https://github.com/reedes/vim-wordy)
+	
 
 
 > 功能相关
@@ -399,22 +436,32 @@ mivim
 
     git插件, 编辑文件时进行一些diff操作,例如diff
 
-    不是很习惯,所以用的次数太少
+    关于提交的操作建议还是在shell中来执行
 
         [sd]
-        ,ge   = git diff edit[gd被ycm占用了]
+        ,gd   = git diff
+		,gs   = git status
+		,gb	  = git blame
+		,gl   = git log
+		,gc   = git commit
+		,gp   = git push
 
     没有配置其他快捷键,可以参照github,自己增加修改映射
 
 2. ####git状态 [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
 
-    git,在同一个文件内,通过标记和高亮,显示本次文件变更点
+    git diff，相当赞啊，在同一个文件内,通过标记和高亮,显示本次文件变更点
 
         [sd]
-        ,gs   = show diff status [gd被ycm占用了]
+        ,gg   = show diff status [gd被ycm占用了]
 
 
-3. ####文件时光机 [sjl/gundo.vim](https://github.com/sjl/gundo.vim)
+3.  ####gist [matten/gist-vim](https://github.com/mattn/gist-vim)
+		[sd]
+		 
+		
+		
+4. ####文件时光机 [sjl/gundo.vim](https://github.com/sjl/gundo.vim)
 
     编辑文件时光机
 
@@ -459,6 +506,7 @@ mivim
             ,nf 切换树形目录到当前文件位置
 
             在nerdtree窗口常用操作：(小写当前，大写root)
+			I.......Toggle隐藏文件
             x.......收起当前目录树
             X.......递归收起当前目录树
             r.......刷新当前目录
@@ -475,7 +523,7 @@ mivim
             s.......split上下分屏[原来是i, 改键]
             v.......vsplit左右分屏[原来是s, 改键]
 
-            c.......将当前目录设为根节点
+            C.......将当前目录设为根节点
             q.......关闭
 
     nerdtree配合tab非常赞, i/s 可以在右侧分屏打开
@@ -577,9 +625,11 @@ mivim
 
     markdown语法,编辑md文件
 
-5. ####HTML/JS/JQUERY/CSS
+	
+5. ####HTML
+	[mattn/webapi-vim](https://github.com/mattn/webapi-vim) 提供一些网页编程常用的方法
 
-	[emmet](https://github.com/mattn/emmet-vim) 即原来的zencoding，触发键改为了<c-e>
+	[mattn/emmet-vim](https://github.com/mattn/emmet-vim) 即原来的zencoding，触发键改为了<c-e>
 
         let g:user_emmet_expandabbr_key = '<C-e>'
 		let g:user_emmet_leader_key='<C-e>'
@@ -589,37 +639,60 @@ mivim
 		<C-e>a  Make an anchor from a URL
 		<C-y>A  Make some quoted text from a URL
 		
+	[docunext/closetag.vim](https://github.com/docunext/closetag.vim)  html/xml标签配对补全
 
-    [jelera/vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax) js语法高亮
+	[hail2u/vim-css3-syntax](https://github.com/hail2u/vim-css3-syntax)  html/css的语法
+	
+	[gorodinskiy/vim-coloresque](https://github.com/gorodinskiy/vim-coloresque) 关于配色
+	
+	[tpope/vim-haml](https://github.com/tpope/vim-haml) 关于haml语法高亮
+	
+	[Valloric/MatchTagAlways](https://github.com/Valloric/MatchTagAlways) 高亮显示匹配的标签，未配置
+	
+
+6. ####Javascript
+
+	[jelera/vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax) js语法高亮
+	
     [pangloss/vim-javascript](https://github.com/pangloss/vim-javascript) 缩进等
 
     [marijnh/tern_for_vim](https://github.com/marijnh/tern_for_vim) 配合ycm进行js/jquery自动补全,需要安装 tern_for_vim 并配置, 文档  [ternjs](http://ternjs.net/)
 
-        cd ~/.vim/bundle/tern_for_vim && npm install
+        cd ~/.vim/bundle/tern_for_vim && npm install  [需要npm支持]
+	
+	[elzr/vim-json](https://github.com/elzr/vim-json) json高亮
+	
+		[sd]
+		,jt		设置当前文件类型为json，激活json高亮
+	
+	[briancollins/vim-jst](https://github.com/https://github.com/)  格式调整
+    	
+	[kchmck/vim-coffee-script](https://github.com/kchmck/vim-coffee-script) coffeescript
+	
+	[groenewege/vim-less](https://github.com/groenewege/vim-less) less
+	
 
-    [Valloric/MatchTagAlways](https://github.com/Valloric/MatchTagAlways) 高亮显示匹配的标签
 	
 	[maksimr/vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify)  js/html/css 格式化, 未配置
 
-    [nono/jquery.vim](https://github.com/nono/jquery.vim) jquery高亮
+    [nono/jquery.vim](https://github.com/nono/jquery.vim) jquery高亮，未配置
 
-    [elzr/vim-json](https://github.com/elzr/vim-json) json高亮,未配置
+    
 
-    [kchmck/vim-coffee-script](https://github.com/kchmck/vim-coffee-script) coffeescript,未配置
+7. ####PHP
+	[spf13/PIV](https://github.com/spf13/PIV) 
 
-    [groenewege/vim-less](https://github.com/groenewege/vim-less) less,未配置
-
-    [gorodinskiy/vim-coloresque](https://github.com/gorodinskiy/vim-coloresque) 未配置
-    [vim-css-color](https://github.com/ap/vim-css-color)  css颜色展示，未配置
-   
-
-6. ####Jinja2
+    [arnaud-lb/vim-php-namespace](https://github.com/arnaud-lb/vim-php-namespace)
+	
+	[beyondwords/vim-twig](https://github.com/https://github.com)
+	
+8. ####Jinja2
 
     [Glench/Vim-Jinja2-Syntax](https://github.com/Glench/Vim-Jinja2-Syntax)
 
     jinja2 语法高亮
 
-7. ####Ruby
+9. ####Ruby
 
     可以参考tpope的插件列表,很多跟ruby相关
 
@@ -629,13 +702,8 @@ mivim
     这个有坑, 暂未搞定
     [tpope/vim-endwise](https://github.com/tpope/vim-endwise) 未配置,自动加end
 
-8. ####PHP
 
-    [spf13/PIV](https://github.com/spf13/PIV) 未配置
-
-    [arnaud-lb/vim-php-namespace](https://github.com/arnaud-lb/vim-php-namespace) 未配置
-
-9. ####非语言语法高亮
+10. ####非语言语法高亮
 
     [evanmiller/nginx-vim-syntax](https://github.com/evanmiller/nginx-vim-syntax) 未配置
 

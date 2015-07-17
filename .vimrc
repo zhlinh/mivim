@@ -27,9 +27,10 @@
 "               <<< "Be the change you want to see the world">>>
 "
 " Author:  zhlinh
-" Version: 0.6.8
+" Version: 0.7.17
 " Email: zhlinhng@gmail.com"
-" Last_modify: 2015-6-8
+" Create_time: 2015-06-08
+" Last_modify: 2015-07-17
 " Sections:
 "     ->Initial Plugins
 "     ->System Identification
@@ -114,8 +115,8 @@ set shortmess=atI       " do not show initial page
 set title                " change the terminal's title
 
 "Set the window's size.
-set lines=35
-set columns=115
+set lines=45
+set columns=135
 
 " cancel backup,or it will create a *.wap file
 "" 备份,到另一个位置. 防止误删, 目前是取消备份
@@ -175,6 +176,11 @@ set whichwrap+=<,>,h,l,[,]
 " 00x增减数字时使用十进制
 set nrformats=
 
+" 自动跳转当前打开文件的目录
+autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+
+" gui则全屏显示
+" au GUIEnter * simalt ~x
 
 "==========================================
 " Show:User Interface settings
@@ -186,7 +192,7 @@ if g:isGUI
     set guioptions-=T       " No Toolbar
     set guioptions-=r		" No right hand scrollbars
     set guioptions-=L       " No left hand scrollbars
-"    set guioptions-=e       " 关闭GUI标签页支持
+    " set guioptions-=e       " 关闭GUI标签页支持
     set guitablabel=%M\ %t
     set showtabline=1		" 指定何时显示标签页行,0为永远不会,1为至少有两个标签,2为永远会
     set linespace=2
@@ -215,7 +221,9 @@ if g:isGUI
 endif
 
 
+
 set ruler       " 总在下方显示当前的行列
+set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
 set showcmd     " 显示输入的命令
 set showmode    " 显示当前所处的模式
 set scrolloff=7 " 上下移动时保持顶端或尾部至少7行可见
@@ -328,11 +336,17 @@ if (g:iswindows && g:isGUI)
     set langmenu=zh_CN.utf-8
     "解决consle输出乱码
     language messages zh_CN.utf-8
+    " set guifont="DejaVu Sans Mono for Powerline"
+    set guifont="Monaco for Powerline":h12
+     
+else
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
 endif
 
 "解决英文Windows下的Vim不知道如何显示双倍字符宽度的字体
 "set guifont=Consolas:h11\cANSI
-set guifont=DejaVu_Sans_Mono:h11
+"set guifont=DejaVu_Sans_Mono:h11
+" set guifont="Sauce Code Powerline":h18
 "set guifontwide=Simsun\:h11:cANSI
 
 " --针对中文的一些设置
@@ -401,7 +415,7 @@ imap <c-h> <Left>
 " Ctrl + L 插入模式下光标向右移动
 imap <c-l> <Right>
 
-" F1 - F12 设置(没有用全哈)
+" F1 - F12 设置
 " F1 废弃这个键,防止调出系统帮助
 " F2 行号开关，用于鼠标复制代码用
 " F3 显示可打印字符开关
@@ -415,6 +429,7 @@ imap <c-l> <Right>
 " F7 粘贴模式paste_mode开关,用于有格式的代码粘贴
 " F10 编译运行当前文件
 " F8 用chrome浏览器打开正在编辑的html文件
+" F11 切换全屏
 " F12 用ie刘浏览器打开正在编辑的html文件
 
 function! NumberToggle()
@@ -425,7 +440,7 @@ function! NumberToggle()
   endif
 endfunc
 " I can type :help on my own, thanks.  Protect your fat fingers from the evils of <F1>
-noremap <F1> :call NumberToggle()<cr>
+nnoremap <F1> :call NumberToggle()<cr>
 
 ""为方便复制，用<F2>开启/关闭行号显示:
 function! HideNumber()
@@ -450,10 +465,11 @@ set pastetoggle=<F7>
 
 "C，C++, shell, python, javascript, ruby...等按F10运行
 " TODO 还需要进一步完善
-map <F10> :call CompileRun()<CR>
+nnoremap <F10> :call CompileRun()<CR>
 func! CompileRun()
     "去掉bom, 写了autocmd，保存前就会自动做这些
     exec ":set nobomb"
+    exec ":set fileformat=unix"
     exec ":set fileencoding=utf-8"
     exec ":w"
     let infile = expand("%:p")
@@ -519,8 +535,15 @@ function! ViewInBrowser(name)
         exec ":silent !start" l:browsers[a:name] file
     endif
 endfunction
-nmap <F8> :call ViewInBrowser("chrome")<cr>
-nmap <F12> :call ViewInBrowser("ie")<cr>
+nnoremap <F8> :call ViewInBrowser("chrome")<cr>
+nnoremap <F12> :call ViewInBrowser("ie")<cr>
+
+if has('gui_running') && has('libcall')
+    let g:MyVimLib = $VIMRUNTIME.'/gvimfullscreen.dll'
+    "F11
+    nnoremap <F11> :call libcallnr(g:MyVimLib, "ToggleFullScreen", 0)<CR>
+    inoremap <F11> <ESC>:call libcallnr(g:MyVimLib, "ToggleFullScreen", 0)<CR>
+endif
 
 " disbale paste mode when leaving insert mode
 au InsertLeave * set nopaste
@@ -542,6 +565,7 @@ nmap <silent> <leader>sm :so $MYVIMRC<CR>
 nmap <silent> <leader>eb :e ~/.vimrc.bundles<CR>
 
 " 在当前窗口打开一个文本
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 map <leader>ee :e %%
 " 隐藏当前文本打开另一文本，可以用t来toggle缓存<C-^>
 map <leader>eh :hide e %%
@@ -566,10 +590,6 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-" Go to home and end using capitalized directions  --有用
-noremap H ^
-noremap L $
 
 " Speed up scrolling of the viewport slightly
 nnoremap <C-e> 2<C-e>
@@ -616,8 +636,8 @@ nnoremap <silent> g* g*zz
 
 " TODO: 如何跳转到确定的buffer?
 " :b 1 :b 2
-nnoremap [b :bprevious<cr>
-nnoremap ]b :bnext<cr>
+nnoremap H :bprevious<cr>
+nnoremap L :bnext<cr>
 noremap <left> :bp<CR>
 noremap <right> :bn<CR>
 nnoremap dp :diffput<CR>
@@ -654,6 +674,34 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
+" Code folding options
+nmap <leader>f0 :set foldlevel=0<CR>
+nmap <leader>f1 :set foldlevel=1<CR>
+nmap <leader>f2 :set foldlevel=2<CR>
+nmap <leader>f3 :set foldlevel=3<CR>
+nmap <leader>f4 :set foldlevel=4<CR>
+nmap <leader>f5 :set foldlevel=5<CR>
+nmap <leader>f6 :set foldlevel=6<CR>
+nmap <leader>f7 :set foldlevel=7<CR>
+nmap <leader>f8 :set foldlevel=8<CR>
+nmap <leader>f9 :set foldlevel=9<CR>
+
+" Change Working Directory to that of the current file
+cmap cwd lcd %:p:h
+cmap cd. lcd %:p:h
+
+" Allow using the repeat operator with a visual selection (!)
+" http://stackoverflow.com/a/8064607/127816
+vnoremap . :normal .<CR>
+
+
+" Adjust viewports to the same sze
+map <Leader>= <C-w>=
+
+" Map <Leader>fi to display all lines with keyword under cursor
+" and ask which one to jump to
+nmap <Leader>fi [I:let n = input("Which one(number): ")<Bar>exe "normal " . nr ."[\t"<CR>
+
 " Toggles between the active and last active tab "
 " The first tab is always 1 "
 let g:last_active_tab = 1
@@ -668,6 +716,13 @@ autocmd TabLeave * let g:last_active_tab = tabpagenr()
 
 " <leader>k 替换 Esc  --这个可以先试用下，估计会有误操作
 inoremap <leader>k <Esc>
+
+" Easier horizontal scrolling
+map zl zL
+map zh zH
+
+" Linux For when you forget to sudo.. Really Write the file.
+cmap w!! w !sudo tee % >/dev/null
 
 " 复制粘贴系统存储器的内容
 nnoremap <leader>y "+y
@@ -692,8 +747,14 @@ nnoremap ` '
 " 文件类型的一般设置，比如不要 tab 等
 autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
-autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+autocmd FileType haskell,puppet,ruby,yml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2 ai
 autocmd FileType javascript,json,css,scss,html set tabstop=2 shiftwidth=2 expandtab ai
+autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+
+" Workaround vim-commentary for Haskell
+autocmd FileType haskell setlocal commentstring=--\ %s
+" Workaround broken colour highlighting in Haskell
+autocmd FileType haskell,rust setlocal nospell
 
 " 保存文件时删除多余空格
 fun! <SID>StripTrailingWhitespaces()
@@ -746,18 +807,26 @@ set background=dark
 " --设置为256色
 set t_Co=256
 
-"I have fixed solorized.vim to cacel italic.
-"if you want it back, serch for italic and make the 431 line to "else let s:i=",italic".
-colorscheme solarized
+if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+    let g:solarized_termcolors=256
+    let g:solarized_termtrans=1
+    let g:solarized_contrast="normal"
+    let g:solarized_visibility="normal"
+    " 去除注释的斜体
+    let g:solarized_italic=0
+    color solarized
+else
+    colorscheme desert
+endif
+"colorscheme solarized
 "colorscheme molokai
 " colorscheme Tomorrow-Night
 " colorscheme Tomorrow-Night-Bright
 " colorscheme desert
 
 " 设置标记一列的背景颜色和数字行号的背景颜色一致
-hi! link SignColumn   LineNr
-hi! link ShowMarksHLl DiffAdd
-hi! link ShowMarksHLu DiffChange
+highlight clear SignColumn      " SignColumn should match background
+highlight clear LineNr          " Current line number row will have same background color in relative mode
 
 " for error highlight, 防止错误正行标红导致看不清
 highlight clear SpellBad
