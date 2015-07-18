@@ -32,8 +32,8 @@
 " Create_time: 2015-06-08
 " Last_modify: 2015-07-17
 " Sections:
-"     ->Initial Plugins
 "     ->System Identification
+"     ->Initial Plugins
 "     ->General Settings
 "     ->Show:User Interface settings
 "     ->File encode:encode for varied filetype
@@ -44,12 +44,44 @@
 "==========================================
 
 
+" ========================================
+" System Identification
+" ========================================
+
+" -----------------------
+"  < Windows or Linux >
+" -----------------------
+let g:isWindows = 0
+let g:isLinux = 0
+if(has("win32") || has("win64") || has("win95") || has("win16"))
+    let g:isWindows = 1
+else
+    let g:isLinux = 1
+endif
+
+" -----------------------
+"  <  vim or Gvim >
+" -----------------------
+if has("gui_running")
+    let g:isGUI = 1
+else
+    let g:isGUI = 0
+endif
+
 "==========================================
 " Initial Plugin 加载插件
 "==========================================
 
-"Do not compatible with VI
+" Must be the first line.
+" Do not compatible with VI
 set nocompatible
+
+if !g:isWindows
+    set shell=/bin/sh
+else
+    " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+    set rtp+=~/.vim/
+endif
 
 " 修改leader键,因插件中会用到，所以把这句放前面
 let mapleader = ','
@@ -68,41 +100,23 @@ endif
 filetype plugin on
 filetype plugin indent on
 
-" 设置~/.vim为RunTimePath,不然windows不认该目录为rpt,具体:help 'runtimepath‘
-set rtp+=~/.vim/
-
-" ========================================
-" System Identification
-" ========================================
-
-" -----------------------
-"  < Windows or Linux >
-" -----------------------
-let g:iswindows = 0
-let g:islinux = 0
-if(has("win32") || has("win64") || has("win95") || has("win16"))
-    let g:iswindows = 1
-else
-    let g:islinux = 1
-endif
-
-" -----------------------
-"  <  vim or Gvim >
-" -----------------------
-if has("gui_running")
-    let g:isGUI = 1
-else
-    let g:isGUI = 0
-endif
-
 
 "==========================================
 " General Settings
 "==========================================
 
-"history: number of command-lines remembered
-" 设置这句后，在状态栏已经显示正在输入的命令了，同后面设置的set showcmd
-set history=200
+" -- set autowrite --
+" history: number of command-lines remembered
+set history=1000
+set shortmess=atI       " do not show initial page
+set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
+set virtualedit=onemore             " Allow for cursor beyond last character
+set spell                           " Spell checking on
+set hidden                          " Allow buffer switching without saving
+" 设置word的界限
+set iskeyword-=.                    " '.' is an end of word designator
+set iskeyword-=#                    " '#' is an end of word designator
+set iskeyword-=-                    " '-' is an end of word designator
 
 "detect filetype
 filetype on
@@ -111,7 +125,6 @@ filetype on
 filetype indent on
 
 set autoread          " auto reload file after being modified
-set shortmess=atI       " do not show initial page
 set title                " change the terminal's title
 
 "Set the window's size.
@@ -130,9 +143,9 @@ set noswapfile
 
 "create undo file
 if has('persistent_undo')
+  set undofile                " So is persistent undo ...
   set undolevels=1000         " How many undos
   set undoreload=10000        " number of lines to save for undo
-  set undofile                " So is persistent undo ...
   set undodir=/tmp/vimundo/
 endif
 
@@ -281,9 +294,8 @@ set expandtab       "将Tab自动转化成空格 [需要输入真正的Tab键时
 " 取shiftwidth的整数倍，当使用'>' '<'来改变缩进时
 set shiftround
 
-" A buffer becomes hidden when it is abandoned --多缓存的存在方式
-set hidden
-set wildmode=longest:full,full
+" set wildmode=longest:full,full
+set wildmode=list:longest,full
 set ttyfast
 
 
@@ -314,7 +326,7 @@ set encoding=utf-8                           "设置gvim新文件的编码，默
 " 自动判断编码时，依次尝试以下编码
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 "termmencoding 很多都设置为utf-8，但在windows下vim会乱码，gvim不会
-if(g:iswindows && !(g:isGUI))
+if(g:isWindows && !(g:isGUI))
 	set termencoding=cp936		 "终端的编码格式;
 else
 	set termencoding=utf-8
@@ -329,7 +341,7 @@ set helplang=cn
 set fileformat=unix             "设置新文件的<EOL>格式
 set fileformats=unix,dos,mac    "给出文件的<EOL>[End of line]格式类型,设置Unix为默认的文件类型
 
-if (g:iswindows && g:isGUI)
+if (g:isWindows && g:isGUI)
     "解决gvim菜单乱码
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
@@ -338,7 +350,7 @@ if (g:iswindows && g:isGUI)
     language messages zh_CN.utf-8
     " set guifont="DejaVu Sans Mono for Powerline"
     set guifont="Monaco for Powerline":h12
-     
+
 else
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
 endif

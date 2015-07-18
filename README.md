@@ -14,48 +14,60 @@ mivim
 
 1. ####可以自己修改vimrc中配置，决定是否开启鼠标
 
-    set mouse-=a           " 鼠标暂不启用, 键盘党....
-    set mouse=a            " 开启鼠标
+        set mouse-=a           " 鼠标暂不启用, 键盘党....
+        set mouse=a            " 开启鼠标
 
 2. ####可以自己修改vimrc决定是否使用方向键进行上下左右移动，默认关闭，强迫自己用 hjkl，可以注解
 
-    hjkl  上下左右
-    map <Left> <Nop>
-    map <Right> <Nop>
-    map <Up> <Nop>
-    map <Down> <Nop>
+        hjkl  上下左右
+        map <Left> <Nop>
+        map <Right> <Nop>
+        map <Up> <Nop>
+        map <Down> <Nop>
 
 3. ####上排F功能键
 
-    F1 set no/relativenumber,相对行号和绝对行号的转换
-    F2 set nu/nonu,行号开关，用于鼠标复制代码用
-    F3 set list/nolist,显示可打印字符开关
-    F4 set wrap/nowrap,换行开关
-    F5 LaTeX插件的insert/wrap in environment
-    F9 LaTeX插件的do a completion (ref, cite, lename)
-    F6 syntax on/off,语法开关，关闭语法可以加快大文件的展示
-    F7 set paste/nopaste,粘贴模式paste_mode开关,用于有格式的代码粘贴
-    F10 运行当前文件,for windows，path里需要对应的支持
-    <leader>r 运行当前文件，for linux(用了插件quickrun)
-    F8 用chrome运行html文件,需要将chrome放进path
-	F11 切换全屏
-    F12 用ie运行html文件,需要将ie放进path
+        F1 set no/relativenumber,相对行号和绝对行号的转换
+
+        F2 set nu/nonu,行号开关，用于鼠标复制代码用
+
+        F3 set list/nolist,显示可打印字符开关
+
+        F4 set wrap/nowrap,换行开关
+
+        F5 LaTeX插件的insert/wrap in environment
+
+        F9 LaTeX插件的do a completion (ref, cite, lename)
+
+        F6 syntax on/off,语法开关，关闭语法可以加快大文件的展示
+
+        F7 set paste/nopaste,粘贴模式paste_mode开关,用于有格式的代码粘贴
+
+        F10 运行当前文件,for windows，path里需要对应的支持
+
+        <leader>r 运行当前文件，for linux(用了插件quickrun)
+
+        F8 用chrome运行html文件,需要将chrome放进path
+
+	    F11 切换全屏
+
+        F12 用ie运行html文件,需要将ie放进path
 
 4. ####分屏移动
 
-    Normal模式下:
-    ctrl + j/k/h/l   进行上下左右窗口跳转,不需要ctrl+w+jkhl
+        Normal模式下:
+        ctrl + j/k/h/l   进行上下左右窗口跳转,不需要ctrl+w+jkhl
 
-	,w     打开垂直分屏(<c-w>v)
-	,ws	   打开水平分屏(<c-w>s)
-	,wo    只保留当前屏幕(<c-w>o)
-	,wx	   交换分屏位置(<c-w>x)
-	,wl	   垂直分屏最大化(<c-w>|)
-	,wk	   水平分屏最大化(<c-w>k)
-	,we    等分窗口(<c-w>=)
+    	,w     打开垂直分屏(<c-w>v)
+    	,ws	   打开水平分屏(<c-w>s)
+    	,wo    只保留当前屏幕(<c-w>o)
+    	,wx	   交换分屏位置(<c-w>x)
+    	,wl	   垂直分屏最大化(<c-w>|)
+    	,wk	   水平分屏最大化(<c-w>k)
+    	,we    等分窗口(<c-w>=)
 
-	,ww		开启分屏同步滚动(:set scb)
-	,wm		开启分屏同步滚动(:set noscb)
+    	,ww		开启分屏同步滚动(:set scb)
+    	,wm		开启分屏同步滚动(:set noscb)
 
 
     Insert模式下[注意没有c-j和c-k，用于Ultisnips插件的补全操作了，会冲突]:
@@ -63,88 +75,88 @@ mivim
 
 5. ####搜索
 
-    <space> 空格，进入搜索状态/
-    /       =/\v  引入正则
-    ,/      去除匹配高亮
+        <space> 空格，进入搜索状态/
+        /       =/\v  引入正则
+        ,/      去除匹配高亮
 
-	,fi     列出寻找光标下的关键词的所有位置，键入数字即可到达[有点ctrlp-funcy的意思]
+	    ,fi     列出寻找光标下的关键词的所有位置，键入数字即可到达[有点ctrlp-funcy的意思]
 
     优化搜索保证结果在屏幕中间
 
 6. ####Tab操作(重点推)
 
-    ctrl+t 新建一个tab
+        ctrl+t 新建一个tab
 
-    ,l    下一个tab
-    ,h    前一个tab
+        ,l    下一个tab
+        ,h    前一个tab
 
-    (关闭打开操作)
-    ,td    关闭tab
-    ,te    tabedit
-    ,tm    将当前标签移动到最后
-    ,th    将当前标签左移
-    ,tl    将当前标签右移
-    ,1     切第1个tab
-    ,2     切第2个tab
-    ...
-    ,9     切第9个tab
-    ,0     切最后一个tab
+        (关闭打开操作)
+        ,td    关闭tab
+        ,te    tabedit
+        ,tm    将当前标签移动到最后
+        ,th    将当前标签左移
+        ,tl    将当前标签右移
+        ,1     切第1个tab
+        ,2     切第2个tab
+        ...
+        ,9     切第9个tab
+        ,0     切最后一个tab
 
-    ,tu   (Tab Used)最近使用两个tab之间切换
+        ,tu   (Tab Used)最近使用两个tab之间切换
 
 7. ####Buffer操作(不建议, 建议使用ctrlspace插件来操作,l切换tabList or buffList)
 
-    H          前一个buffer
-    L          后一个buffer
+        H          前一个buffer
+        L          后一个buffer
 
-    <Left>     前一个buffer
-    <Right>    后一个buffer
+        <Left>     前一个buffer
+        <Right>    后一个buffer
 
 
 8. ####文件I/O操作
 
-    ,em  打开(my)vimrc配置文件
-    ,eb  打开.vimrc.bundle配置文件
-    ,sm  重载入(my)vimrc配置文件
+        ,em  打开(my)vimrc配置文件
+        ,eb  打开.vimrc.bundle配置文件
+        ,sm  重载入(my)vimrc配置文件
 
-    ,ee  =e 当前目录/
-    ,es  =split  当前目录/
-    ,ev  =vsplit  当前目录/
+        ,ee  =e 当前目录/
+        ,es  =split  当前目录/
+        ,ev  =vsplit  当前目录/
 
 
 9. ####折叠操作
 
-	" Code folding options
-    ,f0    foldlevel=0
-    ,f1    foldlevel=1
-    ,f2    foldlevel=2
-     ...
-    ,f9    foldlevel=9
+	    " Code folding options
+        ,f0    foldlevel=0
+        ,f1    foldlevel=1
+        ,f2    foldlevel=2
+        ...
+        ,f9    foldlevel=9
 
 
 10. ####按键修改
 
-    Y       		=y$    复制到行尾
-    U       		=Ctrl-r
+        Y       		=y$    复制到行尾
+        U       		=Ctrl-r
 
-    ,sa     		select all,全选
-    ,v      		选中段落
+        ,sa     		select all,全选
+        ,v      		选中段落
 
-    ,k      		代替<Esc>，不用到角落去按esc了
+        ,k      		代替<Esc>，不用到角落去按esc了
 
-    c-a     		命令行模式下到行首[默认是c-b]
-    c-e     		命令行模式下到行尾[没变，默认就是c-e]
+        c-a     		命令行模式下到行首[默认是c-b]
+        c-e     		命令行模式下到行尾[没变，默认就是c-e]
 
-	cd.(或cwd)		命令行模式下切换到当前文件目录
+	    cd.(或cwd)		命令行模式下切换到当前文件目录
 
-    ,y              ="+y  复制指定内容到系统剪切板
-    ,Y              ="+yy 复制本行内容到系统剪切板
-    ,p              ="+p  粘贴系统剪切板的内容到光标后
-    ,P              ="+P  粘贴系统剪切板的内容到光标前
+        ,y              ="+y  复制指定内容到系统剪切板
+        ,Y              ="+yy 复制本行内容到系统剪切板
+        ,p              ="+p  粘贴系统剪切板的内容到光标后
+        ,P              ="+P  粘贴系统剪切板的内容到光标前
 
-    ,q              :q，退出vim
+        ,q              :q，退出vim
 
-    <enter>         normal模式下回车选中当前项
+        <enter>         normal模式下回车选中当前项
 
 ---------------------
 # 插件部分
@@ -166,8 +178,8 @@ mivim
 
     修改了下标记一列的背景色,原有的背景色在solarized下太难看了…..
 
-     "记忆方式 <leader> Toggle[E]rror
-     ,e  列出/隐藏当前文件所有错误列表
+        "记忆方式 <leader> Toggle[E]rror
+        ,e  列出/隐藏当前文件所有错误列表
 
 
 > 自动补全
@@ -227,12 +239,12 @@ mivim
     必装，另一个大大提升效率的地方，快速批量加减注释[会自动补一个空格]
 
         [d] shift+v+方向键选中(默认当前行)
-            -> ,cc      	加上注释
-            -> ,cu      	解开注释
-			-> ,c<space>   	加上/解开注释
-			-> ,cm 			使用/* */,只有在支持多种注释类型的文件中才可使用[下同]
-			-> ,cs  		使用段落的/** \t *文本 \t  */
-			-> ,a   		选择注释类型
+        -> ,cc      	加上注释
+        -> ,cu      	解开注释
+        -> ,c<space>   	加上/解开注释
+        -> ,cm 			使用/* */,只有在支持多种注释类型的文件中才可使用[下同]
+        -> ,cs  		使用段落的/** \t *文本 \t  */
+        -> ,a   		选择注释类型
 
     附:注释还有其他两种插件可选[tcomment](https://github.com/tomtom/tcomment_vim) 和[tpope/vim-commentary](https://github.com/tpope/vim-commentary)
 
@@ -551,30 +563,30 @@ mivim
 
     必装,开启目录树导航
 
-        [sd]
-            ,n  打开 关闭树形目录结构
-            ,nf 切换树形目录到当前文件位置
+         [sd]
+         ,n  打开 关闭树形目录结构
+         ,nf 切换树形目录到当前文件位置
 
-            在nerdtree窗口常用操作：(小写当前，大写root)
-			I.......Toggle隐藏文件
-            x.......收起当前目录树
-            X.......递归收起当前目录树
-            r.......刷新当前目录
-            R.......刷新根目录树
+         在nerdtree窗口常用操作：(小写当前，大写root)
+         I.......Toggle隐藏文件
+         x.......收起当前目录树
+         X.......递归收起当前目录树
+         r.......刷新当前目录
+         R.......刷新根目录树
 
-            p.......跳到当前节点的父节点
-            P.......跳到root节点
-            k/j.....上下移动
-            K.......到同目录第一个节点
-            J.......最后一个节点
+         p.......跳到当前节点的父节点
+         P.......跳到root节点
+         k/j.....上下移动
+         K.......到同目录第一个节点
+         J.......最后一个节点
 
-            o.......Open files, directories and bookmarks
+         o.......Open files, directories and bookmarks
 
-            s.......split上下分屏[原来是i, 改键]
-            v.......vsplit左右分屏[原来是s, 改键]
+         s.......split上下分屏[原来是i, 改键]
+         v.......vsplit左右分屏[原来是s, 改键]
 
-            C.......将当前目录设为根节点
-            q.......关闭
+         C.......将当前目录设为根节点
+         q.......关闭
 
     nerdtree配合tab非常赞, i/s 可以在右侧分屏打开
 
@@ -733,9 +745,7 @@ mivim
 
 	[elzr/vim-json](https://github.com/elzr/vim-json) json高亮
 
-		[sd]
-		,jt		设置当前文件类型为json，激活json高亮
-
+		[sd] ,jt		设置当前文件类型为json，激活json高亮
 
 
 	[briancollins/vim-jst](https://github.com/https://github.com/)  格式调整

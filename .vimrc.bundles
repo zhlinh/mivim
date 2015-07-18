@@ -45,6 +45,17 @@ Bundle 'chriskempson/vim-tomorrow-theme'
 
 " ################### 基础 ######################
 
+" Deps 
+if executable('ag')
+    Bundle 'mileszs/ack.vim'
+    let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+elseif executable('ack-grep')
+    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+    Bundle 'mileszs/ack.vim'
+elseif executable('ack')
+    Bundle 'mileszs/ack.vim'
+endif
+
 " 多语言语法检查
 Bundle 'scrooloose/syntastic'
 let g:syntastic_error_symbol='>>'
@@ -350,15 +361,16 @@ let g:ctrlp_custom_ignore = {
             \ 'dir':  '\.git$\|\.hg$\|\.svn$',
             \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
 
-" On Windows use "dir" as fallback command.
-if(has("win32") || has("win64") || has("win95") || has("win16"))
-    let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
-elseif executable('ag')
+" Use ag for the first choice.
+" On Windows & without ag use "dir" as fallback command.
+if executable('ag')
     let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
 elseif executable('ack-grep')
     let s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
 elseif executable('ack')
     let s:ctrlp_fallback = 'ack %s --nocolor -f'
+elseif (has("win32") || has("win64") || has("win95") || has("win16"))
+    let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
 else
     let s:ctrlp_fallback = 'find %s -type f'
 endif
@@ -403,10 +415,16 @@ Bundle "dyng/ctrlsf.vim"
 " t - 在tab中打开(建议)
 " T - Lkie t but focus CtrlSF window instead of opened new tab.
 " q - Quit CtrlSF window.
- 
+
 " 需要ag或ack依赖，grep的升级版!设置ctrlsf 使用ag
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-let g:ctrlsf_ackprg = 'ag'
+if executable('ag')
+    let g:ctrlsf_ackprg = 'ag'
+elseif executable('ack-grep')
+    let g:ctrlsf_ackprg = 'ack-grep'
+elseif executable('ack')
+    let g:ctrlsf_ackprg = 'ack'
+endif
 let g:ctrlsf_debug_mode = 1
 let g:ctrlsf_default_root = 'project'
 
@@ -488,19 +506,19 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 " tabline中当前buffer两端的分隔字符
-" let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_sep = ' '
 " tabline中未激活buffer两端的分隔字符
-" let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_alt_sep = '|'
 " 是否打开tabline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
-" let g:airline_left_sep = '>'
-" let g:airline_right_sep = '<'
-" let g:airline_symbols.linenr = '¶'
-" let g:airline_symbols.paste = 'Þ'
-" let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_left_sep = '>'
+let g:airline_right_sep = '<'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.whitespace = 'Ξ'
 
 "在右下显示当前buffer的编号
 "let g:airline_setion_y = 'BN: %{bufnr{"%"}}'
@@ -608,54 +626,56 @@ if executable('ctags')
     if gitroot != ''
         let &tags = &tags . ',' . gitroot . '/.git/tags'
     endif
+
+    nmap <silent> <leader>t :TagbarToggle<CR>
+
+    let g:tagbar_autofocus = 1
+    " for ruby
+    let g:tagbar_type_ruby = {
+                \ 'kinds' : [
+                \ 'm:modules',
+                \ 'c:classes',
+                \ 'd:describes',
+                \ 'C:contexts',
+                \ 'f:methods',
+                \ 'F:singleton methods'
+                \ ]
+                \ }
+
+    " go语言的tagbar配置
+    " 1. install gotags 'go get -u github.com/jstemmer/gotags'
+    " 2. make sure `gotags` in you shell PATH, you can call check it with `which gotags`
+    " for gotags. work with tagbar
+    let g:tagbar_type_go = {
+                \ 'ctagstype' : 'go',
+                \ 'kinds'     : [
+                \ 'p:package',
+                \ 'i:imports:1',
+                \ 'c:constants',
+                \ 'v:variables',
+                \ 't:types',
+                \ 'n:interfaces',
+                \ 'b:bundle',
+                \ 'w:fields',
+                \ 'e:embedded',
+                \ 'm:methods',
+                \ 'r:constructor',
+                \ 'f:functions'
+                \ ],
+                \ 'sro' : '.',
+                \ 'kind2scope' : {
+                \ 't' : 'ctype',
+                \ 'n' : 'ntype'
+                \ },
+                \ 'scope2kind' : {
+                \ 'ctype' : 't',
+                \ 'ntype' : 'n'
+                \ },
+                \ 'ctagsbin'  : 'gotags',
+                \ 'ctagsargs' : '-sort -silent'
+                \ }
+
 endif
-nmap <silent> <leader>t :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
-" for ruby
-let g:tagbar_type_ruby = {
-            \ 'kinds' : [
-            \ 'm:modules',
-            \ 'c:classes',
-            \ 'd:describes',
-            \ 'C:contexts',
-            \ 'f:methods',
-            \ 'F:singleton methods'
-            \ ]
-            \ }
-
-" go语言的tagbar配置
-" 1. install gotags 'go get -u github.com/jstemmer/gotags'
-" 2. make sure `gotags` in you shell PATH, you can call check it with `which gotags`
-" for gotags. work with tagbar
-let g:tagbar_type_go = {
-            \ 'ctagstype' : 'go',
-            \ 'kinds'     : [
-            \ 'p:package',
-            \ 'i:imports:1',
-            \ 'c:constants',
-            \ 'v:variables',
-            \ 't:types',
-            \ 'n:interfaces',
-            \ 'b:bundle',
-            \ 'w:fields',
-            \ 'e:embedded',
-            \ 'm:methods',
-            \ 'r:constructor',
-            \ 'f:functions'
-            \ ],
-            \ 'sro' : '.',
-            \ 'kind2scope' : {
-            \ 't' : 'ctype',
-            \ 'n' : 'ntype'
-            \ },
-            \ 'scope2kind' : {
-            \ 'ctype' : 't',
-            \ 'ntype' : 'n'
-            \ },
-            \ 'ctagsbin'  : 'gotags',
-            \ 'ctagsargs' : '-sort -silent'
-            \ }
-
 
 " 去除taglist =>原因: 使用tagbar和ctrlp-funky可以直接快速跳转函数和变量位置,taglist有些多余
 
