@@ -284,7 +284,7 @@ mivim
 
 3. ####快速运行 [vim-quickrun](https://github.com/thinca/vim-quickrun)
 
-        <leader>r  快速运行当前文件
+        ,r  快速运行当前文件
 
 
 
@@ -702,7 +702,7 @@ mivim
 	[mattn/webapi-vim](https://github.com/mattn/webapi-vim) 提供一些网页编程常用的方法
 
 
-	[mattn/emmet-vim](https://github.com/mattn/emmet-vim) 即原来的zencoding，触发键改为了<c-e>
+	[mattn/emmet-vim](https://github.com/mattn/emmet-vim) 即原来的zencoding，触发键改为了`<c-e>`
 
         let g:user_emmet_expandabbr_key = '<C-e>'
 		let g:user_emmet_leader_key='<C-e>'
@@ -710,7 +710,7 @@ mivim
 		<C-e>k  Remove a Tag
 		<C-e>j  Split/Join Tag
 		<C-e>a  Make an anchor from a URL
-		<C-y>A  Make some quoted text from a URL
+		<C-e>A  Make some quoted text from a URL
 
 
 	[docunext/closetag.vim](https://github.com/docunext/closetag.vim)  html/xml标签配对补全
@@ -762,7 +762,7 @@ mivim
 	[maksimr/vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify)  js/html/css 格式化, 未配置
 
 
-    [nono/jquery.vim](https://github.com/nono/jquery.vim) jquery高亮，未配置
+  [nono/jquery.vim](https://github.com/nono/jquery.vim) jquery高亮，未配置
 
 
 

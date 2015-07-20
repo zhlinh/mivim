@@ -45,7 +45,7 @@ Bundle 'chriskempson/vim-tomorrow-theme'
 
 " ################### 基础 ######################
 
-" Deps 
+" Deps
 if executable('ag')
     Bundle 'mileszs/ack.vim'
     let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
@@ -128,9 +128,9 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 " Haskell post write lint and check with ghcmod
 " $ `cabal install ghcmod` if missing and ensure
 " ~/.cabal/bin is in your $PATH.
-if !executable("ghcmod")
-    autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-endif
+" if !executable("ghcmod")
+    " autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+" endif
 
 " For snippet_complete marker.
 if has('conceal')
@@ -149,7 +149,7 @@ let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
 let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
 let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
 
-"let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
+" let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全
 
 " 跳转到定义处, 分屏打开
 let g:ycm_goto_buffer_command = 'horizontal-split'
@@ -167,9 +167,10 @@ if !empty(glob("~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
     let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
 endif
 
-" 直接触发自动补全 insert模式下
+" insert模式下,直接触发自动补全,故不需要快捷键
 " let g:ycm_key_invoke_completion = '<C-Space>'
-" 黑名单,不启用
+
+" 在下列形式中不启用ycm
 let g:ycm_filetype_blacklist = {
             \ 'tagbar' : 1,
             \ 'gitcommit' : 1,
@@ -501,24 +502,26 @@ Bundle 'powerline/fonts'
 " 状态栏增强展示
 " 新的airline配置
 Bundle 'bling/vim-airline'
+" 有了powerline/fonts的支持就不要用自定义字符
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
+
 " tabline中当前buffer两端的分隔字符
-let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_sep = ' '
 " tabline中未激活buffer两端的分隔字符
-let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#left_alt_sep = '|'
 " 是否打开tabline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
-let g:airline_left_sep = '>'
-let g:airline_right_sep = '<'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.whitespace = 'Ξ'
+" let g:airline_left_sep = '>'
+" let g:airline_right_sep = '<'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.whitespace = 'Ξ'
 
 "在右下显示当前buffer的编号
 "let g:airline_setion_y = 'BN: %{bufnr{"%"}}'
@@ -568,8 +571,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeMouseMode=2
 " 默认显示隐藏文件，切换快捷键为 I : Toggle hidden files
 let NERDTreeShowHidden=1
-let NERDTreeKeepTreeInNewTab=1
-let NERDTreeHighlightCursorline=1
+" let NERDTreeKeepTreeInNewTab=1
 " 设置是否自启动
 " let g:nerdtree_tabs_open_on_gui_startup=0
 "close vim if the only window left open is a NERDTree
@@ -617,7 +619,7 @@ hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=
 
 
 " 标签导航,配合ctrlp-funky使用
-" 需要ctags依赖
+" 需要ctags依赖(必须),jsctags依赖(可选,如果想适配JS)
 if executable('ctags')
     Bundle 'majutsushi/tagbar'
     set tags=./tags;/,~/.vimtags
@@ -626,251 +628,293 @@ if executable('ctags')
     if gitroot != ''
         let &tags = &tags . ',' . gitroot . '/.git/tags'
     endif
+    " c文件时自动打开tagbar
+    " autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
     nmap <silent> <leader>t :TagbarToggle<CR>
 
     let g:tagbar_autofocus = 1
     " for ruby
     let g:tagbar_type_ruby = {
-                \ 'kinds' : [
-                \ 'm:modules',
-                \ 'c:classes',
-                \ 'd:describes',
-                \ 'C:contexts',
-                \ 'f:methods',
-                \ 'F:singleton methods'
-                \ ]
-                \ }
+          \ 'kinds' : [
+          \ 'm:modules',
+          \ 'c:classes',
+          \ 'd:describes',
+          \ 'C:contexts',
+          \ 'f:methods',
+          \ 'F:singleton methods'
+          \ ]
+          \ }
 
-    " go语言的tagbar配置
+    " google go语言的tagbar配置
     " 1. install gotags 'go get -u github.com/jstemmer/gotags'
     " 2. make sure `gotags` in you shell PATH, you can call check it with `which gotags`
     " for gotags. work with tagbar
     let g:tagbar_type_go = {
-                \ 'ctagstype' : 'go',
-                \ 'kinds'     : [
-                \ 'p:package',
-                \ 'i:imports:1',
-                \ 'c:constants',
-                \ 'v:variables',
-                \ 't:types',
-                \ 'n:interfaces',
-                \ 'b:bundle',
-                \ 'w:fields',
-                \ 'e:embedded',
-                \ 'm:methods',
-                \ 'r:constructor',
-                \ 'f:functions'
-                \ ],
-                \ 'sro' : '.',
-                \ 'kind2scope' : {
-                \ 't' : 'ctype',
-                \ 'n' : 'ntype'
-                \ },
-                \ 'scope2kind' : {
-                \ 'ctype' : 't',
-                \ 'ntype' : 'n'
-                \ },
-                \ 'ctagsbin'  : 'gotags',
-                \ 'ctagsargs' : '-sort -silent'
-                \ }
+          \ 'ctagstype' : 'go',
+          \ 'kinds'     : [
+          \ 'p:package',
+          \ 'i:imports:1',
+          \ 'c:constants',
+          \ 'v:variables',
+          \ 't:types',
+          \ 'n:interfaces',
+          \ 'b:bundle',
+          \ 'w:fields',
+          \ 'e:embedded',
+          \ 'm:methods',
+          \ 'r:constructor',
+          \ 'f:functions'
+          \ ],
+          \ 'sro' : '.',
+          \ 'kind2scope' : {
+          \ 't' : 'ctype',
+          \ 'n' : 'ntype'
+          \ },
+          \ 'scope2kind' : {
+          \ 'ctype' : 't',
+          \ 'ntype' : 'n'
+          \ },
+          \ 'ctagsbin'  : 'gotags',
+          \ 'ctagsargs' : '-sort -silent'
+          \ }
 
-endif
+    " CSS语言的tagbar配置
+    let g:tagbar_type_css = {
+          \ 'ctagstype' : 'Css',
+          \ 'kinds'     : [
+          \ 'c:classes',
+          \ 's:selectors',
+          \ 'i:identities'
+          \ ]
+          \ }
 
-" 去除taglist =>原因: 使用tagbar和ctrlp-funky可以直接快速跳转函数和变量位置,taglist有些多余
+    " JS语言的tagbar配置
+    " 需要tern 和 jsctags的支持
+    " 安装方法为npm install -g git+https://github.com/ramitos/jsctags.git
+    if executable('jsctags')
+      let g:tagbar_type_javascript = {
+            \ 'ctagsbin' : 'jsctags'
+            \ }
+    endif
 
-" ################### 语言相关 ###################
+    " VHDL语言的tagbar配置
+    let g:tagbar_type_vhdl = {
+          \ 'ctagstype': 'vhdl',
+          \ 'kinds' : [
+          \'d:prototypes',
+          \'b:package bodies',
+          \'e:entities',
+          \'a:architectures',
+          \'t:types',
+          \'p:processes',
+          \'f:functions',
+          \'r:procedures',
+          \'c:constants',
+          \'T:subtypes',
+          \'r:records',
+          \'C:components',
+          \'P:packages',
+          \'l:locals'
+          \]
+          \}
 
-"快速编译运行的插件
-Bundle 'thinca/vim-quickrun'
-let g:quickrun_config = {
-            \   "_" : {
-            \       "outputter" : "message",
-            \   },
-            \}
+  endif
 
-let g:quickrun_no_default_key_mappings = 1
-nmap <Leader>r <Plug>(quickrun)
+  " 去除taglist =>原因: 使用tagbar和ctrlp-funky可以直接快速跳转函数和变量位置,taglist有些多余
 
-" ###### Latex #########
-"Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
-"上面那个太久了，应该只是一个mirror
-"故改用下面这个，也是官网上的github网址
-"官网地址http://vim-latex.sourceforge.net/
-Bundle 'vim-latex/vim-latex'
-"用到的快捷键:
-" <leader>ll：compile
-" <leader>lv：view pdf
-" <leader>ls: 正向搜索
-" SumatraPDF中 双击: 反向搜索
-" Ctrl-J： 跳到下一个++位置（place holder）
-" F5：insert/wrap in environment
-" F9：do a completion (ref, cite, lename)
-" za：fold/unfold
-" <leader>rf：refresh folding
-" 下面是官方的一些推荐配置
-" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
-" can be called correctly.
-set shellslash
-" Set your grep program to always generate a file-name.
-set grepprg=grep\ -nH\ $*
-" vim默认把空的tex文件设为plaintex而不是tex，导致latex-suite不被加载
-let g:tex_flavor='latex'
+  " ################### 语言相关 ###################
 
-" TIP: if you write your \label's as \label{fig:something}, then if you
-" type in \ref{fig: and press <C-n> you will automatically cycle through
-" all the figure labels. Very useful!
-set iskeyword+=:
-autocmd BufEnter *.tex set sw=2
+  "快速编译运行的插件
+  Bundle 'thinca/vim-quickrun'
+  let g:quickrun_config = {
+        \   "_" : {
+        \       "outputter" : "message",
+        \   },
+        \}
 
-" 反向搜索相关
-let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_CompileRule_pdf = 'xelatex --synctex=-1 -src-specials -interaction=nonstopmode $*'
-let g:Tex_ViewRule_pdf = 'sumatrapdf -reuse-instance -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
-" tex文件自动检查拼写
-autocmd BufNewFile,BufRead *.tex set spell
-" 关闭编辑tex文件时换行时自动对齐的功能
-let g:tex_indent_items=0
+  let g:quickrun_no_default_key_mappings = 1
+  nmap <Leader>r <Plug>(quickrun)
 
+  " ###### Latex #########
+  "Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
+  "上面那个太久了，应该只是一个mirror
+  "故改用下面这个，也是官网上的github网址
+  "官网地址http://vim-latex.sourceforge.net/
+  Bundle 'vim-latex/vim-latex'
+  "用到的快捷键:
+  " <leader>ll：compile
+  " <leader>lv：view pdf
+  " <leader>ls: 正向搜索
+  " SumatraPDF中 双击: 反向搜索
+  " Ctrl-J： 跳到下一个++位置（place holder）
+  " F5：insert/wrap in environment
+  " F9：do a completion (ref, cite, lename)
+  " za：fold/unfold
+  " <leader>rf：refresh folding
+  " 下面是官方的一些推荐配置
+  " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+  " can be called correctly.
+  set shellslash
+  " Set your grep program to always generate a file-name.
+  set grepprg=grep\ -nH\ $*
+  " vim默认把空的tex文件设为plaintex而不是tex，导致latex-suite不被加载
+  let g:tex_flavor='latex'
 
-" ###### Python #########
+  " TIP: if you write your \label's as \label{fig:something}, then if you
+  " type in \ref{fig: and press <C-n> you will automatically cycle through
+  " all the figure labels. Very useful!
+  set iskeyword+=:
+  autocmd BufEnter *.tex set sw=2
 
-" python fly check, 弥补syntastic只能打开和保存才检查语法的不足
-Bundle 'kevinw/pyflakes-vim'
-let g:pyflakes_use_quickfix = 0
-
-" for python.vim syntax highlight
-Bundle 'hdima/python-syntax'
-let python_highlight_all = 1
-
-
-
-" ###### Golang #########
-" 1.install golang and install gocode 'go get github.com/nsf/gocode'
-" 2.make sure gocode in your path: `which gocode` (add $GOPATH/bin to you $PATH)
-Bundle 'Blackrush/vim-gocode'
-" Bundle 'fatih/vim-go.git'
-
-" ###### Ruby #########
-" Bundle 'vim-ruby/vim-ruby'
-" Bundle 'nelstrom/vim-textobj-rubyblock'
-
-" 有bug, 和当前有冲突, 尚未解决, 不要打开
-" Bundle 'tpope/vim-endwise'
-
-
-" ###### Markdown #########
-Bundle 'plasticboy/vim-markdown'
-let g:vim_markdown_folding_disabled=1
-
-" https://github.com/suan/vim-instant-markdown
-" npm -g install instant-markdown-d
-" Bundle 'suan/vim-instant-markdown'
-" let g:instant_markdown_slow = 1
-" let g:instant_markdown_autostart = 0
-" map <F12> :InstantMarkdownPreview<CR>
-
-" ###### HTML/CSS/JS/PHP #########
-"        """""""""""""""""""
-"        "     HTML/JS     "
-"        """""""""""""""""""
-
-" Web的API，提供一些常用的方法
-Bundle "mattn/webapi-vim"
-
-" emmet HTML complete
-Bundle "mattn/emmet-vim"
-let g:user_emmet_settings = {
-            \ 'php' : {
-            \ 'extends' : 'html',
-            \ 'filters' : 'c',
-            \ },
-            \ 'xml' : {
-            \ 'extends' : 'html',
-            \ },
-            \ 'haml' : {
-            \ 'extends' : 'html',
-            \ },
-            \}
-let g:user_emmet_expandabbr_key = '<C-e>'
-let g:user_emmet_leader_key='<C-e>'
-
-" 自动补全html/xml标签
-Bundle 'alvan/vim-closetag'
-
-" 语法相关
-Bundle 'hail2u/vim-css3-syntax'
-
-" 配色相关
-Bundle 'gorodinskiy/vim-coloresque'
-
-" ###### Always highlight enclosing tags #########
-Bundle "Valloric/MatchTagAlways"
-
-" haml
-Bundle 'tpope/vim-haml'
+  " 反向搜索相关
+  let g:Tex_DefaultTargetFormat='pdf'
+  let g:Tex_CompileRule_pdf = 'xelatex --synctex=-1 -src-specials -interaction=nonstopmode $*'
+  let g:Tex_ViewRule_pdf = 'sumatrapdf -reuse-instance -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
+  " tex文件自动检查拼写
+  autocmd BufNewFile,BufRead *.tex set spell
+  " 关闭编辑tex文件时换行时自动对齐的功能
+  let g:tex_indent_items=0
 
 
-"        """"""""""""""""""""""
-"        "     javascript     "
-"        """"""""""""""""""""""
-" for javascript  注意: syntax这个插件要放前面
-Bundle 'jelera/vim-javascript-syntax'
+  " ###### Python #########
 
-Bundle "pangloss/vim-javascript"
-let g:html_indent_inctags = "html,body,head,tbody"
-let g:html_indent_script1 = "inc"
-let g:html_indent_style1 = "inc"
+  " python fly check, 弥补syntastic只能打开和保存才检查语法的不足
+  Bundle 'kevinw/pyflakes-vim'
+  let g:pyflakes_use_quickfix = 0
 
-Bundle 'elzr/vim-json'
-nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
-let g:vim_json_syntax_conceal = 0
-
-" ###### vim.less : less 自动更新##########
-Bundle 'groenewege/vim-less'
-autocmd BufWritePost *.less :!lessc % > %:p:r.css
-
-Bundle 'briancollins/vim-jst'
-
-Bundle 'kchmck/vim-coffee-script'
-
-" for javascript 自动补全,配合YCM,需要安装nodejs&npm  see
-" https://github.com/marijnh/tern_for_vim
-" Bundle 'marijnh/tern_for_vim'
-
-" for jquery
-" Bundle 'nono/jquery.vim'
-
-"        """""""""""""""""""
-"        "        PHP      "
-"        """""""""""""""""""
-Bundle 'spf13/PIV'
-let g:DisableAutoPHPFolding = 0
-let g:PIVAutoClose = 0
-
-Bundle 'arnaud-lb/vim-php-namespace'
-Bundle 'beyondwords/vim-twig'
+  " for python.vim syntax highlight
+  Bundle 'hdima/python-syntax'
+  let python_highlight_all = 1
 
 
-" ###### Jinja2 #########
-Bundle 'Glench/Vim-Jinja2-Syntax'
+
+  " ###### Golang #########
+  " 1.install golang and install gocode 'go get github.com/nsf/gocode'
+  " 2.make sure gocode in your path: `which gocode` (add $GOPATH/bin to you $PATH)
+  Bundle 'Blackrush/vim-gocode'
+  " Bundle 'fatih/vim-go.git'
+
+  " ###### Ruby #########
+  " Bundle 'vim-ruby/vim-ruby'
+  " Bundle 'nelstrom/vim-textobj-rubyblock'
+
+  " 有bug, 和当前有冲突, 尚未解决, 不要打开
+  " Bundle 'tpope/vim-endwise'
 
 
-" ###### nginx #########
-" Bundle 'evanmiller/nginx-vim-syntax'
+  " ###### Markdown #########
+  Bundle 'plasticboy/vim-markdown'
+  let g:vim_markdown_folding_disabled=1
+
+  " https://github.com/suan/vim-instant-markdown
+  " npm -g install instant-markdown-d
+  " Bundle 'suan/vim-instant-markdown'
+  " let g:instant_markdown_slow = 1
+  " let g:instant_markdown_autostart = 0
+  " map <F12> :InstantMarkdownPreview<CR>
+
+  " ###### HTML/CSS/JS/PHP #########
+  "        """""""""""""""""""
+  "        "     HTML/CSS     "
+  "        """""""""""""""""""
+
+  " Web的API，提供一些常用的方法
+  Bundle "mattn/webapi-vim"
+
+  " emmet HTML complete
+  Bundle "mattn/emmet-vim"
+  let g:user_emmet_settings = {
+        \ 'php' : {
+        \ 'extends' : 'html',
+        \ 'filters' : 'c',
+        \ },
+        \ 'xml' : {
+        \ 'extends' : 'html',
+        \ },
+        \ 'haml' : {
+        \ 'extends' : 'html',
+        \ },
+        \}
+  let g:user_emmet_expandabbr_key = '<C-e>'
+  let g:user_emmet_leader_key='<C-e>'
+
+  " 自动补全html/xml标签
+  Bundle 'alvan/vim-closetag'
+
+  " 语法相关
+  Bundle 'hail2u/vim-css3-syntax'
+
+  " 配色相关
+  Bundle 'gorodinskiy/vim-coloresque'
+
+  " ###### Always highlight enclosing tags #########
+  Bundle "Valloric/MatchTagAlways"
+
+  " haml
+  Bundle 'tpope/vim-haml'
 
 
-" ####### temp #######
-" python code format
-" autocmd FileType python nnoremap <leader>y :0,$!yapf --stdout-encoding=utf-8<Cr>
-" autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
-" Bundle 'mindriot101/vim-yapf'
-" scriptencoding utf-8
-" let g:yapf_style = "google"
-" let g:yapf_style = "pep8"
-" setenv PYTHONIOENCODING UTF-8
-" nnoremap <leader>y :call Yapf()<cr>
+  "        """"""""""""""""""""""
+  "        "     javascript     "
+  "        """"""""""""""""""""""
+  " for javascript  注意: syntax这个插件要放前面
+  Bundle 'jelera/vim-javascript-syntax'
 
-" Bundle 'amoffat/snake'
+  Bundle "pangloss/vim-javascript"
+  let g:html_indent_inctags = "html,body,head,tbody"
+  let g:html_indent_script1 = "inc"
+  let g:html_indent_style1 = "inc"
 
-"------------------------------------------- end of configs --------------------------------------------
+  Bundle 'elzr/vim-json'
+  nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
+  let g:vim_json_syntax_conceal = 0
+
+  " ###### vim.less : less 自动更新##########
+  Bundle 'groenewege/vim-less'
+  autocmd BufWritePost *.less :!lessc % > %:p:r.css
+
+  Bundle 'briancollins/vim-jst'
+
+  Bundle 'kchmck/vim-coffee-script'
+
+  " for javascript 自动补全,配合YCM,需要安装nodejs&npm  see
+  " https://github.com/marijnh/tern_for_vim
+  Bundle 'marijnh/tern_for_vim'
+
+  " for jquery
+  " Bundle 'nono/jquery.vim'
+
+  "        """""""""""""""""""
+  "        "        PHP      "
+  "        """""""""""""""""""
+  Bundle 'spf13/PIV'
+  let g:DisableAutoPHPFolding = 0
+  let g:PIVAutoClose = 0
+
+  Bundle 'arnaud-lb/vim-php-namespace'
+  Bundle 'beyondwords/vim-twig'
+
+
+  " ###### Jinja2 #########
+  Bundle 'Glench/Vim-Jinja2-Syntax'
+
+
+  " ###### nginx #########
+  " Bundle 'evanmiller/nginx-vim-syntax'
+
+
+  " ####### temp #######
+  " python code format
+  " autocmd FileType python nnoremap <leader>y :0,$!yapf --stdout-encoding=utf-8<Cr>
+  " autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
+  " Bundle 'mindriot101/vim-yapf'
+  " scriptencoding utf-8
+  " let g:yapf_style = "google"
+  " let g:yapf_style = "pep8"
+  " setenv PYTHONIOENCODING UTF-8
+  " nnoremap <leader>y :call Yapf()<cr>
+
+  " Bundle 'amoffat/snake'
+
+  "------------------------------------------- end of configs --------------------------------------------

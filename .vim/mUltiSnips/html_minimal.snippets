@@ -3,6 +3,15 @@
 
 priority -50
 
+
+snippet br "Another line.<br />"
+<br />
+endsnippet
+
+snippet hr "Horizontal line.<hr />"
+<hr />
+endsnippet
+
 snippet id
 id="${1}"${2}
 endsnippet
@@ -24,9 +33,9 @@ snippet submit
 <input type="submit" value="${2}" ${3}/>${7}
 endsnippet
 
-snippet textarea
-<textarea name="$2"${3: id="$4"}>$5</textarea>
-endsnippet
+# snippet textarea
+# <textarea name="$2"${3: id="$4"}>$5</textarea>
+# endsnippet
 
 snippet img
 <img src="$1"${2: alt="$3"}/>

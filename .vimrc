@@ -117,6 +117,8 @@ set hidden                          " Allow buffer switching without saving
 set iskeyword-=.                    " '.' is an end of word designator
 set iskeyword-=#                    " '#' is an end of word designator
 set iskeyword-=-                    " '-' is an end of word designator
+set iskeyword-=>                    " '>' is an end of word designator
+set iskeyword-="                    " '"' is an end of word designator
 
 "detect filetype
 filetype on
@@ -128,8 +130,8 @@ set autoread          " auto reload file after being modified
 set title                " change the terminal's title
 
 "Set the window's size.
-set lines=45
-set columns=135
+set lines=40
+set columns=125
 
 " cancel backup,or it will create a *.wap file
 "" 备份,到另一个位置. 防止误删, 目前是取消备份
@@ -294,8 +296,8 @@ set expandtab       "将Tab自动转化成空格 [需要输入真正的Tab键时
 " 取shiftwidth的整数倍，当使用'>' '<'来改变缩进时
 set shiftround
 
-" set wildmode=longest:full,full
-set wildmode=list:longest,full
+set wildmode=longest:full,full
+" set wildmode=list:longest,full
 set ttyfast
 
 
@@ -348,9 +350,8 @@ if (g:isWindows && g:isGUI)
     set langmenu=zh_CN.utf-8
     "解决consle输出乱码
     language messages zh_CN.utf-8
-    " set guifont="DejaVu Sans Mono for Powerline"
-    set guifont="Monaco for Powerline":h12
-
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
+    " set guifont=Monaco\ for\ Powerline:h10
 else
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
 endif
@@ -479,11 +480,11 @@ set pastetoggle=<F7>
 " TODO 还需要进一步完善
 nnoremap <F10> :call CompileRun()<CR>
 func! CompileRun()
-    "去掉bom, 写了autocmd，保存前就会自动做这些
-    exec ":set nobomb"
-    exec ":set fileformat=unix"
-    exec ":set fileencoding=utf-8"
-    exec ":w"
+    "去掉bom
+    :set nobomb
+    :set fileformat=unix
+    :set fileencoding=utf-8
+    :w
     let infile = expand("%:p")
     let outfile = expand("%:r")
     " 解决空格问题
@@ -542,7 +543,8 @@ function! ViewInBrowser(name)
     if strpos == -1
         exec ":silent !start" l:browsers[a:name] file
     else
-        let file=substitute(file, htdocs, "http://127.0.0.1:8080/", "g")
+        " let file=substitute(file, htdocs, "http://127.0.0.1:8080/", "g")
+        let file=substitute(file, htdocs, "http://127.0.0.1/", "g")
         let file=substitute(file, '\\', '/', "g")
         exec ":silent !start" l:browsers[a:name] file
     endif
