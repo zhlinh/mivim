@@ -580,7 +580,8 @@ let NERDTreeShowHidden=1
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
 " Automatically find and select currently opened file in NERDTree.
-let g:nerdtree_tabs_autofind = 1
+" It will take a lot of time when there are many files in the directory.
+" let g:nerdtree_tabs_autofind = 1
 
 
 Bundle 'jistr/vim-nerdtree-tabs'

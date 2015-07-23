@@ -424,9 +424,14 @@ nnoremap gj j
 "imap <c-k> <Up>
 "imap <c-j> <Down>
 " Ctrl + H 插入模式下光标向左移动
-imap <c-h> <Left>
+imap <C-h> <Left>
 " Ctrl + L 插入模式下光标向右移动
-imap <c-l> <Right>
+imap <C-l> <Right>
+
+" 移动到本行下一个""处，用于html
+inoremap <C-f> <Esc>2f"a
+" 移动到本行上一个""处，用于html
+inoremap <C-b> <Esc>2F"i
 
 " F1 - F12 设置
 " F1 废弃这个键,防止调出系统帮助
@@ -581,7 +586,7 @@ nmap <silent> <leader>eb :e ~/.vimrc.bundles<CR>
 " 在当前窗口打开一个文本
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 map <leader>ee :e %%
-" 隐藏当前文本打开另一文本，可以用t来toggle缓存<C-^>
+" 隐藏当前文本打开另一文本,<C-6>可toggle缓存
 map <leader>eh :hide e %%
 " 水平打开另一个文本
 map <leader>es :sp %%
@@ -600,10 +605,10 @@ cnoremap <C-e> <End>
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 " 在分屏中移动光标
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
 
 " v分屏
 nmap <leader>w  <c-w>v
@@ -725,10 +730,6 @@ cmap cd. lcd %:p:h
 " Allow using the repeat operator with a visual selection (!)
 " http://stackoverflow.com/a/8064607/127816
 vnoremap . :normal .<CR>
-
-
-" Adjust viewports to the same sze
-map <Leader>= <C-w>=
 
 " Map <Leader>fi to display all lines with keyword under cursor
 " and ask which one to jump to

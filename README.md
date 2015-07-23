@@ -4,7 +4,7 @@ mivim
 -----------------------
 	原则是尽量少用需要依赖的插件
 
-	package dependence:  **ctags**, **ag**(he_silver_searcher), **curl**
+	package dependence:  **ctags**, **ag**(the_silver_searcher), **curl**
 	python dependence:   **pep8**, **pyflake**[这些只要装了python就好]
 
 
@@ -49,7 +49,7 @@ mivim
 
         F8 用chrome运行html文件,需要将chrome放进path
 
-	    F11 切换全屏
+        F11 切换全屏
 
         F12 用ie运行html文件,需要将ie放进path
 
@@ -70,16 +70,18 @@ mivim
     	,wm		开启分屏同步滚动(:set noscb)
 
 
-    Insert模式下[注意没有c-j和c-k，用于Ultisnips插件的补全操作了，会冲突]:
-    ctrl + h/l  相当于Normal模式下的h/l
-
+		Insert模式下[注意没有c-j和c-k，用于Ultisnips插件的补全操作了，会冲突]:
+		ctrl + h/l  相当于Normal模式下的h/l
+		for HTML:
+		ctrl + f   移动到下一个""处
+		ctrl + b   移动到上一个""处
 5. ####搜索
 
         <space> 空格，进入搜索状态/
         /       =/\v  引入正则
         ,/      去除匹配高亮
 
-	    ,fi     列出寻找光标下的关键词的所有位置，键入数字即可到达[有点ctrlp-funcy的意思]
+        ,fi     列出寻找光标下的关键词的所有位置，键入数字即可到达[有点ctrlp-funcy的意思]
 
     优化搜索保证结果在屏幕中间
 
@@ -646,7 +648,7 @@ mivim
 
 1. ####LaTeX [vim-latex/vim-latex](https://github.com/vim-latex/vim-latex)
 
-   vim下的LaTeX编辑插件,还算可以。但C-J会与切换窗口冲突，未解决，只能用<C-W>J来切换窗口
+   vim下的LaTeX编辑插件,还算可以。但`C-J`会与切换窗口冲突，未解决，只能用`<C-W>J`来切换窗口
 
     "LaTeX-suit的常用快捷键:记忆方式:<leader>[L]aTeX
 
@@ -762,7 +764,7 @@ mivim
 	[maksimr/vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify)  js/html/css 格式化, 未配置
 
 
-  [nono/jquery.vim](https://github.com/nono/jquery.vim) jquery高亮，未配置
+    [nono/jquery.vim](https://github.com/nono/jquery.vim) jquery高亮，未配置
 
 
 
