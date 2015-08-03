@@ -13,6 +13,20 @@ snippet '':f "object method string"
 }${10:,}
 endsnippet
 
+snippet addLoadEvent "add more than one event when loading"
+function addLoadEvent(func){
+	var oldonload = window.onload;
+	if (typeof window.onload != "function"){
+		window.onload = func;
+	}else{
+		window.onload = function(){
+			oldonload();
+			func();
+		}
+	}
+}
+endsnippet
+
 snippet :f "Object Method"
 ${1:method_name}: function(${3:attribute}) {
 	${VISUAL}$0

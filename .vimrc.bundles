@@ -364,14 +364,14 @@ let g:ctrlp_custom_ignore = {
 
 " Use ag for the first choice.
 " On Windows & without ag use "dir" as fallback command.
-if executable('ag')
+if (has("win32") || has("win64") || has("win95") || has("win16"))
+    let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
+elseif executable('ag')
     let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
 elseif executable('ack-grep')
     let s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
 elseif executable('ack')
     let s:ctrlp_fallback = 'ack %s --nocolor -f'
-elseif (has("win32") || has("win64") || has("win95") || has("win16"))
-    let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
 else
     let s:ctrlp_fallback = 'find %s -type f'
 endif
@@ -475,7 +475,23 @@ let g:gitgutter_enabled = 1
 let g:gitgutter_highlight_lines = 1
 nnoremap <leader>gg :GitGutterToggle<CR>
 
+
+" 可以用:Gist (-m -p -s something)直接提交/更新代码，只是对多文件查看和更新的支持不好
+" 用:Gist -l(a) 查看你的所有gists
 Bundle 'mattn/gist-vim'
+" open browser after the post
+let g:gist_open_browser_after_post = 1
+" if you want to change the browser
+let g:gist_browser_command = 'chrome %URL% &'
+let g:gist_post_private = 1
+" Only :w! updates a gist.
+let g:gist_update_on_write = 2
+if (has("win32") || has("win64") || has("win95") || has("win16"))
+  let g:gist_clip_command = 'putclip'
+else
+  let g:gist_clip_command = 'xclip -selection clipboard'
+endif
+
 
 " edit history, 可以查看回到某个历史状态
 Bundle 'sjl/gundo.vim'
@@ -486,9 +502,10 @@ noremap <leader><leader>h :GundoToggle<CR>
 Bundle 'vim-scripts/sessionman.vim'
 set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
 if isdirectory(expand("~/.vim/bundle/sessionman.vim/"))
-    nmap <leader>sl :SessionList<CR>
     " saves the current editing session.
     nmap <leader>ss :SessionSave<CR>
+    " list the saved sessions.
+    nmap <leader>sl :SessionList<CR>
     " wipes out all buffers, kills cscope and clears variables with session name.
     nmap <leader>sc :SessionClose<CR>
 endif
@@ -571,7 +588,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeMouseMode=2
 " 默认显示隐藏文件，切换快捷键为 I : Toggle hidden files
 let NERDTreeShowHidden=1
-" let NERDTreeKeepTreeInNewTab=1
+let NERDTreeKeepTreeInNewTab=1
 " 设置是否自启动
 " let g:nerdtree_tabs_open_on_gui_startup=0
 "close vim if the only window left open is a NERDTree
@@ -853,7 +870,7 @@ if executable('ctags')
   Bundle "Valloric/MatchTagAlways"
 
   " haml
-  Bundle 'tpope/vim-haml'
+  " Bundle 'tpope/vim-haml'
 
 
   "        """"""""""""""""""""""

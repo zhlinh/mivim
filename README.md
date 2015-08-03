@@ -10,14 +10,13 @@ mivim
 
 # 自定义快捷键
 -----------------------
-0. ####注意, 以下 `,` 代表`<leader>`
+0. **注意, 以下 `,` 代表`<leader>`**
 
-1. ####可以自己修改vimrc中配置，决定是否开启鼠标
+1. **默认不启用鼠标**
 
-        set mouse-=a           " 鼠标暂不启用, 键盘党....
-        set mouse=a            " 开启鼠标
+        set mouse-=a           " 鼠标暂不启用
 
-2. ####可以自己修改vimrc决定是否使用方向键进行上下左右移动，默认关闭，强迫自己用 hjkl，可以注解
+2. **默认关闭方向键的移动**
 
         hjkl  上下左右
         map <Left> <Nop>
@@ -25,7 +24,7 @@ mivim
         map <Up> <Nop>
         map <Down> <Nop>
 
-3. ####上排F功能键
+3. **上排F功能键**
 
         F1 set no/relativenumber,相对行号和绝对行号的转换
 
@@ -53,7 +52,7 @@ mivim
 
         F12 用ie运行html文件,需要将ie放进path
 
-4. ####分屏移动
+4. **分屏移动**
 
         Normal模式下:
         ctrl + j/k/h/l   进行上下左右窗口跳转,不需要ctrl+w+jkhl
@@ -75,7 +74,7 @@ mivim
 		for HTML:
 		ctrl + f   移动到下一个""处
 		ctrl + b   移动到上一个""处
-5. ####搜索
+5. **搜索**
 
         <space> 空格，进入搜索状态/
         /       =/\v  引入正则
@@ -85,7 +84,7 @@ mivim
 
     优化搜索保证结果在屏幕中间
 
-6. ####Tab操作(重点推)
+6. **Tab操作(重点推)**
 
         ctrl+t 新建一个tab
 
@@ -106,7 +105,8 @@ mivim
 
         ,tu   (Tab Used)最近使用两个tab之间切换
 
-7. ####Buffer操作(不建议, 建议使用ctrlspace插件来操作,l切换tabList or buffList)
+
+7. **Buffer操作**
 
         H          前一个buffer
         L          后一个buffer
@@ -114,8 +114,10 @@ mivim
         <Left>     前一个buffer
         <Right>    后一个buffer
 
+        建议用ctrlspace插件来操作,l切换tabList or buffList)
 
-8. ####文件I/O操作
+
+8. **文件I/O操作**
 
         ,em  打开(my)vimrc配置文件
         ,eb  打开.vimrc.bundle配置文件
@@ -126,7 +128,7 @@ mivim
         ,ev  =vsplit  当前目录/
 
 
-9. ####折叠操作
+9. **折叠操作**
 
 	    " Code folding options
         ,f0    foldlevel=0
@@ -136,7 +138,7 @@ mivim
         ,f9    foldlevel=9
 
 
-10. ####按键修改
+10. **按键修改**
 
         Y       		=y$    复制到行尾
         U       		=Ctrl-r
@@ -489,11 +491,11 @@ mivim
 
         [sd]
         ,gd   = git diff
-		,gs   = git status
-		,gb	  = git blame
-		,gl   = git log
-		,gc   = git commit
-		,gp   = git push
+		    ,gs   = git status
+		    ,gb	  = git blame
+		    ,gl   = git log
+		    ,gc   = git commit
+		    ,gp   = git push
 
     没有配置其他快捷键,可以参照github,自己增加修改映射
 
@@ -508,19 +510,32 @@ mivim
 
 
 
-5.  ####gist [matten/gist-vim](https://github.com/mattn/gist-vim)
-		[sd]
+5. ####gist [matten/gist-vim](https://github.com/mattn/gist-vim)
+
+  	  	[sd]
+        :Gist      = Post current buffer to gist,using default privacy option
+        :Gist -m   = Create a gist with all open buffers.
+        :Gist -p   = Create a private gist
+        :Gist -P   = Create a public gist
+        :Gist -s something    =Post with description
 
 
 
 6. ####文件时光机 [sjl/gundo.vim](https://github.com/sjl/gundo.vim)
 
-    编辑文件时光机
-
         "不常用，所以用两个<leader>
         [sd] ,,h  查看文件编辑历史
 
-    附:同类插件 [mbbill/undotree](https://github.com/mbbill/undotree)
+      附:同类插件 [mbbill/undotree](https://github.com/mbbill/undotree)
+
+
+
+7 ####session管理 [vim-scripts/sessionman.vim](https://github.com/vim-scripts/sessionman.vim)
+
+        [sd]
+        ,ss     - saves the current editing session.
+        ,sl     - list the saved sessions.
+        ,sc     - wipes out all buffers, kills cscope and clears variables with session name.
 
 
 
@@ -724,7 +739,7 @@ mivim
 	[gorodinskiy/vim-coloresque](https://github.com/gorodinskiy/vim-coloresque) 关于配色
 
 
-	[tpope/vim-haml](https://github.com/tpope/vim-haml) 关于haml语法高亮
+	[tpope/vim-haml](https://github.com/tpope/vim-haml) 关于haml语法高亮,未配置
 
 
 	[Valloric/MatchTagAlways](https://github.com/Valloric/MatchTagAlways) 高亮显示匹配的标签，未配置
