@@ -692,7 +692,7 @@ nnoremap <leader>l gt
 nnoremap <leader>h gT
 
 map <leader>te :tabedit<cr>
-map <leader>td :tabclose<cr>
+map <leader>tc :tabclose<cr>
 "将当前标签移动到最后一个
 map <leader>tm :tabm<cr>
 map <leader>th :-tabm<cr>
