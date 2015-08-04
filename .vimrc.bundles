@@ -358,9 +358,12 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>fh :CtrlPMRU<CR>
+map <leader>fb :CtrlPBuffer<CR>
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\.git$\|\.hg$\|\.svn$',
-            \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+            \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$'
+            \ }
+
 
 " Use ag for the first choice.
 " On Windows & without ag use "dir" as fallback command.

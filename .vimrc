@@ -633,6 +633,9 @@ nnoremap <leader>wm  :set noscb<CR>
 nnoremap <C-e> 2<C-e>
 nnoremap <C-y> 2<C-y>
 
+" 跳转到行末加分号
+inoremap <C-u> <Esc>A;<Esc>o
+
 "将分号影射到冒号，进一步提高进入命令模式的速度和降低错误率
 nnoremap ; :
 "nnoremap ' :b
@@ -746,10 +749,6 @@ nnoremap <silent> <leader>tu :execute 'tabnext ' . g:last_active_tab<cr>
 vnoremap <silent> <leader>tu :execute 'tabnext ' . g:last_active_tab<cr>
 " 记住上次离开Tab的位置
 autocmd TabLeave * let g:last_active_tab = tabpagenr()
-
-
-" <leader>k 替换 Esc  --这个可以先试用下，估计会有误操作
-inoremap <leader>k <Esc>
 
 " Easier horizontal scrolling
 map zl zL

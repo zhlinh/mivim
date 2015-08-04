@@ -52,7 +52,7 @@ mivim
 
         F12 用ie运行html文件,需要将ie放进path
 
-4. **分屏移动**
+4. **分屏及移动**
 
         Normal模式下:
         ctrl + j/k/h/l   进行上下左右窗口跳转,不需要ctrl+w+jkhl
@@ -71,9 +71,10 @@ mivim
 
 		Insert模式下[注意没有c-j和c-k，用于Ultisnips插件的补全操作了，会冲突]:
 		ctrl + h/l  相当于Normal模式下的h/l
-		for HTML:
-		ctrl + f   移动到下一个""处
-		ctrl + b   移动到上一个""处
+
+		ctrl + f   移动到下一个""处,也可用于退出Insert模式,若无"时
+		ctrl + b   移动到上一个""处,也可用于退出Insert模式,若无"时
+
 5. **搜索**
 
         <space> 空格，进入搜索状态/
@@ -82,7 +83,7 @@ mivim
 
         ,fi     列出寻找光标下的关键词的所有位置，键入数字即可到达[有点ctrlp-funcy的意思]
 
-    优化搜索保证结果在屏幕中间
+        优化搜索保证结果在屏幕中间
 
 6. **Tab操作(重点推)**
 
@@ -145,8 +146,6 @@ mivim
 
         ,sa     		select all,全选
         ,v      		选中段落
-
-        ,k      		代替<Esc>，不用到角落去按esc了
 
         c-a     		命令行模式下到行首[默认是c-b]
         c-e     		命令行模式下到行尾[没变，默认就是c-e]
@@ -449,11 +448,12 @@ mivim
 
         [sd] ctrl + p  打开ctrlp搜索
         "[F]ind [H]istory file
-        [sd] ,fh       相当于mru功能，show recently opened files
+        ,fh       		mru功能，show recently opened files
+		,fb			   	打开buffers列表
 
-        ctrl + j/k     进行上下移动
-        ctrl + x/v     分屏打开该文件 [重要**]
-        ctrl + t       在新tab中打开该文件
+        ctrl + j/k     	进行上下移动
+        ctrl + x/v     	分屏打开该文件 [重要**]
+        ctrl + t       	在新tab中打开该文件
 
     当前文件快速函数搜索:[tacahiroy/ctrlp-funky](https://github.com/tacahiroy/ctrlp-funky)
 
@@ -530,7 +530,7 @@ mivim
 
 
 
-7 ####session管理 [vim-scripts/sessionman.vim](https://github.com/vim-scripts/sessionman.vim)
+7. ####session管理 [vim-scripts/sessionman.vim](https://github.com/vim-scripts/sessionman.vim)
 
         [sd]
         ,ss     - saves the current editing session.
