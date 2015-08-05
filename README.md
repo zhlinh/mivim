@@ -75,6 +75,8 @@ mivim
 		ctrl + f   移动到下一个""处,也可用于退出Insert模式,若无"时
 		ctrl + b   移动到上一个""处,也可用于退出Insert模式,若无"时
 
+        ctrl + g   行末加分号，并跳转下一行
+
 6. **搜索**
 
         <space> 空格，进入搜索状态/
@@ -82,7 +84,7 @@ mivim
         ,/      去除匹配高亮
 
         ,fi     列出寻找光标下的关键词的所有位置，键入数字即可到达[有点ctrlp-funcy的意思]
-        “ 替换光标下的词:
+        " 替换光标下的词:
         ,r                  不确认，非整词
         ,rw                 不确认，整词
         ,rc                 确认，非整词
@@ -439,18 +441,20 @@ mivim
 
 2. ####全局搜索插件(类sumlimetext) [dyng/ctrlsf.vim](https://github.com/dyng/ctrlsf.vim)
 
-    解决了重构代码时需要修改多处的问题
+    解决了重构代码时需要修改多处的问题,可配合插件vim-multiple-cursors使用
 
     实话说不是很推荐，相当相当慢，慎用
 
         \       搜索光标下的词
-        ,\      进入ctrlsf搜索的命令行模式
+        ,\      重新打开/关闭ctrlsf窗口
         进入左侧后的操作:
-                    o - 打开[注意回车不能打开]
-                    O - 在buffer中打开
-                    t - 在tab中打开(建议)
-                    T - Like t but focus CtrlSF window instead of opened new tab.
-                    q - Quit CtrlSF window.
+                    o   - 打开[注意回车不能打开]
+                    O   - 在buffer中打开
+                    t   - 在tab中打开(建议)
+                    T   - Like t but focus CtrlSF window instead of opened new tab.
+                    c-n - 下一个匹配项
+                    c-p - 上一个匹配项
+                    q   - Quit CtrlSF window.
 
 3. ####git 常用操作 [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
 

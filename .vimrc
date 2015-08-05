@@ -634,7 +634,7 @@ nnoremap <C-e> 2<C-e>
 nnoremap <C-y> 2<C-y>
 
 " 跳转到行末加分号
-inoremap <C-u> <Esc>A;<Esc>o
+inoremap <C-g> <Esc>A;<Esc>o
 " 花括号自动换行
 inoremap {<CR> {<CR>}<ESC>O
 

@@ -149,7 +149,7 @@ let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
 let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
 let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
 
-" let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全
+let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全
 
 " 跳转到定义处, 分屏打开
 let g:ycm_goto_buffer_command = 'horizontal-split'
@@ -345,34 +345,43 @@ let g:multi_cursor_quit_key='<Esc>'
 
 " file, buffer, Mru, Tag, 搜索
 " change to https://github.com/ctrlpvim/ctrlp.vim
+" 好吧可以通过 :help ctrlp-mapping 或? 查看按键
 " c-p 进入find file模式
+"
 " Ctrl-d:Toggle between full-path and filename only search.
 " Ctrl-r:Toggle between the string mode and full regexp mode.
 " Ctrl-t:Open the selected file in a new tab.
+"
 " Ctrl-v:Open the selected file in a vertical split.
-" Ctrl-x:Open the selected file in a horizontal split.
+" Ctrl-s/x:Open the selected file in a horizontal split.
+"
+" Ctrl-f ToggleType(1),换另一种类型(file,buffer,MRU...)
+" Ctrl-b ToggleType(-1)
+" F5 更新MRU
+" F7 清除MRU
 Bundle 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>fh :CtrlPMRU<CR>
 map <leader>fb :CtrlPBuffer<CR>
+" 修改该选项为1，设置默认为按文件名搜索（否则为全路径）,可以使用 <c-d> 来切换
+let g:ctrlp_by_filename = 1
+
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\.git$\|\.hg$\|\.svn$',
             \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$'
             \ }
-
-
 " Use ag for the first choice.
 " On Windows & without ag use "dir" as fallback command.
-if (has("win32") || has("win64") || has("win95") || has("win16"))
-    let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
-elseif executable('ag')
-    let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
+if executable('ag')
+    let s:ctrlp_fallback = 'ag -i --nocolor --nogroup --hidden -g "" %s'
 elseif executable('ack-grep')
     let s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
 elseif executable('ack')
     let s:ctrlp_fallback = 'ack %s --nocolor -f'
+elseif (has("win32") || has("win64") || has("win95") || has("win16"))
+    let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
 else
     let s:ctrlp_fallback = 'find %s -type f'
 endif
@@ -388,14 +397,14 @@ let g:ctrlp_user_command = {
             \ },
             \ 'fallback': s:ctrlp_fallback
             \ }
-" ag is fast enouth, so not use cach
-" let g:ctrlp_use_caching = 0
+" 启用/禁用每个会话的缓存:
+let g:ctrlp_use_caching = 1
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
 " 设置显示位置
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
-let g:ctrlp_match_window_reversed=0
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15,results:500'
 let g:ctrlp_mruf_max=500
+" 跟随但是忽略内部循环的链接，避免重复
 let g:ctrlp_follow_symlinks=1
 
 " ctrlp插件funky - 不用ctag进行函数快速跳转
@@ -408,10 +417,8 @@ let g:ctrlp_funky_syntax_highlight = 1
 
 
 " 类似sublimetext的搜索
-" 光标移动到单词, 按\ 进入全局搜索
-" 也可以在命令行输入 :CtrlSF [path],设置搜索路径,目前映射为<leader>\
+" 光标移动到单词, 按\ 进入全局搜索,<C-\>重新打开/关闭ctrlsf窗口
 " 实话说，运行速度比较慢，慎用,感觉意义不大，还是用IDE实现重构快些
-" TODO
 Bundle "dyng/ctrlsf.vim"
 " In CtrlSF:
 " 回车/o, 打开
@@ -428,18 +435,28 @@ elseif executable('ack-grep')
 elseif executable('ack')
     let g:ctrlsf_ackprg = 'ack'
 endif
-let g:ctrlsf_debug_mode = 1
-let g:ctrlsf_default_root = 'project'
 
-nmap \ <Plug>CtrlSFCwordExec
+nmap \ <Plug>CtrlSFCwordPath
+vmap \ <Plug>CtrlSFVwordPath
 " 进入ctrlsf的命令行模式
-nmap <C-\> <Plug>CtrlSFPrompt
-" let g:ctrlsf_default_root = 'project'
+" nmap <C-\> <Plug>CtrlSFPrompt
+" reopen CtrlSF window
+nmap <C-\> :CtrlSFToggle<CR>
 
+
+" 设置为project就有可能不搜索文件,default为cwd
+" let g:ctrlsf_default_root = 'project'
+" 默认使用正则表达式
+let g:ctrlsf_regex_pattern = 1
+" highlight lines in preview and open window.
+let g:ctrlsf_selected_line_hl = 'op'
 let g:ctrlsf_position = 'bottom'
-let g:ctrlsf_winsize = '35%'
+let g:ctrlsf_winsize = '40%'
+" B 为before lines，A为after lines
+let g:ctrlsf_context = '-B 5 -A 3'
 let g:ctrlsf_auto_close = 0
-" let g:ctrlsf_confirm_save = 0
+" 修改后是否需要确认
+let g:ctrlsf_confirm_save = 0
 
 " Note: cannot use <CR> or <C-m> for open
 " Use : o or t
