@@ -10,13 +10,13 @@ mivim
 
 # 自定义快捷键
 -----------------------
-0. **注意, 以下 `,` 代表`<leader>`**
+1. **注意, 以下 `,` 代表`<leader>`**
 
-1. **默认不启用鼠标**
+2. **默认不启用鼠标**
 
         set mouse-=a           " 鼠标暂不启用
 
-2. **默认关闭方向键的移动**
+3. **默认关闭方向键的移动**
 
         hjkl  上下左右
         map <Left> <Nop>
@@ -24,7 +24,7 @@ mivim
         map <Up> <Nop>
         map <Down> <Nop>
 
-3. **上排F功能键**
+4. **上排F功能键**
 
         F1 set no/relativenumber,相对行号和绝对行号的转换
 
@@ -44,7 +44,7 @@ mivim
 
         F10 运行当前文件,for windows，path里需要对应的支持
 
-        <leader>r 运行当前文件，for linux(用了插件quickrun)
+        <leader>qr 运行当前文件，for linux(用了插件quickrun)
 
         F8 用chrome运行html文件,需要将chrome放进path
 
@@ -52,7 +52,7 @@ mivim
 
         F12 用ie运行html文件,需要将ie放进path
 
-4. **分屏及移动**
+5. **分屏及移动**
 
         Normal模式下:
         ctrl + j/k/h/l   进行上下左右窗口跳转,不需要ctrl+w+jkhl
@@ -68,24 +68,29 @@ mivim
     	,ww		开启分屏同步滚动(:set scb)
     	,wm		开启分屏同步滚动(:set noscb)
 
-
-		Insert模式下[注意没有c-j和c-k，用于Ultisnips插件的补全操作了，会冲突]:
+		Insert模式下:
 		ctrl + h/l  相当于Normal模式下的h/l
+        ctrl + j/k，用于Ultisnips插件的补全及跳转操作
 
 		ctrl + f   移动到下一个""处,也可用于退出Insert模式,若无"时
 		ctrl + b   移动到上一个""处,也可用于退出Insert模式,若无"时
 
-5. **搜索**
+6. **搜索**
 
         <space> 空格，进入搜索状态/
         /       =/\v  引入正则
         ,/      去除匹配高亮
 
         ,fi     列出寻找光标下的关键词的所有位置，键入数字即可到达[有点ctrlp-funcy的意思]
+        “ 替换光标下的词:
+        ,r                  不确认，非整词
+        ,rw                 不确认，整词
+        ,rc                 确认，非整词
+        ,rcw(,rwc)          确认，整词
 
         优化搜索保证结果在屏幕中间
 
-6. **Tab操作(重点推)**
+7. **Tab操作(重点推)**
 
         ctrl+t 新建一个tab
 
@@ -106,8 +111,7 @@ mivim
 
         ,tu   (Tab Used)最近使用两个tab之间切换
 
-
-7. **Buffer操作**
+8. **Buffer操作**
 
         H          前一个buffer
         L          后一个buffer
@@ -117,8 +121,7 @@ mivim
 
         建议用ctrlspace插件来操作,l切换tabList or buffList)
 
-
-8. **文件I/O操作**
+9. **文件I/O操作**
 
         ,em  打开(my)vimrc配置文件
         ,eb  打开.vimrc.bundle配置文件
@@ -128,8 +131,7 @@ mivim
         ,es  =split  当前目录/
         ,ev  =vsplit  当前目录/
 
-
-9. **折叠操作**
+10. **折叠操作**
 
 	    " Code folding options
         ,f0    foldlevel=0
@@ -138,8 +140,7 @@ mivim
         ...
         ,f9    foldlevel=9
 
-
-10. **按键修改**
+11. **按键修改**
 
         Y       		=y$    复制到行尾
         U       		=Ctrl-r
@@ -209,8 +210,6 @@ mivim
         ,df  跳转到函数定义[DeFinition]位置, 分屏打开一个buffer(非常有用!!!!!!!!!)
         ,dc  跳到声明[DeClaration]位置, 仅 filetypes: c, cpp, objc, objcpp, python 有效(比较少用)
 
-
-
 2. ####代码片段快速插入 [SirVer/ultisnips](https://github.com/SirVer/ultisnips) +[honza/vim-snippets](https://github.com/honza/vim-snippets)
 
     必装，效率杀手锏，快速插入自定义的代码片段, 高效必备
@@ -222,9 +221,7 @@ mivim
         ctrl+j  使用片段 -> expand to codes
         ,us    编辑对应文件类型的代码片段
 
-
-
-4. ####引号配对补全 [Raimondi/delimitMate](https://github.com/Raimondi/delimitMate)
+3. ####引号配对补全 [Raimondi/delimitMate](https://github.com/Raimondi/delimitMate)
 
     必装，输入引号,括号时,自动补全
 
@@ -250,8 +247,6 @@ mivim
         -> ,a   		选择注释类型
 
     附:注释还有其他两种插件可选[tcomment](https://github.com/tomtom/tcomment_vim) 和[tpope/vim-commentary](https://github.com/tpope/vim-commentary)
-
-
 
 2. ####快速编辑 [tpope/vim-surround](https://github.com/tpope/vim-surround) +[tpope/vim-repeat](https://github.com/tpope/vim-repeat)
 
@@ -283,21 +278,15 @@ mivim
 
         ys$" 当前到行尾, 引号引住
 
-
-
 3. ####快速运行 [vim-quickrun](https://github.com/thinca/vim-quickrun)
 
         ,r  快速运行当前文件
-
-
 
 4. ####去行尾空格 [bronson/vim-trailing-whitespace](https://github.com/bronson/vim-trailing-whitespace)
 
     将代码行最后无效的空格标红
 
         [sd] ,空格    去掉当前行末尾空格
-
-
 
 5. ####赋值语句代码对齐 [junegunn/vim-easy-align](https://github.com/junegunn/vim-easy-align)
 
@@ -320,7 +309,6 @@ mivim
 
 
 
-
 > 快速移动
 
 1. ####位置跳转[Lokaltog/vim-easymotion](https://github.com/Lokaltog/vim-easymotion)
@@ -338,15 +326,11 @@ mivim
         s或,,f[如sa]      查找'a',快速跳转定位到某个字符位置
         ,.      重复上一次easymotion命令
 
-
-
 2. ####符号匹配跳转[vim-scripts/matchit.zip](https://github.com/vim-scripts/matchit.zip)
 
     必装
 
     % 匹配成对的标签，跳转
-
-
 
 3. ####mark跳转 [kshenoy/vim-signature](https://github.com/kshenoy/vim-signature)
 
@@ -372,8 +356,6 @@ mivim
         v 增加选中范围
         V 减少选中范围
 
-
-
 2. ####多光标选中编辑 [vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors)
 
     多光标批量操作
@@ -383,8 +365,6 @@ mivim
         ctrl + p 向上取消
         ctrl + n 跳过
         esc   退出
-
-
 
 > 文本对象扩展
 
@@ -396,7 +376,6 @@ mivim
 
    PS: 特希望有一个扩展支持 '' "" [] {} ()
 
-
 2. ####行文本对象 [kana/vim-textobj-line](https://github.com/kana/vim-textobj-line)
 
    增加文本对象: l
@@ -404,7 +383,6 @@ mivim
         dal
         yal
         cil
-
 
 3. ####缩进文本对象 [kana/vim-textobj-indent](https://github.com/kana/vim-textobj-indent)
 
@@ -416,7 +394,6 @@ mivim
         yai
         cii
 
-
 4. ####文件文本对象 [kana/vim-textobj-entire](https://github.com/kana/vim-textobj-entire)
 
    增加文本对象: e
@@ -425,15 +402,11 @@ mivim
         yae
         cie
 
-
 5. ####句子对象 [reedes/vim-textobj-sentence](https://github.com/reedes/vim-textobj-sentence)
-
 
 6. ####引用对象 [reedes/vim-textobj-quote](https://github.com/reedes/vim-textobj-quote)
 
-
 7. ####语法检查 [reedes/vim-textobj-quote](https://github.com/reedes/vim-textobj-quote)
-
 
 8. ####单词检查 [reedes/vim-wordy](https://github.com/reedes/vim-wordy)
 
@@ -464,8 +437,6 @@ mivim
         ,ff   进入当前文件函数搜索
         ,f    搜索光标下单词对应函数[常用]
 
-
-
 2. ####全局搜索插件(类sumlimetext) [dyng/ctrlsf.vim](https://github.com/dyng/ctrlsf.vim)
 
     解决了重构代码时需要修改多处的问题
@@ -480,8 +451,6 @@ mivim
                     t - 在tab中打开(建议)
                     T - Like t but focus CtrlSF window instead of opened new tab.
                     q - Quit CtrlSF window.
-
-
 
 3. ####git 常用操作 [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
 
@@ -499,16 +468,12 @@ mivim
 
     没有配置其他快捷键,可以参照github,自己增加修改映射
 
-
-
 4. ####git状态 [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
 
     git diff，相当赞啊，在同一个文件内,通过标记和高亮,显示本次文件变更点
 
         [sd]
         ,gg   = show diff status [gd被ycm占用了]
-
-
 
 5. ####gist [matten/gist-vim](https://github.com/mattn/gist-vim)
 
@@ -519,16 +484,12 @@ mivim
         :Gist -P   = Create a public gist
         :Gist -s something    =Post with description
 
-
-
 6. ####文件时光机 [sjl/gundo.vim](https://github.com/sjl/gundo.vim)
 
         "不常用，所以用两个<leader>
         [sd] ,,h  查看文件编辑历史
 
       附:同类插件 [mbbill/undotree](https://github.com/mbbill/undotree)
-
-
 
 7. ####session管理 [vim-scripts/sessionman.vim](https://github.com/vim-scripts/sessionman.vim)
 
@@ -541,12 +502,9 @@ mivim
 
 > 显示增强
 
-
 1. ####状态栏增强 [bling/vim-airline](https://github.com/bling/vim-airline)
 
     之前使用powerline, 用airline替换, powerline的配置注释,需要的自行解开
-
-
 
 2. ####括号上色高亮 [kien/rainbow_parentheses.vim](https://github.com/kien/rainbow_parentheses.vim)
 
@@ -558,13 +516,9 @@ mivim
 
     经典主题,目前我使用的,看起来舒服
 
-
-
 2. ####[tomasr/molokai](https://github.com/tomasr/molokai)
 
     用sublime text2的同学应该很熟悉, 另一个主题,可选,偶尔换换味道
-
-
 
 3. ####[chriskempson/vim-tomorrow-theme](https://github.com/chriskempson/vim-tomorrow-theme)
 
@@ -607,15 +561,11 @@ mivim
 
     nerdtree配合tab非常赞, i/s 可以在右侧分屏打开
 
-
-
 2. ####目录树tab增强 [jistr/vim-nerdtree-tabs](https://github.com/jistr/vim-nerdtree-tabs)
 
     选装, 多个tab时, 保持NerdTree一致
 
     即Just one NerdTree，仅保持一个NerdTree实例
-
-
 
 3. ####tab/buffer导航增强 [vim-ctrlspace](https://github.com/szw/vim-ctrlspace)
 
@@ -644,8 +594,6 @@ mivim
 
           esc/q   close the list
 
-
-
 4. ####Tag [majutsushi/tagbar](https://github.com/majutsushi/tagbar)
 
     必装,标签导航,纬度和taglist不同, taglist的替代者
@@ -656,11 +604,10 @@ mivim
 
         "记忆方式: ,[t]agbar toggle
         [sd] <leader>t 打开Tagbar
-
-		 
 		 
 5. ####任务列表  [vim-scripts/TaskList.vim](https://github.com/vim-scripts/TaskList.vim)
 	管理项目中的 TODO、FIXME、XXX等标签
+	
 		[sd]
 		,td    打开todo列表
 	
@@ -684,8 +631,6 @@ mivim
         za：fold/unfold
         <leader>rf：refresh folding
 
-
-
 2. ####Python
 
     Vim as a Python IDE, but much more than that!
@@ -694,13 +639,11 @@ mivim
 
     使用Python建议安装，python语法高亮,就是python.vim,在github,有维护和更新
 
-
     语法检查[kevinw/pyflakes-vim](https://github.com/kevinw/pyflakes-vim)
 
     虽然这个的作者推荐使用syntastic,但是这个插件对于pythoner还是很需要的
 
     因为有一个特牛的功能,fly check,即,编码时在buffer状态就能动态查错标记,弥补syntastic只能保存和打开时检查语法错误的不足
-
 
 3. ####Golang
 
@@ -712,19 +655,14 @@ mivim
 
     另一个插件[觉得太过庞大没有使用,golang开发者可以配置试用下] [fatih/vim-go](https://github.com/fatih/vim-go) [介绍](http://blog.gopheracademy.com/vimgo-development-environment)
 
-
-
 4. ####Markdown
 
     [plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)
 
     markdown语法,编辑md文件
 
-
-
 5. ####HTML
 	[mattn/webapi-vim](https://github.com/mattn/webapi-vim) 提供一些网页编程常用的方法
-
 
 	[mattn/emmet-vim](https://github.com/mattn/emmet-vim) 即原来的zencoding，触发键改为了`<c-e>`
 
@@ -736,79 +674,45 @@ mivim
 		<C-e>a  Make an anchor from a URL
 		<C-e>A  Make some quoted text from a URL
 
-
 	[docunext/closetag.vim](https://github.com/docunext/closetag.vim)  html/xml标签配对补全
-
 
 	[hail2u/vim-css3-syntax](https://github.com/hail2u/vim-css3-syntax)  html/css的语法
 
-
 	[gorodinskiy/vim-coloresque](https://github.com/gorodinskiy/vim-coloresque) 关于配色
-
 
 	[tpope/vim-haml](https://github.com/tpope/vim-haml) 关于haml语法高亮,未配置
 
-
 	[Valloric/MatchTagAlways](https://github.com/Valloric/MatchTagAlways) 高亮显示匹配的标签，未配置
-
-
 
 6. ####Javascript
 
 	[jelera/vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax) js语法高亮
 
-
     [pangloss/vim-javascript](https://github.com/pangloss/vim-javascript) 缩进等
-
 
     [marijnh/tern_for_vim](https://github.com/marijnh/tern_for_vim) 配合ycm进行js/jquery自动补全,需要安装 tern_for_vim 并配置, 文档  [ternjs](http://ternjs.net/)
 
         cd ~/.vim/bundle/tern_for_vim && npm install  [需要npm支持]
 
-
-
 	[elzr/vim-json](https://github.com/elzr/vim-json) json高亮
 
 		[sd] ,jt		设置当前文件类型为json，激活json高亮
 
-
 	[briancollins/vim-jst](https://github.com/https://github.com/)  格式调整
-
-
 
 	[kchmck/vim-coffee-script](https://github.com/kchmck/vim-coffee-script) coffeescript
 
-
-
-	[groenewege/vim-less](https://github.com/groenewege/vim-less) less
-
-
 	[maksimr/vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify)  js/html/css 格式化, 未配置
 
-
     [nono/jquery.vim](https://github.com/nono/jquery.vim) jquery高亮，未配置
-
-
 
 7. ####PHP
 
 	[spf13/PIV](https://github.com/spf13/PIV)
 
-
     [arnaud-lb/vim-php-namespace](https://github.com/arnaud-lb/vim-php-namespace)
 
-
 	[beyondwords/vim-twig](https://github.com/https://github.com)
-
-
-
-8. ####Jinja2
-
-    [Glench/Vim-Jinja2-Syntax](https://github.com/Glench/Vim-Jinja2-Syntax)
-
-    jinja2 语法高亮
-
-
 
 9. ####Ruby
 
@@ -816,9 +720,7 @@ mivim
 
     [tpope/vim-rails](https://github.com/tpope/vim-rails) 未配置
 
-
     [nelstrom/vim-textobj-rubyblock](https://github.com/nelstrom/vim-textobj-ruby)
-
 
     [tpope/vim-endwise](https://github.com/tpope/vim-endwise) 未配置，有坑，自动加end
 

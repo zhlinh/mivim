@@ -411,6 +411,7 @@ let g:ctrlp_funky_syntax_highlight = 1
 " 光标移动到单词, 按\ 进入全局搜索
 " 也可以在命令行输入 :CtrlSF [path],设置搜索路径,目前映射为<leader>\
 " 实话说，运行速度比较慢，慎用,感觉意义不大，还是用IDE实现重构快些
+" TODO
 Bundle "dyng/ctrlsf.vim"
 " In CtrlSF:
 " 回车/o, 打开
@@ -590,6 +591,10 @@ let NERDTreeMouseMode=2
 " 默认显示隐藏文件，切换快捷键为 I : Toggle hidden files
 let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
+" NERDTree 子窗口中不显示冗余帮助信息
+let NERDTreeMinimalUI=1
+" 删除文件时自动删除文件对应 buffer
+let NERDTreeAutoDeleteBuffer=1
 " 设置是否自启动
 " let g:nerdtree_tabs_open_on_gui_startup=0
 "close vim if the only window left open is a NERDTree
@@ -727,7 +732,7 @@ endif
 
 " 任务列表插件，管理项目中的 TODO、FIXME、XXX 等标签
 Bundle 'vim-scripts/TaskList.vim'
-let g:tlTokenList = ["FIXME", "TODO", "XXX", "HACK", "NOTE", "WARN", "MODIFY"]
+let g:tlTokenList = ["TODO", "FIXME", "CHANGED", "XXX", "NOTE", "WARN", "HACK"]
 " 绑定快捷键，默认是 <Leader>t
 nmap <leader>td <Plug>TaskList
 
@@ -743,7 +748,7 @@ let g:quickrun_config = {
             \}
 
 let g:quickrun_no_default_key_mappings = 1
-nmap <Leader>r <Plug>(quickrun)
+nmap <Leader>qr <Plug>(quickrun)
 
 " ###### Latex #########
 "Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
@@ -813,15 +818,12 @@ Bundle 'Blackrush/vim-gocode'
 
 
 " ###### Markdown #########
+" Markdown语法高亮
 Bundle 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
-" https://github.com/suan/vim-instant-markdown
-" npm -g install instant-markdown-d
-" Bundle 'suan/vim-instant-markdown'
-" let g:instant_markdown_slow = 1
-" let g:instant_markdown_autostart = 0
-" map <F12> :InstantMarkdownPreview<CR>
+" 实时显示用chrome的扩展markdwon preview plus实现的，保存后自动加载
+" 否则用vim的插件需要太多依赖了
 
 " ###### HTML/CSS/JS/PHP #########
 "        """""""""""""""""""
@@ -906,7 +908,7 @@ Bundle 'beyondwords/vim-twig'
 
 
 " ###### Jinja2 #########
-Bundle 'Glench/Vim-Jinja2-Syntax'
+" Bundle 'Glench/Vim-Jinja2-Syntax'
 
 
 " ###### nginx #########
