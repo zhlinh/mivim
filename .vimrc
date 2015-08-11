@@ -426,8 +426,10 @@ nnoremap gj j
 "imap <c-j> <Down>
 " Ctrl + H 插入模式下光标向左移动
 imap <C-h> <Left>
+cmap <C-h> <Left>
 " Ctrl + L 插入模式下光标向右移动
 imap <C-l> <Right>
+cmap <C-l> <Right>
 
 " 移动到本行下一个""处，用于html
 inoremap <C-f> <Esc>2f"a
@@ -814,6 +816,7 @@ nnoremap ` '
 
 " 文件类型的一般设置，比如不要 tab 等
 autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown
+autocmd BufRead,BufNew *.html,*.htm  set filetype=html
 autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType haskell,puppet,ruby,yml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2 ai
 autocmd FileType javascript,json,css,scss,html set tabstop=2 shiftwidth=2 expandtab ai

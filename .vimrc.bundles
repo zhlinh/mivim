@@ -501,7 +501,7 @@ Bundle 'mattn/gist-vim'
 " open browser after the post
 let g:gist_open_browser_after_post = 1
 " if you want to change the browser
-let g:gist_browser_command = 'chrome %URL% &'
+let g:gist_browser_command = 'chrome %URL%'
 let g:gist_post_private = 1
 " Only :w! updates a gist.
 let g:gist_update_on_write = 2
@@ -599,11 +599,12 @@ au Syntax * RainbowParenthesesLoadBraces
 Bundle 'scrooloose/nerdtree'
 map <leader>n :NERDTreeToggle<CR>
 " 用于切换NERDTree到当前文件目录
-map <leader>nf :NERDTreeTabsFind<CR>
+map <leader>nf :NERDTreeFind<CR>
 let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
 let NERDTreeChDirMode=0
-let NERDTreeQuitOnOpen=1
+" the NERD tree window will close after opening a file
+" let NERDTreeQuitOnOpen=1
 let NERDTreeMouseMode=2
 " 默认显示隐藏文件，切换快捷键为 I : Toggle hidden files
 let NERDTreeShowHidden=1
@@ -615,7 +616,7 @@ let NERDTreeAutoDeleteBuffer=1
 " 设置是否自启动
 " let g:nerdtree_tabs_open_on_gui_startup=0
 "close vim if the only window left open is a NERDTree
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
 " s/v 分屏打开文件
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
