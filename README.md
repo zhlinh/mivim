@@ -603,19 +603,22 @@
 
     必装,标签导航,纬度和taglist不同, taglist的替代者
 
-    tagbar针对而一些语言的文档https://github.com/majutsushi/tagbar/wiki
+    需要[ctags](http://ctags.sourceforge.net)依赖(必须)
+
+    tagbar针对而一些语言的[wiki文档](https://github.com/majutsushi/tagbar/wiki)，配置文件为.ctags
 
     注意:之前版本有装taglist,决定用tagbar替代,taglist的配置注解未删除,需要的自行打开
 
         "记忆方式: ,[t]agbar toggle
-        [sd] <leader>t 打开Tagbar
-		 
+        [sd]
+        ,t 打开Tagbar
+
 5. ####任务列表  [vim-scripts/TaskList.vim](https://github.com/vim-scripts/TaskList.vim)
 	管理项目中的 TODO、FIXME、XXX等标签
-	
+
 		[sd]
 		,td    打开todo列表
-	
+
 
 
 > 语言相关- 需要自定义编辑确认是否保留(默认打开)

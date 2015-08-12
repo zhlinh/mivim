@@ -644,7 +644,10 @@ hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=
 
 
 " 标签导航,配合ctrlp-funky使用
-" 需要ctags依赖(必须),jsctags依赖(可选,如果想适配JS)
+" 需要ctags依赖(必须),http://ctags.sourceforge.net/
+" 多语言支持配置见 https://github.com/majutsushi/tagbar/wiki
+" 配置文件为.ctags
+" 已含多语言支持
 if executable('ctags')
     Bundle 'majutsushi/tagbar'
     set tags=./tags;/,~/.vimtags
@@ -655,95 +658,37 @@ if executable('ctags')
     endif
     " c文件时自动打开tagbar
     " autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
-
     nmap <silent> <leader>t :TagbarToggle<CR>
-
     let g:tagbar_autofocus = 1
-    " for ruby
-    let g:tagbar_type_ruby = {
-                \ 'kinds' : [
-                \ 'm:modules',
-                \ 'c:classes',
-                \ 'd:describes',
-                \ 'C:contexts',
-                \ 'f:methods',
-                \ 'F:singleton methods'
-                \ ]
-                \ }
 
-    " google go语言的tagbar配置
-    " 1. install gotags 'go get -u github.com/jstemmer/gotags'
-    " 2. make sure `gotags` in you shell PATH, you can call check it with `which gotags`
-    " for gotags. work with tagbar
-    let g:tagbar_type_go = {
-                \ 'ctagstype' : 'go',
-                \ 'kinds'     : [
-                \ 'p:package',
-                \ 'i:imports:1',
-                \ 'c:constants',
-                \ 'v:variables',
-                \ 't:types',
-                \ 'n:interfaces',
-                \ 'b:bundle',
-                \ 'w:fields',
-                \ 'e:embedded',
-                \ 'm:methods',
-                \ 'r:constructor',
-                \ 'f:functions'
-                \ ],
-                \ 'sro' : '.',
-                \ 'kind2scope' : {
-                \ 't' : 'ctype',
-                \ 'n' : 'ntype'
-                \ },
-                \ 'scope2kind' : {
-                \ 'ctype' : 't',
-                \ 'ntype' : 'n'
-                \ },
-                \ 'ctagsbin'  : 'gotags',
-                \ 'ctagsargs' : '-sort -silent'
-                \ }
-
-    " CSS语言的tagbar配置
     let g:tagbar_type_css = {
-                \ 'ctagstype' : 'Css',
-                \ 'kinds'     : [
-                \ 'c:classes',
-                \ 's:selectors',
-                \ 'i:identities'
-                \ ]
-                \ }
-
-    " JS语言的tagbar配置
-    " 需要tern 和 jsctags的支持
-    " 安装方法为npm install -g git+https://github.com/ramitos/jsctags.git
-    if executable('jsctags')
-        let g:tagbar_type_javascript = {
-                    \ 'ctagsbin' : 'jsctags'
-                    \ }
-    endif
-
-    " VHDL语言的tagbar配置
-    let g:tagbar_type_vhdl = {
-                \ 'ctagstype': 'vhdl',
-                \ 'kinds' : [
-                \'d:prototypes',
-                \'b:package bodies',
-                \'e:entities',
-                \'a:architectures',
-                \'t:types',
-                \'p:processes',
-                \'f:functions',
-                \'r:procedures',
-                \'c:constants',
-                \'T:subtypes',
-                \'r:records',
-                \'C:components',
-                \'P:packages',
-                \'l:locals'
-                \]
-                \}
-
+          \ 'ctagstype' : 'css',
+          \ 'kinds'     : [
+          \ 'c:classes',
+          \ 's:selectors',
+          \ 'i:identities',
+          \ ],
+          \ 'deffile' :  '~/.vim/ctags/.ctags',
+          \ }
+    let g:tagbar_type_javascript = {
+          \ 'deffile' :  '~/.vim/ctags/.ctags',
+          \ }
+    let g:tagbar_type_markdown = {
+          \ 'ctagstype' : 'markdown',
+          \ 'kinds' : [
+          \ 'h:Heading_L1',
+          \ 'i:Heading_L2',
+          \ 'k:Heading_L3',
+          \ ],
+          \ 'deffile' :  '~/.vim/ctags/.ctags',
+          \ }
+    let g:tagbar_type_snippets = {
+          \ 'ctagstype' : 'snippets',
+          \ 'kinds' : [
+          \ 's:snippets',
+          \ ],
+          \ 'deffile' :  '~/.vim/ctags/.ctags',
+          \ }
 endif
 
 " 去除taglist =>原因: 使用tagbar和ctrlp-funky可以直接快速跳转函数和变量位置,taglist有些多余
@@ -760,10 +705,10 @@ nmap <leader>td <Plug>TaskList
 "快速编译运行的插件
 Bundle 'thinca/vim-quickrun'
 let g:quickrun_config = {
-            \   "_" : {
-            \       "outputter" : "message",
-            \   },
-            \}
+      \   "_" : {
+      \       "outputter" : "message",
+      \   },
+      \}
 
 let g:quickrun_no_default_key_mappings = 1
 nmap <Leader>qr <Plug>(quickrun)
@@ -854,17 +799,17 @@ Bundle "mattn/webapi-vim"
 " emmet HTML complete
 Bundle "mattn/emmet-vim"
 let g:user_emmet_settings = {
-            \ 'php' : {
-            \ 'extends' : 'html',
-            \ 'filters' : 'c',
-            \ },
-            \ 'xml' : {
-            \ 'extends' : 'html',
-            \ },
-            \ 'haml' : {
-            \ 'extends' : 'html',
-            \ },
-            \}
+      \ 'php' : {
+      \ 'extends' : 'html',
+      \ 'filters' : 'c',
+      \ },
+      \ 'xml' : {
+      \ 'extends' : 'html',
+      \ },
+      \ 'haml' : {
+      \ 'extends' : 'html',
+      \ },
+      \}
 let g:user_emmet_expandabbr_key = '<C-e>'
 let g:user_emmet_leader_key='<C-e>'
 
