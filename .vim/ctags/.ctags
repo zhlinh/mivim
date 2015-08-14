@@ -6,7 +6,6 @@
 --regex-JavaScript=/^[ \t]*([A-Za-z0-9_$]*\.)*([A-Za-z0-9_$]+)[ \t]*[:=][ \t]*function/\2/f,function/
 --regex-JavaScript=/^var[ \t]+([A-Za-z0-9._$]+)[ \t]*=[ \t]*[A-Za-z0-9_$]+.extend/\1/f,function/
 
-
 --langdef=markdown
 --langmap=markdown:.mkd
 --regex-markdown=/^#[ \t]+(.*)/\1/h,Heading_L1/

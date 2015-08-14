@@ -13,7 +13,7 @@ snippet '':f "object method string"
 }${10:,}
 endsnippet
 
-snippet addLoadEvent "add more than one event when loading"
+snippet onload "add more than one event when loading"
 function addLoadEvent(func){
 	var oldonload = window.onload;
 	if (typeof window.onload != "function"){
@@ -24,7 +24,30 @@ function addLoadEvent(func){
 			func();
 		}
 	}
+${VISUAL}$0
 }
+endsnippet
+
+snippet chktag "check DOM support"
+if (!document.getElementsByTagName) {
+	return false;
+}
+${VISUAL}$0
+endsnippet
+
+snippet chkid "check DOM support"
+if (!document.getElementById${1:("${2:Id}")}) {
+	return false;
+}
+${VISUAL}$0
+endsnippet
+
+snippet gt "check DOM support"
+document.getElementsByTagName("${1:TagName}")
+endsnippet
+
+snippet gi "check DOM support"
+document.getElementById("${1:Id}")
 endsnippet
 
 snippet :f "Object Method"

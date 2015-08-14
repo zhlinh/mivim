@@ -544,6 +544,7 @@ function! ViewInBrowser(name)
                 \"chrome":" chrome ",
                 \"ie":" iexplore "
                 \}
+    " FIXME 修改为自己服务器的根目录
     let htdocs='D:/Program Files/Apache24/htdocs/'
     "echo htdocs
     let strpos = stridx(file,htdocs)

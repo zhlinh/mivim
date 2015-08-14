@@ -60,27 +60,31 @@ endif
 Bundle 'scrooloose/syntastic'
 let g:syntastic_error_symbol='>>'
 let g:syntastic_warning_symbol='>'
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting=1
+" cursor will jump to the first error detected
+let g:syntastic_auto_jump = 3
 
-" 最轻量
+" python最轻量
 " let g:syntastic_python_checkers=['pyflakes'] " 使用pyflakes
 
-" 中等
+" python中等
 " error code: http://pep8.readthedocs.org/en/latest/intro.html#error-codes
 let g:syntastic_python_checkers=['pyflakes', 'pep8'] " 使用pyflakes,速度比pylint快
 let g:syntastic_python_pep8_args='--ignore=E501,E225'
 
-" 重量级, 但是足够强大, 定制完成后相当个性化
+" python重量级, 但是足够强大, 定制完成后相当个性化
 " pylint codes: http://pylint-messages.wikidot.com/all-codes
 " let g:syntastic_python_checkers=['pyflakes', 'pylint'] " 使用pyflakes,速度比pylint快
 " let g:syntastic_python_checkers=['pylint'] " 使用pyflakes,速度比pylint快
 " let g:syntastic_python_pylint_args='--disable=C0111,R0903,C0301'
 
-
 let g:syntastic_javascript_checkers = ['jsl', 'jshint']
 let g:syntastic_html_checkers=['tidy', 'jshint']
+
 " 修改高亮的背景色, 适应主题
 highlight SyntasticErrorSign guifg=white guibg=black
 
@@ -98,8 +102,8 @@ function! ToggleErrors()
     endif
 endfunction
 nnoremap <Leader>e :call ToggleErrors()<cr>
-" nnoremap <Leader>tn :lnext<cr>
-" nnoremap <Leader>tp :lprevious<cr>
+nnoremap <Leader>en :lnext<cr>
+nnoremap <Leader>ep :lprevious<cr>
 
 
 " ################### 自动补全 ###################
@@ -149,7 +153,8 @@ let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
 let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
 let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
 
-let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全
+" 语言关键字补全,开启后提示类名后的方法或属性会反应较长一段时间
+" let g:ycm_seed_identifiers_with_syntax=1
 
 " 跳转到定义处, 分屏打开
 let g:ycm_goto_buffer_command = 'horizontal-split'
@@ -501,7 +506,7 @@ Bundle 'mattn/gist-vim'
 " open browser after the post
 let g:gist_open_browser_after_post = 1
 " if you want to change the browser
-let g:gist_browser_command = 'chrome %URL%'
+" let g:gist_browser_command = 'chrome %URL%'
 let g:gist_post_private = 1
 " Only :w! updates a gist.
 let g:gist_update_on_write = 2
@@ -732,7 +737,10 @@ Bundle 'vim-latex/vim-latex'
 " 下面是官方的一些推荐配置
 " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
 " can be called correctly.
-set shellslash
+" 文件路径用'/'代替'\'。
+" if has("win32") || has("win64")
+  " set shellslash
+" endif
 " Set your grep program to always generate a file-name.
 set grepprg=grep\ -nH\ $*
 " vim默认把空的tex文件设为plaintex而不是tex，导致latex-suite不被加载
