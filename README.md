@@ -659,11 +659,11 @@
 
     Vim as a Python IDE, but much more than that!
 
-    **语法高亮[python-syntax](https://github.com/hdima/python-syntax)**
+    语法高亮[python-syntax](https://github.com/hdima/python-syntax)
 
     使用Python建议安装，python语法高亮,就是python.vim,在github,有维护和更新
 
-    **语法检查[kevinw/pyflakes-vim](https://github.com/kevinw/pyflakes-vim)**
+    语法检查[kevinw/pyflakes-vim](https://github.com/kevinw/pyflakes-vim)
 
     虽然这个的作者推荐使用syntastic,但是这个插件对于pythoner还是很需要的
 
@@ -671,7 +671,7 @@
 
 3. ####Golang
 
-    **Go语言自动补全[Blackrush/vim-gocode](https://github.com/Blackrush/vim-gocode)**
+    Go语言自动补全[Blackrush/vim-gocode](https://github.com/Blackrush/vim-gocode)
 
     安装gocode之后 ,配置这个插件
 
@@ -681,17 +681,17 @@
 
 4. ####Markdown
 
-    **Markdown语法[plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)**
+    Markdown语法[plasticboy/vim-markdown](https://github.com/plasticboy/vim-markdown)
 
     markdown语法,编辑md文件
 
 5. ####HTML
 
-   **webapi[mattn/webapi-vim](https://github.com/mattn/webapi-vim)**
+   webapi[mattn/webapi-vim](https://github.com/mattn/webapi-vim)
 
     也是gist-vim的依赖
 
-   **emmet[原zencoding][mattn/emmet-vim](https://github.com/mattn/emmet-vim)**
+   emmet[原zencoding][mattn/emmet-vim](https://github.com/mattn/emmet-vim)
 
         [sd/id]
         <C-e>   触发补全
@@ -701,62 +701,62 @@
         <C-e>a  Make an anchor from a URL
         <C-e>A  Make some quoted text from a URL
 
-    **html/xml标签配对补全[docunext/closetag.vim](https://github.com/docunext/closetag.vim)**
+    html/xml标签配对补全[docunext/closetag.vim](https://github.com/docunext/closetag.vim)
 
-    **html/css的语法[hail2u/vim-css3-syntax](https://github.com/hail2u/vim-css3-syntax)**
+    html/css的语法[hail2u/vim-css3-syntax](https://github.com/hail2u/vim-css3-syntax)
 
-    **CSS显示配色[gorodinskiy/vim-coloresque](https://github.com/gorodinskiy/vim-coloresque)**
+    CSS显示配色[gorodinskiy/vim-coloresque](https://github.com/gorodinskiy/vim-coloresque)
 
-    **关于haml语法高亮,未配置[tpope/vim-haml](https://github.com/tpope/vim-haml)**
+    关于haml语法高亮,未配置[tpope/vim-haml](https://github.com/tpope/vim-haml)
 
-    **高亮显示匹配的标签，未配置[Valloric/MatchTagAlways](https://github.com/Valloric/MatchTagAlways)**
+    高亮显示匹配的标签，未配置[Valloric/MatchTagAlways](https://github.com/Valloric/MatchTagAlways)
 
 6. ####Javascript
 
-    **js语法高亮[jelera/vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax)**
+    js语法高亮[jelera/vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax)
 
-    **js格式[pangloss/vim-javascript](https://github.com/pangloss/vim-javascript)**
+    js格式[pangloss/vim-javascript](https://github.com/pangloss/vim-javascript)
 
-    **Tern[marijnh/tern_for_vim](https://github.com/marijnh/tern_for_vim)**
+    Tern[marijnh/tern_for_vim](https://github.com/marijnh/tern_for_vim)
 
     配合ycm进行js/jquery自动补全,需要安装 tern_for_vim 并配置, 文档  [ternjs](http://ternjs.net/)
 
        cd ~/.vim/bundle/tern_for_vim && npm install  [需要npm支持]
 
-     **json高亮[elzr/vim-json](https://github.com/elzr/vim-json)**
+     json高亮[elzr/vim-json](https://github.com/elzr/vim-json)
 
        [sd]
        ,jt  设置当前文件类型为json，激活json高亮
 
-    **格式调整[briancollins/vim-jst](https://github.com/https://github.com/)**
+    格式调整[briancollins/vim-jst](https://github.com/https://github.com/)
 
-    **coffee[kchmck/vim-coffee-script](https://github.com/kchmck/vim-coffee-script)**
+    coffee[kchmck/vim-coffee-script](https://github.com/kchmck/vim-coffee-script)
 
-    **js/html/css 格式化, 未配置[maksimr/vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify)**
+    js/html/css 格式化, 未配置[maksimr/vim-jsbeautify](https://github.com/maksimr/vim-jsbeautify)
 
-    **jquery高亮，未配置[nono/jquery.vim](https://github.com/nono/jquery.vim)**
+    jquery高亮，未配置[nono/jquery.vim](https://github.com/nono/jquery.vim)
 
 7. ####PHP
 
-    **PIV[spf13/PIV](https://github.com/spf13/PIV)**
+    PIV[spf13/PIV](https://github.com/spf13/PIV)
 
-    **PHP[arnaud-lb/vim-php-namespace](https://github.com/arnaud-lb/vim-php-namespace)**
+    PHP[arnaud-lb/vim-php-namespace](https://github.com/arnaud-lb/vim-php-namespace)
 
-    **Twig[evidens/vim-twig](https://github.com/evidens/vim-twig)**
+    Twig[evidens/vim-twig](https://github.com/evidens/vim-twig)
 
 8. ####Ruby
 
     可以参考tpope的插件列表,很多跟ruby相关
 
-    **Rails, 未配置[tpope/vim-rails](https://github.com/tpope/vim-rails)**
+    Rails, 未配置[tpope/vim-rails](https://github.com/tpope/vim-rails)
 
-    **ruby-textobj[nelstrom/vim-textobj-rubyblock](https://github.com/nelstrom/vim-textobj-ruby)**
+    ruby-textobj[nelstrom/vim-textobj-rubyblock](https://github.com/nelstrom/vim-textobj-ruby)
 
-    **自动加end, 未配置, 有坑[tpope/vim-endwise](https://github.com/tpope/vim-endwise)**
+    自动加end, 未配置, 有坑[tpope/vim-endwise](https://github.com/tpope/vim-endwise)
 
 9. ####非语言语法高亮
 
-    **nginx高亮, 未配置[evanmiller/nginx-vim-syntax](https://github.com/evanmiller/nginx-vim-syntax)** 
+    nginx高亮, 未配置[evanmiller/nginx-vim-syntax](https://github.com/evanmiller/nginx-vim-syntax) 
 
 
 

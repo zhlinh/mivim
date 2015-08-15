@@ -539,23 +539,26 @@ function! ViewInBrowser(name)
     "解决空格问题，加双引号
     let file = '"'.file.'"'
     exec ":update " . file
-    "echo file
+    " echo file
     let l:browsers = {
                 \"chrome":" chrome ",
                 \"ie":" iexplore "
                 \}
     " FIXME 修改为自己服务器的根目录
-    let htdocs='D:/Program Files/Apache24/htdocs/'
+    let path_win='D:/Program Files/Apache24/htdocs/'
+    let path_unix=substitute(file, '\\', '/', "g")
     "echo htdocs
-    let strpos = stridx(file,htdocs)
-    "echo strpos
+    let strpos = (stridx(file,path_win) == -1 
+                \ && stridx(file,path_unix) == -1) ? -1 : 1
+    " echo strpos
     if strpos == -1
-        exec ":silent !start" l:browsers[a:name] file
+        silent! exec "!start" l:browsers[a:name] file
     else
         " let file=substitute(file, htdocs, "http://127.0.0.1:8080/", "g")
-        let file=substitute(file, htdocs, "http://127.0.0.1/", "g")
+        let file=substitute(file, path_win, "http://127.0.0.1/", "g")
+        let file=substitute(file, path_unix, "http://127.0.0.1/", "g")
         let file=substitute(file, '\\', '/', "g")
-        exec ":silent !start" l:browsers[a:name] file
+        silent! exec "!start" l:browsers[a:name] file
     endif
 endfunction
 nnoremap <F8> :call ViewInBrowser("chrome")<cr>

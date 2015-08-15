@@ -60,8 +60,8 @@ endif
 Bundle 'scrooloose/syntastic'
 let g:syntastic_error_symbol='>>'
 let g:syntastic_warning_symbol='>'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting=1
@@ -738,9 +738,9 @@ Bundle 'vim-latex/vim-latex'
 " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
 " can be called correctly.
 " 文件路径用'/'代替'\'。
-" if has("win32") || has("win64")
-  " set shellslash
-" endif
+if has("win32") || has("win64")
+  set shellslash
+endif
 " Set your grep program to always generate a file-name.
 set grepprg=grep\ -nH\ $*
 " vim默认把空的tex文件设为plaintex而不是tex，导致latex-suite不被加载
