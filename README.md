@@ -8,10 +8,10 @@
     1.关键依赖
       package dependence:  ctags, ag(the_silver_searcher), python2.7.10(for YCM)
 
-    2.语言相关(语法检查,for syntastic)
+    2.语言相关(语法检查,for Syntastic)
       c/cpp dependence:        gcc/g++ (mingw32/64[on Windows])
       python dependence:       pep8, pyflake (python3.4.3 and then 'pip install --upgrade xxx')
-      javascript dependence:   node, jshint (https://nodejs.org, 'npm install -g jshint'’)
+      javascript dependence:   node, jshint (https://nodejs.org, 'npm install -g jshint')
       html dependence:         tidy-html5 (https://github.com/htacg/tidy-html5)
 
     3.其他语法检查:
@@ -54,9 +54,9 @@
 
         F7   set paste/nopaste,粘贴模式paste_mode开关,用于有格式的代码粘贴
 
-        F10  运行当前文件,for windows，path里需要对应的支持
+        F10  运行当前文件,for Windows，path里需要相应的支持
 
-        ,qr  运行当前文件，for linux(用了插件quickrun)
+        ,qr  运行当前文件，for Linux(用了插件quickrun)
 
         F8   用chrome运行html文件,需要将chrome放进path
 
@@ -102,7 +102,7 @@
         ,rc         确认，非整词
         ,rcw(,rwc)  确认，整词
 
-        优化搜索保证结果在屏幕中间
+        优化搜索，保证结果在屏幕中间
 
 7. **Tab操作(重点推)**
 
@@ -221,7 +221,7 @@
         ctrl + p  选择上一个补全
         回车      选中
         ,df       跳转到函数定义[DeFinition]位置, 分屏打开一个buffer(非常有用!!!!!!!!!)
-        ,dc       跳到声明[DeClaration]位置, 仅 filetypes: c, cpp, objc, objcpp, python 有效(比较少用)
+        ,dc       跳到声明[DeClaration]位置, 仅c, cpp, objc, objcpp, python 有效(比较少用)
 
 2. ####代码片段快速插入 [SirVer/ultisnips](https://github.com/SirVer/ultisnips) +[honza/vim-snippets](https://github.com/honza/vim-snippets)
 
@@ -277,8 +277,9 @@
         ysiw"       [You Surround in word]
         Hello -> "Hello"
 
-        ysiW"       [You Surround in Word(split with space),besides ysis"(sentence) ysip"(paragraph)]
+        ysiW"       [You Surround in Word(split with space)]
         Hello tpope/vim-surround  ->   Hello "tpope/vim-surround"
+		-->> besides ysis"(sentence) ysip"(paragraph)
 
         yss"        [You Surround Surround]
         Hello world -> "Hello world"
@@ -719,14 +720,14 @@
 
     Tern[marijnh/tern_for_vim](https://github.com/marijnh/tern_for_vim)
 
-    配合ycm进行js/jquery自动补全,需要安装 tern_for_vim 并配置, 文档  [ternjs](http://ternjs.net/)
+    配合ycm进行js/jquery自动补全,需要安装tern_for_vim并配置, 文档[ternjs](http://ternjs.net/)
 
-       cd ~/.vim/bundle/tern_for_vim && npm install  [需要npm支持]
+        cd ~/.vim/bundle/tern_for_vim && npm install  [需要npm支持]
 
-     json高亮[elzr/vim-json](https://github.com/elzr/vim-json)
+    json高亮[elzr/vim-json](https://github.com/elzr/vim-json)
 
-       [sd]
-       ,jt  设置当前文件类型为json，激活json高亮
+        [sd]
+        ,jt  设置当前文件类型为json，激活json高亮
 
     格式调整[briancollins/vim-jst](https://github.com/https://github.com/)
 

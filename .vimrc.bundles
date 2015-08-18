@@ -738,9 +738,9 @@ Bundle 'vim-latex/vim-latex'
 " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
 " can be called correctly.
 " 文件路径用'/'代替'\'。
-if has("win32") || has("win64")
-  set shellslash
-endif
+" if has("win32") || has("win64")
+"  set shellslash
+"endif
 " Set your grep program to always generate a file-name.
 set grepprg=grep\ -nH\ $*
 " vim默认把空的tex文件设为plaintex而不是tex，导致latex-suite不被加载
