@@ -13,11 +13,12 @@
       python dependence:       pep8, pyflake (python3.4.3 and then 'pip install --upgrade xxx')
       javascript dependence:   node, jshint (https://nodejs.org, 'npm install -g jshint')
       html dependence:         tidy-html5 (https://github.com/htacg/tidy-html5)
+      php dependence:          phpcs (https://github.com/squizlabs/PHP_CodeSniffer)
 
     3.其他语法检查:
       见: https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers
       然后在配置文件中添加类似于:
-      let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+      let g:syntastic_php_checkers = ['php', 'phpcs']
 
 ----------------------
 ## 自定义快捷键
