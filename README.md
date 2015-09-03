@@ -29,15 +29,7 @@
 
         set mouse-=a           " 鼠标暂不启用
 
-3. **默认关闭方向键的移动**
-
-        hjkl  上下左右
-        map   <Left>   <Nop>
-        map   <Right>  <Nop>
-        map   <Up>     <Nop>
-        map   <Down>   <Nop>
-
-4. **上排F功能键**
+3. **上排F功能键**
 
         F1   set no/relativenumber,相对行号和绝对行号的转换
 
@@ -65,7 +57,7 @@
 
         F12  用ie运行html文件,需要将ie放进path
 
-5. **分屏及移动**
+4. **分屏及移动**
 
         Normal模式下:
         ctrl + j/k/h/l  进行上下左右窗口跳转,不需要ctrl+w+jkhl
@@ -90,11 +82,9 @@
 
         ctrl + g    行末加分号，并跳转下一行
 
-6. **搜索**
-
-        <space>  进入搜索状态/
-        /        =/\v  引入正则
-        ,/       去除匹配高亮
+5. **搜索**
+        
+        <BS>       去除匹配高亮
         ,fi      列出寻找光标下的关键词的所有位置，键入数字即可到达[有点ctrlp-funcy的意思]
 
         替换光标下的词:
@@ -105,7 +95,7 @@
 
         优化搜索，保证结果在屏幕中间
 
-7. **Tab操作(重点推)**
+6. **Tab操作(重点推)**
 
         ctrl+t  新建一个tab
 
@@ -126,14 +116,14 @@
 
         ,tu  (Tab Used)最近使用两个tab之间切换
 
-8. **Buffer操作**
+7. **Buffer操作**
 
         H/<Left>   前一个buffer
         L/<Right>  后一个buffer
 
         建议用ctrlspace插件来操作,l切换tabList or buffList)
 
-9. **文件I/O操作**
+8. **文件I/O操作**
 
         ,em  打开(my)vimrc配置文件
         ,eb  打开.vimrc.bundle配置文件
@@ -143,7 +133,7 @@
         ,es  =split ./
         ,ev  =vsplit ./
 
-10. **折叠操作**
+9. **折叠操作**
 
         代码折叠等级:
         ,f0  foldlevel=0
@@ -152,23 +142,30 @@
         ...
         ,f9  foldlevel=9
 
-11. **按键修改**
+10. **按键修改**
 
-        Y  =y$  复制到行尾
-        U  =Ctrl-r
+        <Space>   翻页
+        
+        Y      =y$  复制到行尾
+        U      =Ctrl-r
+        S      =%s//g
+        v      =<C-v>
+        <C-v>  =v
 
-        ,sa  select all,全选
         ,v   选中段落
+        vaa  全选
+        
+        
 
         c-a  命令行模式下到行首[默认是c-b]
         c-e  命令行模式下到行尾[没变，默认就是c-e]
 
         cd./cwd  命令行模式下工作目录切换到当前文件目录
 
-        ,y  ="+y  复制指定内容到系统剪切板
-        ,Y  ="+yy 复制本行内容到系统剪切板
-        ,p  ="+p  粘贴系统剪切板的内容到光标后
-        ,P  ="+P  粘贴系统剪切板的内容到光标前
+        ,y  ="+y   复制指定内容到系统剪切板
+        ,Y  ="+y$  复制光标到本行末的内容到系统剪切板
+        ,p  ="+p   粘贴系统剪切板的内容到光标后
+        ,P  ="+P   粘贴系统剪切板的内容到光标前
 
         ,q  =:q，退出vim
 
@@ -287,11 +284,16 @@
 
         cst"
         <a>abc</a>  -> "abc"
+		-->t for tab
 
         veeS"       [用于可视模式的]
         hello world -> "hello world"
 
         ys$" 当前到行尾, 引号引住
+		
+		==> Tips:  The targets b, B, r, a are aliases for ), }, ], >
+		==> The former contains no space
+		==> With |cs|, has a shortcut for ysi (cswb == ysiwb, more or less)
 
 3. ####快速运行 [vim-quickrun](https://github.com/thinca/vim-quickrun)
 
@@ -311,16 +313,18 @@
     <leader>a后还可以用<enter>来转换右对齐还是两端对齐，默认为左对齐
 
         [sd/vd]一般会先用vip[visual in paragraph]先选中一段,不选中默认操作当前行
-        ,a=         对齐等号表达 [有用]
-        ,a:         对齐冒号表达式(json/map等)
-        ,a<space>   首个空格左对齐
-        ,a2<space>  第二个空格左对齐
+        <Enter>     visual模式下进入easy-align
+        ga          normal模式下进入easy-align       
+                =....................对齐等号表达 [有用]
+                :....................对齐冒号表达式(json/map等)
+                <space>..............首个空格左对齐
+                2<space>.............第二个空格左对齐
 
-        ,a*|               左对齐所有|号,表格中会用到
-        ,a**|              依次左右对齐所出现的|号
-        ,a<enter>*|        右对齐所有|号
-        ,a<enter>**|       依次右左对齐所出现的|号
-        ,<enter><enter>*|  居中对齐所有|号
+                *|...................左对齐所有|号,表格中会用到
+                **|..................依次左右对齐所出现的|号
+                <enter>*|............右对齐所有|号
+                <enter>**|...........依次右左对齐所出现的|号
+                <enter><enter>*|.....居中对齐所有|号
 
     同类插件 [tabular](https://github.com/godlygeek/tabular)
 
@@ -363,6 +367,14 @@
 
         m<space>   去除所有标签
 
+4. ####移动选中的可视块 [atweiden/vim-dragvisuals](https://github.com/atweiden/vim-dragvisuals)
+    
+    用方向键移动选中的可视块
+    
+        [vd]
+        <方向键>     移动选中的可视块
+        <D>          复制并粘贴选中的可视块    
+
 
 
 > 快速选中
@@ -380,9 +392,9 @@
     多光标批量操作
 
         [sd]
-        ctrl + m  开始选择
+        ctrl + n  开始选择
         ctrl + p  向上取消
-        ctrl + n  跳过
+        ctrl + x  跳过
         esc       退出
 
 > 文本对象扩展
@@ -438,8 +450,8 @@
     文件搜索,ack/Command-T需要依赖于外部包,不喜欢有太多依赖的,除非十分强大, 具体 [文档](http://kien.github.io/ctrlp.vim/)
 
          [sd]
-         ctrl + p  打开ctrlp搜索
-         ,fh       mru功能，show recently opened files
+         cp       打开ctrlp搜索
+         ,fh      mru功能，show recently opened files
          ,fb      打开buffers列表
 
          ctrl + j/k  进行上下移动

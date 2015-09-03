@@ -1,11 +1,13 @@
 priority -50
 
+extends html
+
 ## Snippets from SnipMate, taken from
 ## https://github.com/scrooloose/snipmate-snippets.git
 
 snippet php "php"
 <?php
-    $0
+$0
 ?>
 endsnippet
 
@@ -63,8 +65,14 @@ foreach ($${1:variable} as $${2:key} => $${3:value}) {
 }
 endsnippet
 
-snippet get "get"
-$_GET['${1}']${2}
+snippet get "_GET"
+$${1:var} = $_GET['$1'];
+$0
+endsnippet
+
+snippet gett "_GET trim"
+$${1:var} = trim($_GET['$1']);
+$0
 endsnippet
 
 snippet if "if"
@@ -87,12 +95,24 @@ snippet log "log"
 error_log(var_export(${1}, true));${2}
 endsnippet
 
-snippet post "post"
-$_POST['${1}']${2}
+snippet post "_POST"
+$${1:var} = $_POST['$1'];
+$0
 endsnippet
 
-snippet req "req1"
-require_once '${1:file}';${2}
+snippet postt "_POST trim"
+$${1:var} = trim($_POST['$1']);
+$0
+endsnippet
+
+snippet req "_REQUEST"
+$${1:var} = $_REQUEST['$1'];
+$0
+endsnippet
+
+snippet reqt "_REQUEST"
+$${1:var} = trim($_REQUEST['$1']);
+$0
 endsnippet
 
 snippet req1 "req1"

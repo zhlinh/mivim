@@ -106,6 +106,14 @@ nnoremap <Leader>e :call ToggleErrors()<cr>
 nnoremap <Leader>en :lnext<cr>
 nnoremap <Leader>ep :lprevious<cr>
 
+" If you'd like digraphs with a heads-up
+" and a saner naming convention, see atweiden/vim-betterdigraphs
+" inoremap <expr> <C-k> HUDG_GetDigraph()
+" If you'd like satandard digraphs, see gavinbeatty/hudigraphs.vim
+" Bundle 'atweiden/vim-betterdigraphs'
+" " To Use:
+" inoremap <expr> <C-K> BDG_GetDigraph()
+
 
 " ################### 自动补全 ###################
 
@@ -234,11 +242,11 @@ let g:NERDRemoveExtraSpaces=1
 " 快速加入修改环绕字符
 Bundle 'tpope/vim-surround'
 " 快捷键(map):
-" ,ysiw"  在单词上环绕 "
-" ,ysiW:  在以空格为界的词上环绕 "
-" ,yss"   在一行上环绕 "
-" ,cs"'   改变环绕 "为 '
-" ,ds"    删除环绕"
+" ysiw"  在单词上环绕 "
+" ysiW"  在以空格为界的词上环绕 "
+" yss"   在一行上环绕 "
+" cs"'   改变环绕 "为 '
+" ds"    删除环绕"
 
 " for repeat -> enhance surround.vim, . to repeat command
 Bundle 'tpope/vim-repeat'
@@ -249,13 +257,9 @@ map <leader><space> :FixWhitespace<cr>
 
 " 快速赋值语句对齐
 Bundle 'junegunn/vim-easy-align'
-"<leader>a后还可以用<enter>来转换右对齐还是两端对齐，默认为左对齐
-vmap <leader>a <Plug>(EasyAlign)
-nmap <leader>a <Plug>(EasyAlign)
-if !exists('g:easy_align_delimiters')
-    let g:easy_align_delimiters = {}
-endif
-let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
+"<Plug>(EasyAlign)后还可以用<Enter>来转换右对齐还是两端对齐，默认为左对齐
+vmap <Enter> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " ################### 快速移动 ###################
 
@@ -276,12 +280,41 @@ map <leader>. <Plug>(easymotion-repeat)
 
 "符号跳转,使用%
 Bundle 'vim-scripts/matchit.zip'
+" Match angle brackets...
+set matchpairs+=<:>,«:»
+
+" Match double-angles, XML tags and Perl keywords...
+let TO = ':'
+let OR = ','
+let b:match_words =
+\
+\                          '<<' .TO. '>>'
+\
+\.OR.     '<\@<=\(\w\+\)[^>]*>' .TO. '<\@<=/\1>'
+\
+\.OR. '\<if\>' .TO. '\<elsif\>' .TO. '\<else\>'
+
+" Engage debugging mode to overcome bug in matchpairs matching...
+let b:match_debug = 1
 
 " 显示marks - 方便自己进行标记和跳转
 " m[a-zA-Z] add mark
 " '[a-zA-Z] go to mark
 " m<Space>  del all marks
 Bundle "kshenoy/vim-signature"
+
+
+" ===[Make arrow keys move visual blocks around]===
+Bundle 'atweiden/vim-dragvisuals'
+vmap <expr> <LEFT>  DVB_Drag('left')
+vmap <expr> <RIGHT> DVB_Drag('right')
+vmap <expr> <DOWN>  DVB_Drag('down')
+vmap <expr> <UP>    DVB_Drag('up')
+vmap <expr> D       DVB_Duplicate()
+
+" Remove any introduced trailing whitespace after moving...
+let g:DVB_TrimWS = 1
+
 
 " ################### 文本对象 ###################
 
@@ -342,10 +375,11 @@ let g:expand_region_text_objects = {
 Bundle 'terryma/vim-multiple-cursors'
 let g:multi_cursor_use_default_mapping=0
 " Default mapping
-let g:multi_cursor_next_key='<C-m>'
+let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-n>'
+let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+
 
 " ################### 功能相关 ###################
 
@@ -367,7 +401,7 @@ let g:multi_cursor_quit_key='<Esc>'
 " F7 清除MRU
 Bundle 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_map = '<C-p>'
+let g:ctrlp_map = 'cp'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>fh :CtrlPMRU<CR>
 map <leader>fb :CtrlPBuffer<CR>
