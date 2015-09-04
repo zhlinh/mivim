@@ -532,8 +532,18 @@
         ,ss  - saves the current editing session.
         ,sl  - list the saved sessions.
         ,sc  - wipes out all buffers, kills cscope and clears variables with session name.
+        
+9. ####可视块数学统计 [atweiden/vim-vmath](https://github.com/atweiden/vim-vmath)
 
+    在可视块上作简单的数学统计，包括sum, avg, min, max  
 
+10. ####可视块增强 [RobertAudi/vis.vim](https://github.com/RobertAudi/vis.vim)
+    用例: 只排序选中的可视块:B sort，而不是排序整行 
+    
+        [vd] Use v/ctrl-v to visually mark the block then
+        :B cmd  -  ( will appear as   :'<,'>B cmd )
+
+        
 
 > 显示增强
 

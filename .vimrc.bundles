@@ -114,6 +114,9 @@ nnoremap <Leader>ep :lprevious<cr>
 " " To Use:
 " inoremap <expr> <C-K> BDG_GetDigraph()
 
+Bundle 'gioele/vim-autoswap'
+"Note that this plugin only works if your Vim
+"configuration includes: set title titlestring=
 
 " ################### 自动补全 ###################
 
@@ -569,6 +572,20 @@ if isdirectory(expand("~/.vim/bundle/sessionman.vim/"))
     nmap <leader>sc :SessionClose<CR>
 endif
 
+
+" for math on visual regions
+Bundle 'atweiden/vim-vmath'
+vmap <expr>  ++  VMATH_YankAndAnalyse()
+nmap         ++  vip++
+
+" Perform an Ex command on a visual highlighted block (CTRL-V).
+Bundle 'RobertAudi/vis.vim'
+" ex. Use v/ctrl-v to visually mark the block then
+" use :B cmd     (will appear as   :'<,'>B cmd )
+" which cmd could be sort, and it will sort the block only.
+
+
+
 " ################### 显示增强 ###################
 
 " 字体补丁，用于帮助airline显示特殊字符
@@ -654,9 +671,8 @@ let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
 " 设置是否自启动
-" let g:nerdtree_tabs_open_on_gui_startup=0
-"close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+let g:nerdtree_tabs_open_on_gui_startup=1
+
 " s/v 分屏打开文件
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'

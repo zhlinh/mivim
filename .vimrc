@@ -114,6 +114,8 @@ filetype plugin indent on
 "===[Miscellaneous features (mainly options)]===
 set title           " Show filename in titlebar of window
 set titleold=
+" for autoswap plugin
+set title titlestring=
 " set nomore        " Don't page long listings
 set autowrite       " Save buffer automatically when changing files
 set autoread        " Always reload buffer when external changes detected
@@ -170,6 +172,8 @@ set colorcolumn=81
 set backup
 set backupext=.bak
 set backupdir=$HOME/.cache/.VIM_BK_FILES
+" 设置交换文件
+set swapfile
 " cancel backup,or it will create a *.wap file
 " 取消备份
 " set nobackup
@@ -629,6 +633,7 @@ vnoremap p "_dP
 augroup VimReload
 autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
+    autocmd BufWritePost ~/.vimrc.bundles source ~/.vimrc.bundles
 augroup END
 
 nmap <silent> <leader>em :next $MYVIMRC<CR>
