@@ -31,17 +31,16 @@ Bundle 'gmarik/vundle'
 
 " ################### 主题 ###################"
 
-" 主题 solarized
-Bundle 'altercation/vim-colors-solarized'
-
 " 主题 molokai
 Bundle 'tomasr/molokai'
 " monokai原始背景色
-let g:molokai_original = 1
+" let g:molokai_original = 1
 
 " 主题 tomorrow
 Bundle 'chriskempson/vim-tomorrow-theme'
 
+" 主题 solarized
+Bundle 'altercation/vim-colors-solarized'
 
 " ################### 基础 ######################
 
@@ -585,7 +584,6 @@ Bundle 'RobertAudi/vis.vim'
 " which cmd could be sort, and it will sort the block only.
 
 
-
 " ################### 显示增强 ###################
 
 " 字体补丁，用于帮助airline显示特殊字符
@@ -950,4 +948,4 @@ Bundle 'beyondwords/vim-twig'
 
 " Bundle 'amoffat/snake'
 
-"------------------------------------------- end of configs --------------------------------------------
+"---------------------------- end of configs ------------------------------------

@@ -27,10 +27,10 @@
 "               <<< "Be the change you want to see the world">>>
 "
 " Author:  zhlinh
-" Version: 0.7.17
+" Version: 0.9.5
 " Email: zhlinhng@gmail.com"
 " Create_time: 2015-06-08
-" Last_modify: 2015-07-17
+" Last_modify: 2015-09-05
 " Sections:
 "     ->System Identification
 "     ->Initial Plugins
@@ -140,7 +140,7 @@ set updatecount=20     "Save buffer every 20 chars typed
 set timeout timeoutlen=300 ttimeoutlen=300
 
 set virtualedit=block      "Square up visual selections...
-set virtualedit=onemore    "Allow cusor to one more last of line $
+" set virtualedit=onemore    "Allow cusor to one more last of line $
 
 " history: number of command-lines remembered
 set history=1000
@@ -161,11 +161,6 @@ set iskeyword-=:                    " ':' is an end of word designator
 set lines=40
 set columns=125
 
-"===[Make the 81th column stand out]===
-" FIXME
-" highlight colorcolumn ctermbg=magenta
-" autocmd BufEnter * call matchadd('colorcolumn','\%81v', 100)
-set colorcolumn=81
 
 
 "备份,到另一个位置. 防止误删
@@ -267,7 +262,6 @@ if g:isGUI
 	"source $VIMRUNTIME/mswin.vim
     "behave mswin
 endif
-
 
 
 set ruler         " Show cursor location info on status line
@@ -488,7 +482,7 @@ inoremap <C-f> <Esc>2f"a
 inoremap <C-b> <Esc>2F"i
 
 " F1 - F12 设置
-" F1 废弃这个键,防止调出系统帮助
+" F1 相对/绝对行号开关
 " F2 行号开关，用于鼠标复制代码用
 " F3 显示可打印字符开关
 " F4 换行开关
@@ -766,14 +760,14 @@ nnoremap <leader>rwc :call Replace(1, 1, input('replace '.expand('<cword>').' wi
 
 " tab/buffer相关
 
-" todo: 如何跳转到确定的buffer?
+" TODO: 如何跳转到确定的buffer?
 " :b 1 :b 2
 nnoremap H :bprevious<CR>
 nnoremap L :bnext<CR>
 nnoremap dp :diffput<CR>
 nnoremap dg :diffget<CR>
 
-" toggle between two buffers   --可以用f来替代t原先的功能，相差一个字符
+" toggle between two buffers
 "nnoremap t <c-^>
 
 " tab 操作
@@ -784,7 +778,9 @@ map <leader>te :tabedit<CR>
 map <leader>tc :tabclose<CR>
 "将当前标签移动到最后一个
 map <leader>tm :tabm<CR>
+"将当前标签往左移动
 map <leader>th :-tabm<CR>
+"将当前标签往右移动
 map <leader>tl :+tabm<CR>
 
 
@@ -906,7 +902,7 @@ nnoremap $$ $<i}``
 nnoremap ' `
 nnoremap ` '
 
-" i'm sick of typing :%s/.../.../g
+" I'm sick of typing :%s/.../.../g
 nmap S :%s//g<left><left>
 vmap S :b s//g<left><left>
 
@@ -957,14 +953,14 @@ autocmd filetype haskell,rust setlocal nospell
 " let g:php_default_indenting = 4
 
 " 保存文件时删除多余空格
-fun! <sid>StripTrailingWhitespaces()
+fun! <SID>StripTrailingWhitespaces()
     let save_cursor = getcurpos()
     %s/\s\+$//ge
     "把光标放回原位
     call setpos('.', save_cursor)
 endfun
 
-autocmd filetype c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,vim autocmd bufwritepre <buffer> :call <sid>StripTrailingWhitespaces()
+autocmd filetype c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,vim autocmd bufwritepre <buffer> :call <SID>StripTrailingWhitespaces()
 
 
 " 定义函数autosetfilehead，自动插入文件头
@@ -987,34 +983,42 @@ function! Autosetfilehead()
 endfunc
 
 
-" set some keyword to highlight
-if has("autocmd")
-    " highlight TODO, FIXME, XXX, etc.
-    if v:version > 701
-        autocmd syntax * call matchadd('TODO',  '\w\zs\(TODO\|FIXME\|CHANGED\|DONE\|XXX\|BUG\|HACK\)')
-        autocmd syntax * call matchadd('DEBUG', '\w\zs\(NOTE\|INFO\|IDEA\|NOTICE\)')
-    endif
-endif
-
-
 "==========================================
 " color&theme
 "==========================================
 
-" --设置背景为light和dark，对应solarized的两种配色，对于molokai没区别
+" 设置背景为light和dark，对应solarized的两种配色，对于molokai没区别
 "set background=light
 set background=dark
-" --设置为256色
-set t_co=256
+
+" highlight TODO, FIXME, XXX, BUG, INFO, NOTE, etc.
+" \W\zs ensures that there is a word break in front of the match
+" FIXME Syntax * doesn't work here when source .vimc.bundle
+autocmd BufWinEnter * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\)')
+autocmd BufWinEnter * call matchadd('Debug', '\W\zs\(DEBUG\|NOTE\|INFO\|IDEA\)')
+
+"===[Make the 81th column stand out]===
+" there are two options: matchadd or set colorcolumn
+" matchadd({group}, {pattern}[, {priority}[, {id}]])
+" autocmd BufWinEnter * call matchadd('ErrorMsg', '\%81v', 100)
+" To use Syntax * ,vim v:version > 701
+if v:version > 701
+    autocmd Syntax * :set colorcolumn=81
+else
+    autocmd BufWinEnter * :set colorcolumn=81
+endif
+
 
 if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+    set rtp+=~/.vim/bundle/vim-colors-solarized
     let g:solarized_termcolors=256
     let g:solarized_termtrans=1
     let g:solarized_contrast="normal"
-    let g:solarized_visibility="normal"
+    let g:solarized_visibility="high"
+    call togglebg#map("<leader>b")
     " 去除注释的斜体
     let g:solarized_italic=0
-    color solarized
+    colorscheme solarized
 else
     colorscheme desert
 endif
@@ -1024,16 +1028,18 @@ endif
 " colorscheme tomorrow-night-bright
 " colorscheme desert
 
+" for error highlight, 防止错误正行标红导致看不清
+ highlight clear spellbad
+highlight spellbad term=standout ctermfg=1 term=underline cterm=underline
+ highlight clear spellcap
+highlight spellcap term=underline cterm=underline
+ highlight clear spellrare
+highlight spellrare term=underline cterm=underline
+ highlight clear Spelllocal
+highlight spelllocal term=underline cterm=underline
+
 " 设置标记一列的背景颜色和数字行号的背景颜色一致
 highlight clear signcolumn      " signcolumn should match background
 highlight clear linenr          " current line number row will have same background color in relative mode
 
-" for error highlight, 防止错误正行标红导致看不清
-highlight clear spellbad
-highlight spellbad term=standout ctermfg=1 term=underline cterm=underline
-highlight clear spellcap
-highlight spellcap term=underline cterm=underline
-highlight clear spellrare
-highlight spellrare term=underline cterm=underline
-highlight clear Spelllocal
-highlight spelllocal term=underline cterm=underline
+"-------------------------- end of configs --------------------------------------
