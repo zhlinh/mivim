@@ -749,7 +749,8 @@ endif
 
 " 任务列表插件，管理项目中的 TODO、FIXME、XXX 等标签
 Bundle 'vim-scripts/TaskList.vim'
-let g:tlTokenList = ["TODO", "FIXME", "CHANGED", "XXX", "NOTE", "WARN", "HACK"]
+let g:tlTokenList = ["TODO", "FIXME", "CHANGED", "XXX", "BUG", "HACK",
+                    \ "DEBUG", "WARN", "NOTE", "INFO", "IDEA"]
 " 绑定快捷键，默认是 <Leader>t
 nmap <leader>td <Plug>TaskList
 
@@ -920,7 +921,7 @@ Bundle 'marijnh/tern_for_vim'
 "        "        PHP      "
 "        """""""""""""""""""
 Bundle 'spf13/PIV'
-let g:DisableAutoPHPFolding = 0
+let g:DisableAutoPHPFolding = 1
 let g:PIVAutoClose = 0
 
 Bundle 'arnaud-lb/vim-php-namespace'

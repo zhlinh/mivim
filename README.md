@@ -51,11 +51,11 @@
 
         ,qr  运行当前文件，for Linux(用了插件quickrun)
 
-        F8   用chrome运行html文件,需要将chrome放进path
+        F8   用Chrome运行html文件,需要将chrome放进path
 
         F11  切换全屏
 
-        F12  用ie运行html文件,需要将ie放进path
+        F12  用IE运行html文件,需要将IE放进path
 
 4. **分屏及移动**
 

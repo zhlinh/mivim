@@ -995,7 +995,7 @@ set background=dark
 " \W\zs ensures that there is a word break in front of the match
 " FIXME Syntax * doesn't work here when source .vimc.bundle
 autocmd BufWinEnter * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\)')
-autocmd BufWinEnter * call matchadd('Debug', '\W\zs\(DEBUG\|NOTE\|INFO\|IDEA\)')
+autocmd BufWinEnter * call matchadd('WarningMsg', '\W\zs\(DEBUG\|WARN\|NOTE\|INFO\|IDEA\)')
 
 "===[Make the 81th column stand out]===
 " there are two options: matchadd or set colorcolumn
