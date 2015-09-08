@@ -218,7 +218,7 @@ Bundle 'Raimondi/delimitMate'
 " for python docstring ",优化输入
 au FileType python let b:delimitMate_nesting_quotes = ['"']
 " 关闭html文件补全"<"">"，由插件AutoCloseTag完成
-au FileType html let b:delimitMate_matchpairs = "(:),[:],{:}"
+au FileType html,php let b:delimitMate_matchpairs = "(:),[:],{:}"
 " 关闭某些类型文件的自动补全
 "au FileType mail let b:delimitMate_autoclose = 0
 
@@ -556,8 +556,8 @@ endif
 
 " edit history, 可以查看回到某个历史状态
 Bundle 'sjl/gundo.vim'
-" 估计很少用到，故用了两个<leader>，然后history
-noremap <leader><leader>h :GundoToggle<CR>
+" 估计很少用到，故用了两个<leader>，然后Undo
+noremap <leader><leader>u :GundoToggle<CR>
 
 
 Bundle 'vim-scripts/sessionman.vim'
@@ -873,6 +873,7 @@ let g:user_emmet_leader_key='<C-e>'
 
 " 自动补全html/xml标签
 Bundle 'alvan/vim-closetag'
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php"
 
 " 语法相关
 Bundle 'hail2u/vim-css3-syntax'

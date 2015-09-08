@@ -893,8 +893,8 @@ nmap -- A<CR><CR><CR><ESC>k6i-----cut-----<ESC><CR>
 
 
 " Indent/outdent current block...
-nnoremap %% $>i}``
-nnoremap $$ $<i}``
+nnoremap <leader><leader>l >i}``
+nnoremap <leader><leader>h <i}``
 
 " swap implementations of ` and ' jump to markers
 " by default, ' jumps to the marked line, ` jumps to the marked line&column

@@ -522,7 +522,7 @@
 
         "不常用，所以用两个<leader>
         [sd]
-        ,,h  查看文件编辑历史
+        ,,u  查看undo历史
 
       附:同类插件 [mbbill/undotree](https://github.com/mbbill/undotree)
 
@@ -725,7 +725,7 @@
         <C-e>a  Make an anchor from a URL
         <C-e>A  Make some quoted text from a URL
 
-    html/xml标签配对补全[docunext/closetag.vim](https://github.com/docunext/closetag.vim)
+    html/xml标签配对补全[alvan/vim-closetag](https://github.com/alvan/vim-closetag)
 
     html/css的语法[hail2u/vim-css3-syntax](https://github.com/hail2u/vim-css3-syntax)
 
