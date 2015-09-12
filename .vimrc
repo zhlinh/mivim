@@ -542,7 +542,6 @@ func! CompileRun()
     " 解决空格问题
     let infile = '"'.infile.'"'
     let outfile = '"'.outfile.'"'
-    " 转义的\还需要再转义一次
     "echo outfile
     if &filetype == 'c'
         exec "!g++ " infile "-o" outfile
@@ -936,14 +935,15 @@ vnoremap aa vgo1g
 "==========================================
 
 " 文件类型的一般设置，比如不要 tab 等
-autocmd bufread,bufnew *.md,*.mkd,*.markdown  set filetype=markdown
-autocmd bufread,bufnew *.html,*.htm  set filetype=html
-autocmd bufread,bufnew *.php,*.php3,*.phpt,*.phtml  set filetype=php
+autocmd bufread,bufRead *.md,*.mkd,*.markdown  set filetype=markdown
+autocmd bufread,bufRead *.html,*.htm  set filetype=html
+autocmd bufread,bufRead *.php,*.php3,*.phpt,*.phtml  set filetype=php
+autocmd bufnewfile,bufRead *.coffee set filetype=coffee
+autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
 autocmd filetype python set tabstop=4 shiftwidth=4 expandtab ai
 autocmd filetype haskell,puppet,ruby,yml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2 ai
 autocmd filetype javascript,json,css,scss,html set tabstop=2 shiftwidth=2 expandtab ai
 autocmd filetype java,php set tabstop=4 shiftwidth=4 expandtab ai
-autocmd bufnewfile,bufread *.coffee set filetype=coffee
 
 " workaround vim-commentary for haskell
 autocmd filetype haskell setlocal commentstring=--\ %s

@@ -132,6 +132,19 @@ snippet html "html"
 </html>
 endsnippet
 
+snippet html:5 "html"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>${1:`!p snip.rv = snip.basename or "Page Title"`}</title>
+</head>
+<body>
+	$0
+</body>
+</html>
+endsnippet
+
 snippet inputl "Input with Label" w
 <label for="${2:${1/[[:alpha:]]+|( )/(?1:_:\L$0)/g}}">$1</label><input type="${3:text/submit/hidden/button}" name="${4:$2}" value="$5"${6: id="${7:$2}"}`!p x(snip)`>
 
@@ -197,7 +210,7 @@ snip.rv = (snip.basename or 'unnamed') + '_submit'
 `}" method="${2:get}" accept-charset="utf-8">
 	$0
 
-	<p><input type="submit" name="submit" value="Continue →"`!p x(snip)`></p>
+	<p><input type="submit" name="submit" value="Continue →"`!p x(snip)` /></p>
 </form>
 endsnippet
 
