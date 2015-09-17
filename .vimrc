@@ -682,7 +682,7 @@ nnoremap <C-e> 2<C-e>
 nnoremap <C-y> 2<C-y>
 
 " 跳转到行末加分号
-inoremap <C-g> <Esc>A;<Esc>o
+inoremap <C-d> <C-o>A;<CR>
 " 花括号自动换行
 inoremap {<CR> {<CR>}<ESC>O
 
@@ -918,7 +918,7 @@ vnoremap <C-v> v
 vmap <BS> x
 
 " make vaa select the entire file...
-vnoremap aa vgo1g
+vnoremap aa VGo1G
 
 
 " show me that list
@@ -990,6 +990,9 @@ endfunc
 " 设置背景为light和dark，对应solarized的两种配色，对于molokai没区别
 "set background=light
 set background=dark
+function! ToggleBackground()
+    let &background = ( &background == "dark"? "light" : "dark" )
+endfunction
 
 " highlight TODO, FIXME, XXX, BUG, INFO, NOTE, etc.
 " \W\zs ensures that there is a word break in front of the match
@@ -1015,9 +1018,9 @@ if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"
     let g:solarized_termtrans=1
     let g:solarized_contrast="normal"
     let g:solarized_visibility="high"
-    call togglebg#map("<leader>b")
     " 去除注释的斜体
     let g:solarized_italic=0
+    nmap <leader>b :call ToggleBackground()<CR>
     colorscheme solarized
 else
     colorscheme desert

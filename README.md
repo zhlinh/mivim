@@ -80,7 +80,7 @@
         ctrl + f  移动到下一个""处,也可用于退出Insert模式,若无"时
         ctrl + b  移动到上一个""处,也可用于退出Insert模式,若无"时
 
-        ctrl + g    行末加分号，并跳转下一行
+        ctrl + u    行末加分号，并跳转下一行
 
 5. **搜索**
         
@@ -201,7 +201,7 @@
 
 1. ####代码自动补全 [Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
 
-    必装，强烈推荐(YCM是我目前用到的最好的自动补全插件)
+    必装，强烈推荐(YCM是目前用到的最好的自动补全插件)
 
     这个插件包含了以下几个插件功能,所以不需要装下面:
 
@@ -336,10 +336,10 @@
 
     必装，效率提升杀手锏，跳转到光标后任意位置
 
-    easymothion主要用于快速查找跳转,(还支持多字母搜索跳转，不过我认为有/就够了)
+    easymothion主要用于快速查找跳转, 还支持多字母搜索跳转
 
     默认为2个<leader>+单字母，为了避免快捷键冲突
-    以下是我改的一些快捷键，我觉得能用到的
+    以下是修改的一些快捷键，常用到的
 
       "下面这个是大杀器啊，只要盯着你想跳转的词就好
       "记忆方式 [s]earch
@@ -558,7 +558,7 @@
 
 1. ####[altercation/vim-colors-solarized](https://github.com/altercation/vim-colors-solarized)
 
-    经典主题,目前我使用的,看起来舒服
+    经典主题,目前使用的,看起来还不错
 
 2. ####[tomasr/molokai](https://github.com/tomasr/molokai)
 

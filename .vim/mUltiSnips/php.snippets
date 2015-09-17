@@ -11,6 +11,15 @@ $0
 ?>
 endsnippet
 
+snippet datei "ini set timezone"
+ini_set('date.timezone', 'Asia/Shanghai');
+endsnippet
+
+snippet throw "throw new Exception."
+throw new Exception('${1:Something wrong.}');
+$0
+endsnippet
+
 snippet array "array"
 $${1:arrayName} = array('${2}' => ${3});${4}
 endsnippet

@@ -924,6 +924,9 @@ Bundle 'marijnh/tern_for_vim'
 Bundle 'spf13/PIV'
 let g:DisableAutoPHPFolding = 1
 let g:PIVAutoClose = 0
+" let g:PIVCreateDefaultMappings = 0
+" FIXME inoremap <buffer> <C-H> <ESC>:!phpm <C-R>=expand("<cword>")<CR><CR>
+" 与原有按键冲突，且也环境中也无phpm, 不想改动源码，但又不提供接口
 
 Bundle 'arnaud-lb/vim-php-namespace'
 noremap <Leader>u :call PhpInsertUse()<CR>
