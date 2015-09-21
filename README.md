@@ -83,7 +83,7 @@
         ctrl + u    行末加分号，并跳转下一行
 
 5. **搜索**
-        
+
         <BS>       去除匹配高亮
         ,fi      列出寻找光标下的关键词的所有位置，键入数字即可到达[有点ctrlp-funcy的意思]
 
@@ -145,7 +145,7 @@
 10. **按键修改**
 
         <Space>   翻页
-        
+
         Y      =y$  复制到行尾
         U      =Ctrl-r
         S      =%s//g
@@ -154,8 +154,8 @@
 
         ,v   选中段落
         vaa  全选
-        
-        
+
+
 
         c-a  命令行模式下到行首[默认是c-b]
         c-e  命令行模式下到行尾[没变，默认就是c-e]
@@ -176,7 +176,7 @@
 ----------------------
 > 基础
 
-1. #### 插件管理 [gmarik/vundle](https://github.com/gmarik/vundle)
+1. #### 插件管理 [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim)
 
     必装,用于管理所有插件
 
@@ -227,9 +227,9 @@
 
     YCM 自动补全会弹提示
 
+        ctrl + j  使用片段 -> expand to codes
         ctrl + j  下一个需要补充的位置
         ctrl + k  上一个需要补充的位置
-        ctrl + j  使用片段 -> expand to codes
         ,us       编辑对应文件类型的代码片段
 
 3. #### 引号配对补全 [Raimondi/delimitMate](https://github.com/Raimondi/delimitMate)
@@ -290,7 +290,7 @@
         hello world -> "hello world"
 
         ys$" 当前到行尾, 引号引住
-		
+
 		==> Tips:  The targets b, B, r, a are aliases for ), }, ], >
 		==> The former contains no space
 		==> With |cs|, has a shortcut for ysi (cswb == ysiwb, more or less)
@@ -314,7 +314,7 @@
 
         [sd/vd]一般会先用vip[visual in paragraph]先选中一段,不选中默认操作当前行
         <Enter>     visual模式下进入easy-align
-        ga          normal模式下进入easy-align       
+        ga          normal模式下进入easy-align
                 =....................对齐等号表达 [有用]
                 :....................对齐冒号表达式(json/map等)
                 <space>..............首个空格左对齐
@@ -368,12 +368,12 @@
         m<space>   去除所有标签
 
 4. #### 移动选中的可视块 [atweiden/vim-dragvisuals](https://github.com/atweiden/vim-dragvisuals)
-    
+
     用方向键移动选中的可视块
-    
+
         [vd]
         <方向键>     移动选中的可视块
-        <D>          复制并粘贴选中的可视块    
+        <D>          复制并粘贴选中的可视块
 
 
 
@@ -448,7 +448,10 @@
 
 1. #### 搜索 [kien/ctrlp.vim](https://github.com/kien/ctrlp.vim)
 
-    文件搜索,ack/Command-T需要依赖于外部包,不喜欢有太多依赖的,除非十分强大, 具体 [文档](http://kien.github.io/ctrlp.vim/)
+    文件搜索, 可使用dir, find, ack 或 ag(推荐)作为搜索命令
+    
+    还使用了[rking/ag.vim](http://github.com/rking/ag.vim) for `:Ag [options] {pattern} [{directory}]`
+    或者 [mileszs/ack.vim](http://github.com/mileszs/ack.vim) for `:Ack [options] {pattern} [{directories}]`
 
          [sd]
          cp       打开ctrlp搜索
@@ -458,7 +461,7 @@
          ctrl + j/k  进行上下移动
          ctrl + x/v  分屏打开该文件 [重要**]
          ctrl + t    在新tab中打开该文件
-        
+
 2. #### 函数搜索 [tacahiroy/ctrlp-funky](https://github.com/tacahiroy/ctrlp-funky)
 
     解决问题:使用tagbar当函数比较多的时候,移动耗时较长,使用快速搜索快很多
@@ -533,18 +536,18 @@
         ,ss  - saves the current editing session.
         ,sl  - list the saved sessions.
         ,sc  - wipes out all buffers, kills cscope and clears variables with session name.
-        
+
 9. #### 可视块数学统计 [atweiden/vim-vmath](https://github.com/atweiden/vim-vmath)
 
-    在可视块上作简单的数学统计，包括sum, avg, min, max  
+    在可视块上作简单的数学统计，包括sum, avg, min, max
 
 10. #### 可视块增强 [RobertAudi/vis.vim](https://github.com/RobertAudi/vis.vim)
-    用例: 只排序选中的可视块:B sort，而不是排序整行 
-    
+    用例: 只排序选中的可视块:B sort，而不是排序整行
+
         [vd] Use v/ctrl-v to visually mark the block then
         :B cmd  -  ( will appear as   :'<,'>B cmd )
 
-        
+
 
 > 显示增强
 
@@ -781,7 +784,7 @@
 
 9. #### 非语言语法高亮
 
-    nginx高亮, 未配置[evanmiller/nginx-vim-syntax](https://github.com/evanmiller/nginx-vim-syntax) 
+    nginx高亮, 未配置[evanmiller/nginx-vim-syntax](https://github.com/evanmiller/nginx-vim-syntax)
 
 
 

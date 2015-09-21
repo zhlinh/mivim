@@ -26,7 +26,7 @@ call vundle#rc()
 "     :BundleClean       remove plugin not in list 删除本地无用插件
 "     :BundleSearch      search 查找插件
 "     :BundleList        list   列出所有使用的插件
-Bundle 'gmarik/vundle'
+Bundle 'VundleVim/Vundle.vim'
 
 
 " ################### 主题 ###################"
@@ -46,11 +46,11 @@ Bundle 'altercation/vim-colors-solarized'
 
 " Deps
 if executable('ag')
-    Bundle 'mileszs/ack.vim'
+    Bundle 'rking/ag.vim'
     let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
 elseif executable('ack-grep')
-    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
     Bundle 'mileszs/ack.vim'
+    let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 elseif executable('ack')
     Bundle 'mileszs/ack.vim'
 endif
@@ -212,6 +212,7 @@ let g:UltiSnipsSnippetDirectories  = ['mUltiSnips']
 let g:UltiSnipsSnippetsDir = '~/.vim/mUltiSnips'
 " 进入对应filetype的snippets进行编辑
 map <leader>us :UltiSnipsEdit<CR>
+
 
 " 自动补全单引号，双引号等
 Bundle 'Raimondi/delimitMate'
@@ -469,6 +470,9 @@ Bundle "dyng/ctrlsf.vim"
 " T - Lkie t but focus CtrlSF window instead of opened new tab.
 " q - Quit CtrlSF window.
 
+" ":CtrlSF -R" - Use regular expression pattern.
+" ":CTrlSF -I(or -S)" - Search case-insensitively (-I) or case-sensitively (-S).
+
 " 需要ag或ack依赖，grep的升级版!设置ctrlsf 使用ag
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -510,8 +514,8 @@ let g:ctrlsf_mapping = {
             \ "tabb"  : "T",
             \ "prevw" : "p",
             \ "quit"  : "q",
-            \ "next"  : "<C-N>",
-            \ "prev"  : "<C-P>",
+            \ "next"  : "n",
+            \ "prev"  : "N",
             \ "pquit" : "q",
             \ }
 
