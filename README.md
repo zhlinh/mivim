@@ -449,8 +449,9 @@
 1. #### 搜索 [kien/ctrlp.vim](https://github.com/kien/ctrlp.vim)
 
     文件搜索, 可使用dir, find, ack 或 ag(推荐)作为搜索命令
-    
+
     还使用了[rking/ag.vim](http://github.com/rking/ag.vim) for `:Ag [options] {pattern} [{directory}]`
+
     或者 [mileszs/ack.vim](http://github.com/mileszs/ack.vim) for `:Ack [options] {pattern} [{directories}]`
 
          [sd]

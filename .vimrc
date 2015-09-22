@@ -578,9 +578,13 @@ endfunc
 " 在浏览器预览 for Windows
 function! ViewInBrowser(name)
     let file = expand("%:p")
-    "解决空格问题，加双引号
-    let file = '"'.file.'"'
-    exec ":update " . file
+    "解决空格问题，加引号
+    if (has("win32") || has("win64"))
+        let file = '"'.file.'"'
+    else
+        let file = "'".file."'"
+    endif
+    exec ':update '.file
     " echo file
     let l:browsers = {
                 \"chrome":" chrome ",
@@ -594,12 +598,12 @@ function! ViewInBrowser(name)
                 \ && stridx(file,path_unix) == -1) ? -1 : 1
     " echo strpos
     if strpos == -1
-        silent! exec "!start" l:browsers[a:name] file
+        silent! exec '!start '.l:browsers[a:name].' '.file
     else
         let file=substitute(file, path_win, "http://127.0.0.1/", "g")
         let file=substitute(file, path_unix, "http://127.0.0.1/", "g")
         let file=substitute(file, '\\', '/', "g")
-        silent! exec "!start" l:browsers[a:name] file
+        silent! exec '!start '.l:browsers[a:name].' '.file
     endif
 endfunction
 nnoremap <F8> :call ViewInBrowser("chrome")<CR>
@@ -742,10 +746,15 @@ function! Replace(confirm, wholeword, replace)
         let search .= expand('<cword>')
     endif
     let replace = escape(a:replace, '/\&~')
-
-
-    execute 'argdo %s/' . search . '/' . replace . '/' . flag . '| update'
+    " 先要执行:arg *.cpp, 可用 :arg 查看当前arg列表
+    " 如果要在所有Buffer中搜索，则用:bufdo %s/pattern/replace/ge
+    " 如果要在所有Windows中搜索，则用:windo :windo %s/pattern/replace/ge
+    " 添加当前文件到arglist, 不使用argadd, 因其不检查重复项
+    silent! execute 'argedit %'
+    " if using confirm mode, remember to press y/n when word is highlight
+    silent! execute 'argdo %s/' . search . '/' . replace . '/' . flag . '| update'
 endfunction
+
 " 不确认、非整词
 nnoremap <leader>r :call Replace(0, 0, input('replace '.expand('<cword>').' with: '))<CR>
 " 不确认、整词
