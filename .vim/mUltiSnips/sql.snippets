@@ -66,19 +66,19 @@ snippet s* "select * from table"
 select * from ${0:table}
 endsnippet
 
-snippet mgrt "minimal grant"
+snippet mgrant "minimal grant"
 grant select, insert, update, delete
 on ${1:database}.*
 to ${2:user}@${3:host} identified by '${0:password}';
 endsnippet
 
-snippet grt "grant"
+snippet grant "grant"
 grant ${1:all}
 on ${2:*.*}
 to ${3:user}@${4:host} identified by '${0:password}';
 endsnippet
 
-snippet rev "revoke"
+snippet revoke "revoke"
 revoke ${1:all privileges, grant option}
 on ${2:*.*}
 from ${3:user}@${4:host};

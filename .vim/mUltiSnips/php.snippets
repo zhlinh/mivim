@@ -11,7 +11,7 @@ $0
 ?>
 endsnippet
 
-snippet datei "ini set timezone"
+snippet idate "ini set timezone"
 ini_set('date.timezone', 'Asia/Shanghai');
 endsnippet
 
@@ -90,6 +90,12 @@ if (${1:/* condition */}) {
 }
 endsnippet
 
+snippet while "while"
+while (${1:/* condition */}) {
+	${2:// code...}
+}
+endsnippet
+
 snippet elif "elseif"
 elseif (${1:/* condition */}) {
 	${2:// code...}
@@ -110,7 +116,7 @@ $${1:var} = $_POST['$1'];
 $0
 endsnippet
 
-snippet postt "_POST trim"
+snippet tpost "_POST trim"
 $${1:var} = trim($_POST['$1']);
 $0
 endsnippet
@@ -120,16 +126,16 @@ $${1:var} = $_REQUEST['$1'];
 $0
 endsnippet
 
-snippet reqt "_REQUEST trim"
+snippet treq "_REQUEST trim"
 $${1:var} = trim($_REQUEST['$1']);
 $0
 endsnippet
 
-snippet reqro "req1"
+snippet reqo "req once"
 require_once '${1:file}';${2}
 endsnippet
 
-snippet ses "session"
+snippet ses "session" w
 $_SESSION['${1}']${2}
 endsnippet
 

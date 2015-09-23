@@ -227,10 +227,11 @@
 
     YCM 自动补全会弹提示
 
-        ctrl + j  使用片段 -> expand to codes
-        ctrl + j  下一个需要补充的位置
-        ctrl + k  上一个需要补充的位置
-        ,us       编辑对应文件类型的代码片段
+        ctrl + j    使用片段 -> expand to codes
+        ctrl + Tab  展示可选择补充的列表
+        ctrl + j    下一个需要补充的位置
+        ctrl + k    上一个需要补充的位置
+        ,us         编辑对应文件类型的代码片段
 
 3. #### 引号配对补全 [Raimondi/delimitMate](https://github.com/Raimondi/delimitMate)
 
