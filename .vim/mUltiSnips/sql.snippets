@@ -2,8 +2,9 @@ priority -50
 
 snippet tbl "create table"
 create table ${1:table} (
-	${0:columns}
+	${3:columns}
 ) ${2:engine=InnoDB};
+$0
 endsnippet
 
 snippet col "add column"

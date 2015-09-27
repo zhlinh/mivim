@@ -68,20 +68,17 @@ for ($${2:i} = 0; $$2 < ${1:count}; $$2${3:++}) {
 }
 endsnippet
 
+snippet fore "Foreach loop"
+foreach ($${1:variable} as $${3:value}) {
+	${VISUAL}${4}
+}
+$0
+endsnippet
+
 snippet forek "foreach key"
 foreach ($${1:variable} as $${2:key} => $${3:value}) {
 	${4:// code...}
 }
-endsnippet
-
-snippet get "_GET"
-$${1:var} = $_GET['$1'];
-$0
-endsnippet
-
-snippet tget "_GET trim"
-$${1:var} = trim($_GET['$1']);
-$0
 endsnippet
 
 snippet if "if"
@@ -103,7 +100,7 @@ elseif (${1:/* condition */}) {
 endsnippet
 
 snippet inc "inc"
-include('${1:file}');
+include('${1:filename}.php');
 $0
 endsnippet
 
@@ -111,32 +108,63 @@ snippet log "log"
 error_log(var_export(${1}, true));${2}
 endsnippet
 
-snippet post "_POST"
+snippet g "_GET" w
+$_GET['${1}']${2}
+endsnippet
+
+snippet get "$var=$_GET"
+$${1:var} = $_GET['$1'];
+$0
+endsnippet
+
+snippet tget "$var=$_GET trim"
+$${1:var} = trim($_GET['$1']);
+$0
+endsnippet
+
+snippet p "_GET" w
+$_POST['${1}']${2}
+endsnippet
+
+snippet post "$var=$_POST"
 $${1:var} = $_POST['$1'];
 $0
 endsnippet
 
-snippet tpost "_POST trim"
+snippet tpost "$var=$_POST trim"
 $${1:var} = trim($_POST['$1']);
 $0
 endsnippet
 
-snippet req "_REQUEST"
+snippet r "_GET" w
+$_REQUEST['${1}']${2}
+endsnippet
+
+snippet req "$var=$_REQUEST"
 $${1:var} = $_REQUEST['$1'];
 $0
 endsnippet
 
-snippet treq "_REQUEST trim"
+snippet treq "$var=$_REQUEST trim"
 $${1:var} = trim($_REQUEST['$1']);
 $0
 endsnippet
 
-snippet reqo "req once"
+snippet reqo "$var=$req once"
 require_once '${1:file}';${2}
 endsnippet
 
-snippet ses "session" w
+snippet s "_SESSION" w
 $_SESSION['${1}']${2}
+endsnippet
+
+snippet ses "$var=$_REQUEST"
+$${1:var} = $_SESSION['$1'];
+$0
+endsnippet
+
+snippet f "_FILES" w
+$_FILES['${1}']${2}
 endsnippet
 
 snippet t "t"
@@ -269,16 +297,9 @@ private static function ${1:name}(${2:$param}) {
 $0
 endsnippet
 
-snippet f "Function snip" b
+snippet fun "Function snip" b
 function ${1:name}(${2:$param}) {
 	${VISUAL}${3:return null;}
-}
-$0
-endsnippet
-
-snippet fore "Foreach loop"
-foreach ($${1:variable} as $${3:value}) {
-	${VISUAL}${4}
 }
 $0
 endsnippet
@@ -288,11 +309,22 @@ $${1:variableName} = new ${2:${1/\w+\s*/\u$0/}}($3);
 $0
 endsnippet
 
-snippet ife "if else"
+snippet ife "if.. else.."
 if (${1:/* condition */}) {
-	${2:// code...}
+	${2:// code...1}
 } else {
-	${3:// code...}
+	${3:// code...2}
+}
+$0
+endsnippet
+
+snippet ifee "if.. else if.. else.."
+if (${1:/* condition */}) {
+	${2:// code...1}
+} else if {
+	${3:// code...2}
+} else {
+	${4:// code...3}
 }
 $0
 endsnippet
