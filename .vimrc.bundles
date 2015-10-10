@@ -13,7 +13,7 @@
 "set nocompatible
 " configure Vundle
 filetype off " required! turn off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 
