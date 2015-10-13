@@ -101,9 +101,9 @@ function! ToggleErrors()
         Errors
     endif
 endfunction
-nnoremap <Leader>e :call ToggleErrors()<cr>
-nnoremap <Leader>en :lnext<cr>
-nnoremap <Leader>ep :lprevious<cr>
+nnoremap <leader>e :call ToggleErrors()<cr>
+nnoremap <leader>en :lnext<cr>
+nnoremap <leader>ep :lprevious<cr>
 
 " If you'd like digraphs with a heads-up
 " and a saner naming convention, see atweiden/vim-betterdigraphs
@@ -193,7 +193,6 @@ let g:ycm_filetype_blacklist = {
             \}
 
 
-
 " 代码片段快速插入 (snippets中,是代码片段资源,可自己再补充)
 Bundle 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
@@ -268,7 +267,7 @@ nmap ga <Plug>(EasyAlign)
 
 " ################### 快速移动 ###################
 
-"默认快捷键都带两个<Leader>
+"默认快捷键都带两个<leader>
 Bundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
 " 这个真的是神器啊，只要盯着自己想跳转的地方，
@@ -539,8 +538,9 @@ nnoremap <leader>gp :Git push<CR>
 " 行号多一列
 Bundle 'airblade/vim-gitgutter'
 let g:gitgutter_map_keys = 1
-let g:gitgutter_enabled = 1
-let g:gitgutter_highlight_lines = 1
+" 默认关闭
+let g:gitgutter_enabled = 0
+let g:gitgutter_highlight_lines = 0
 nnoremap <leader>gg :GitGutterToggle<CR>
 
 
@@ -687,7 +687,7 @@ let g:NERDTreeMapOpenVSplit = 'v'
 
 
 Bundle 'jistr/vim-nerdtree-tabs'
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+map <leader>n <plug>NERDTreeTabsToggle<CR>
 " 关闭同步
 let g:nerdtree_tabs_synchronize_view=0
 let g:nerdtree_tabs_synchronize_focus=0
@@ -729,10 +729,10 @@ if executable('ctags')
           \ 's:selectors',
           \ 'i:identities',
           \ ],
-          \ 'deffile' :  '~/.vim/ctags/.ctags',
+          \ 'deffile' :  '~/.vim/tools/.ctags',
           \ }
     let g:tagbar_type_javascript = {
-          \ 'deffile' :  '~/.vim/ctags/.ctags',
+          \ 'deffile' :  '~/.vim/tools/.ctags',
           \ }
     let g:tagbar_type_markdown = {
           \ 'ctagstype' : 'markdown',
@@ -741,14 +741,14 @@ if executable('ctags')
           \ 'i:Heading_L2',
           \ 'k:Heading_L3',
           \ ],
-          \ 'deffile' :  '~/.vim/ctags/.ctags',
+          \ 'deffile' :  '~/.vim/tools/.ctags',
           \ }
     let g:tagbar_type_snippets = {
           \ 'ctagstype' : 'snippets',
           \ 'kinds' : [
           \ 's:snippets',
           \ ],
-          \ 'deffile' :  '~/.vim/ctags/.ctags',
+          \ 'deffile' :  '~/.vim/tools/.ctags',
           \ }
 endif
 
@@ -758,7 +758,7 @@ endif
 Bundle 'vim-scripts/TaskList.vim'
 let g:tlTokenList = ["TODO", "FIXME", "CHANGED", "XXX", "BUG", "HACK",
                     \ "DEBUG", "WARN", "NOTE", "INFO", "IDEA"]
-" 绑定快捷键，默认是 <Leader>t
+" 绑定快捷键，默认是 <leader>t
 nmap <leader>td <Plug>TaskList
 
 
@@ -773,7 +773,7 @@ let g:quickrun_config = {
       \}
 
 let g:quickrun_no_default_key_mappings = 1
-nmap <Leader>qr <Plug>(quickrun)
+nmap <leader>qr <Plug>(quickrun)
 
 " ###### Latex #########
 "Bundle 'LaTeX-Suite-aka-Vim-LaTeX'
@@ -849,6 +849,8 @@ Bundle 'Blackrush/vim-gocode'
 " Markdown语法高亮
 Bundle 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
+" 使之支持YAML语法
+let g:vim_markdown_frontmatter=1
 
 " 实时显示用chrome的扩展markdwon preview plus实现的，保存后自动加载
 " 否则用vim的插件需要太多依赖了
@@ -936,9 +938,19 @@ let g:PIVAutoClose = 0
 " 与原有按键冲突，且也环境中也无phpm, 不想改动源码，但又不提供接口
 
 Bundle 'arnaud-lb/vim-php-namespace'
-noremap <Leader>u :call PhpInsertUse()<CR>
+noremap <leader>u :call PhpInsertUse()<CR>
 
 " Bundle 'evidens/vim-twig'
+
+
+" ###### PlantUML#########
+" PlantUML是一种用代码快速绘制UML图形的工具
+Bundle 'aklt/plantuml-syntax'
+" let pupath=expand('$HOME')
+" let g:plantuml_executable_script='java -jar '.pupath.'/.vim/tools/plantuml.jar'
+let pujarpath=expand('~/.vim/tools/plantuml.jar')
+let g:plantuml_executable_script='java -jar '.pujarpath
+nnoremap <leader>ul :silent make<CR>
 
 
 " ###### Jinja2 #########

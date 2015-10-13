@@ -572,6 +572,16 @@ func! CompileRun()
         exec "!node " infile
     elseif &filetype == 'ruby'
         exec "!ruby " infile
+    elseif &filetype == 'plantuml'
+        silent! exec 'make'
+        let pupngname = expand("%:r").'.png'
+        if (has("win32") || has("win64"))
+            let pupngname = '"'.pupngname.'"'
+        else
+            let pupngname = "'".pupngname."'"
+        endif
+        exec 'update '.pupngname
+        silent! exec '!start chrome '.pupngname
     endif
 endfunc
 
@@ -584,7 +594,7 @@ function! ViewInBrowser(name)
     else
         let file = "'".file."'"
     endif
-    exec ':update '.file
+    exec 'update '.file
     " echo file
     let l:browsers = {
                 \"chrome":" chrome ",
