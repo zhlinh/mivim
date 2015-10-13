@@ -950,7 +950,7 @@ Bundle 'aklt/plantuml-syntax'
 " let g:plantuml_executable_script='java -jar '.pupath.'/.vim/tools/plantuml.jar'
 let pujarpath=expand('~/.vim/tools/plantuml.jar')
 let g:plantuml_executable_script='java -jar '.pujarpath
-nnoremap <leader>ul :silent make<CR>
+nnoremap <leader>um :silent make<CR>
 
 
 " ###### Jinja2 #########

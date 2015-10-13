@@ -22,15 +22,15 @@
 "
 "                    zhlinh Linux&Windows GVim config file
 "
-"                                2015.4.25
+"                                2015.6.08
 "
-"               <<< "Be the change you want to see the world">>>
+"               <<< "Be the change you want to see the world" >>>
 "
 " Author:  zhlinh
-" Version: 0.9.5
+" Version: 0.10.13
 " Email: zhlinhng@gmail.com"
 " Create_time: 2015-06-08
-" Last_modify: 2015-09-05
+" Last_modify: 2015-10-13
 " Sections:
 "     ->System Identification
 "     ->Initial Plugins
