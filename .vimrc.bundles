@@ -13,7 +13,7 @@
 "set nocompatible
 " configure Vundle
 filetype off " required! turn off
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
 
@@ -949,7 +949,8 @@ Bundle 'aklt/plantuml-syntax'
 " let pupath=expand('$HOME')
 " let g:plantuml_executable_script='java -jar '.pupath.'/.vim/tools/plantuml.jar'
 let pujarpath=expand('~/.vim/tools/plantuml.jar')
-let g:plantuml_executable_script='java -jar '.pujarpath
+" 使用UTF-8编码，生成svg矢量图
+let g:plantuml_executable_script='java -jar '.pujarpath.' -charset UTF-8 -tsvg'
 nnoremap <leader>um :silent make<CR>
 
 

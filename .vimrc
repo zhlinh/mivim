@@ -574,14 +574,14 @@ func! CompileRun()
         exec "!ruby " infile
     elseif &filetype == 'plantuml'
         silent! exec 'make'
-        let pupngname = expand("%:r").'.png'
+        let puoutput = expand("%:r").'.svg'
         if (has("win32") || has("win64"))
-            let pupngname = '"'.pupngname.'"'
+            let puoutput = '"'. puoutput .'"'
         else
-            let pupngname = "'".pupngname."'"
+            let puoutput = "'". puoutput ."'"
         endif
-        exec 'update '.pupngname
-        silent! exec '!start chrome '.pupngname
+        exec 'update '. puoutput
+        silent! exec '!start chrome '. puoutput
     endif
 endfunc
 
