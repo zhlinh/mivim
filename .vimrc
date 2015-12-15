@@ -156,12 +156,9 @@ set iskeyword-=>                    " '>' is an end of word designator
 set iskeyword-="                    " '"' is an end of word designator
 set iskeyword-=:                    " ':' is an end of word designator
 
-
 "Set the window's size.
 set lines=40
-set columns=125
-
-
+set columns=90
 
 "备份,到另一个位置. 防止误删
 set backup
@@ -993,11 +990,10 @@ function! Autosetfilehead()
     "如果文件类型为python
     if &filetype == 'python'
         exec ":call setline(1, '\#!/usr/bin/env python')"
-        exec ":call append(1, '\# encoding: utf-8')"
+        exec ":call append(1, '\# -*- coding: utf-8 -*-')"
     endif
 
-    normal g
-    normal o
+    normal G
     normal o
 endfunc
 

@@ -676,7 +676,7 @@ let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
 " 设置是否自启动
-let g:nerdtree_tabs_open_on_gui_startup=1
+let g:nerdtree_tabs_open_on_gui_startup=0
 
 " s/v 分屏打开文件
 let g:NERDTreeMapOpenSplit = 's'
@@ -811,7 +811,8 @@ autocmd BufEnter *.tex set sw=2
 
 " 反向搜索相关
 let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_CompileRule_pdf = 'xelatex --synctex=-1 -src-specials -interaction=nonstopmode $*'
+" let g:Tex_CompileRule_pdf = 'xelatex --synctex=-1 -src-specials -interaction=nonstopmode $*'
+let g:Tex_CompileRule_pdf = 'xelatex $*'
 let g:Tex_ViewRule_pdf = 'sumatrapdf -reuse-instance -inverse-search "gvim -c \":RemoteOpen +\%l \%f\""'
 " tex文件自动检查拼写
 autocmd BufNewFile,BufRead *.tex set spell
@@ -822,8 +823,9 @@ let g:tex_indent_items=0
 " ###### Python #########
 
 " python fly check, 弥补syntastic只能打开和保存才检查语法的不足
-Bundle 'kevinw/pyflakes-vim'
-let g:pyflakes_use_quickfix = 0
+" 用了之后反应会特别慢，故注释掉了
+" Bundle 'kevinw/pyflakes-vim'
+" let g:pyflakes_use_quickfix = 0
 
 " for python.vim syntax highlight
 Bundle 'hdima/python-syntax'
