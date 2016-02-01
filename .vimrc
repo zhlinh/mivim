@@ -158,7 +158,7 @@ set iskeyword-=:                    " ':' is an end of word designator
 
 "Set the window's size.
 set lines=40
-set columns=90
+set columns=88
 
 "备份,到另一个位置. 防止误删
 set backup
