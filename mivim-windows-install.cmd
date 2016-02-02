@@ -24,7 +24,7 @@ IF NOT EXIST "%APP_PATH%\.vim\bundle" (
 )
 IF NOT EXIST "%APP_PATH%\.vim\bundle\vundle" (
     @echo Instlling Vundle...
-    call git clone https://github.com/gmarik/vundle.git "%HOME%\.vim\bundle\vundle"
+    call git clone https://github.com/VundleVim/Vundle.vim "%HOME%\.vim\bundle\Vundle.vim"
 )
 
 call vim -u "%APP_PATH%\.vimrc" +BundleInstall! +BundleClean +qall
